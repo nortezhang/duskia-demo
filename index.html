@@ -680,6 +680,12 @@ body {
   background: rgba(168, 85, 247, 0.15);
   color: var(--accent-purple);
   border: 1px solid rgba(168, 85, 247, 0.3);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.char-detail-tags .char-tag:active {
+  background: rgba(168, 85, 247, 0.3);
+  transform: scale(0.95);
 }
 .char-detail-meta {
   color: var(--text-secondary);
@@ -2257,13 +2263,43 @@ function openCharDetail(charId) {
   document.getElementById('char-detail-chats').textContent = '💬 ' + char.chats + ' 对话';
   
   const tagsEl = document.getElementById('char-detail-tags');
-  tagsEl.innerHTML = (char.tags || []).map(t => `<span class="char-tag">${t}</span>`).join('');
+  tagsEl.innerHTML = (char.tags || []).map(t => `<span class="char-tag" onclick="event.stopPropagation();openTagPage('${t}')">${t}</span>`).join('');
   
   const content = document.getElementById('char-detail-content');
   content.textContent = char.persona;
   content.style.whiteSpace = 'pre-wrap';
   
   navigateTo('page-char-detail');
+}
+
+function openTagPage(tagName) {
+  document.getElementById('category-more-title').textContent = tagName;
+  
+  const filtered = characters.filter(c => (c.tags || []).includes(tagName));
+  const grid = document.getElementById('category-more-grid');
+  
+  if (filtered.length === 0) {
+    grid.innerHTML = `
+      <div style="grid-column:1/-1" class="empty-state">
+        <div class="empty-icon">🔍</div>
+        <div class="empty-title">暂无「${tagName}」标签的角色</div>
+      </div>`;
+  } else {
+    grid.innerHTML = filtered.map((char, i) => `
+      <div class="character-card" onclick="openCharDetail(${char.id})" style="animation: fadeInUp 0.4s ease ${i * 0.08}s both">
+        <div class="card-image" style="background-image:url('${char.photo}');background-size:cover;background-position:center">
+          <div class="card-gradient"></div>
+        </div>
+        <div class="card-info">
+          <div class="card-name">${char.name}</div>
+          <div class="card-desc">${char.desc}</div>
+          <div class="card-chat-count">💬 ${char.chats}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+  
+  navigateTo('page-category-more');
 }
 
 function showCharReportConfirm() {
