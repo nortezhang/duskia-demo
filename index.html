@@ -2401,6 +2401,12 @@ function renderMessages() {
   
   let html = '<div class="story-disclaimer">所有回复均由AI生成。所有角色均设定为成年人<br>（18岁及以上）</div>';
   
+  // Find the index of the last dialogue message for showing regenerate button
+  let lastDialogueIdx = -1;
+  for (let j = conv.messages.length - 1; j >= 0; j--) {
+    if (conv.messages[j].type === 'dialogue') { lastDialogueIdx = j; break; }
+  }
+  
   html += conv.messages.map((msg, i) => {
     if (msg.type === 'narration') {
       return `<div class="story-narration">
@@ -2411,12 +2417,13 @@ function renderMessages() {
     }
     if (msg.type === 'dialogue') {
       const audioId = 'audio-' + i;
+      const isLast = (i === lastDialogueIdx);
       return `<div class="dialogue-row">
         <div class="dialogue-avatar"><img src="${char.photo}"></div>
         <div class="dialogue-bubble">
           <div class="dialogue-text">${msg.text}</div>
           <div class="dialogue-audio">
-            <button class="dialogue-audio-btn" onclick="toggleAudioLoop(this)" title="循环">🔄</button>
+            ${isLast ? `<button class="dialogue-audio-btn" onclick="regenerateReply(${i})" title="重新生成">🔄</button>` : ''}
             <button class="dialogue-audio-btn" id="${audioId}" onclick="toggleAudioPlay(this)" title="播放">▶️</button>
           </div>
         </div>
@@ -2583,13 +2590,60 @@ function toggleAudioPlay(btn) {
   }
 }
 
-function toggleAudioLoop(btn) {
-  btn.classList.toggle('playing');
-  if (btn.classList.contains('playing')) {
-    showToast('已开启循环播放', '');
-  } else {
-    showToast('已关闭循环播放', '');
+function regenerateReply(msgIndex) {
+  const conv = conversations[currentChatCharId];
+  if (!conv) return;
+  
+  // Find the last user message to use as context for regeneration
+  let lastUserText = '';
+  for (let i = msgIndex - 1; i >= 0; i--) {
+    if (conv.messages[i].type === 'sent') {
+      lastUserText = conv.messages[i].text;
+      break;
+    }
   }
+  
+  // Remove all messages from the last AI reply block (dialogue + description after last sent)
+  let removeFrom = msgIndex;
+  for (let i = msgIndex - 1; i >= 0; i--) {
+    if (conv.messages[i].type === 'sent' || conv.messages[i].type === 'narration') break;
+    removeFrom = i;
+  }
+  conv.messages.splice(removeFrom);
+  
+  renderMessages();
+  scrollChatBottom();
+  showToast('正在重新生成...', '');
+  
+  // Show typing indicator
+  setTimeout(() => {
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'message-row received';
+    typingDiv.id = 'typing-indicator';
+    const char = characters.find(c => c.id === currentChatCharId);
+    typingDiv.innerHTML = `
+      <div class="dialogue-avatar"><img src="${char ? char.photo : ''}"></div>
+      <div class="dialogue-bubble">
+        <div class="message-typing"><span></span><span></span><span></span></div>
+      </div>
+    `;
+    document.getElementById('chat-messages').appendChild(typingDiv);
+    scrollChatBottom();
+  }, 300);
+  
+  // Generate new reply
+  setTimeout(() => {
+    const typing = document.getElementById('typing-indicator');
+    if (typing) typing.remove();
+    
+    const newReply = getStoryReply(lastUserText, currentChatCharId);
+    newReply.forEach(msg => conv.messages.push(msg));
+    conv.lastTime = new Date();
+    
+    renderMessages();
+    scrollChatBottom();
+    showToast('已重新生成', 'success');
+  }, 1200 + Math.random() * 1000);
 }
 
 // ===== ME / PROFILE =====
