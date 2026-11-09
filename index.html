@@ -450,39 +450,44 @@ body {
   margin-bottom: 12px;
 }
 
-/* ===== 5. Profile Setup ===== */
-.profile-setup { padding: 24px; }
+/* ===== 5. Profile Setup (Bottom Sheet) ===== */
+.profile-setup-sheet {
+  max-height: 85vh;
+  padding: 20px 24px 32px;
+}
 .profile-setup-title {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 .profile-setup-subtitle {
   color: var(--text-secondary);
   font-size: 14px;
-  margin-bottom: 32px;
+  margin-bottom: 8px;
 }
-.avatar-upload {
+.avatar-setup-display {
   width: 96px; height: 96px;
   border-radius: var(--radius-full);
   background: var(--bg-card);
   display: flex;
-  flex-direction: column;
   align-items: center; justify-content: center;
-  margin: 0 auto 32px;
+  font-size: 44px;
+  border: 3px solid var(--border-color);
+  overflow: hidden;
+}
+.avatar-edit-badge {
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 32px; height: 32px;
+  border-radius: var(--radius-full);
+  background: var(--accent-purple);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
   cursor: pointer;
-  border: 2px dashed var(--border-color);
-  transition: border-color 0.2s;
-  gap: 4px;
+  border: 2px solid var(--bg-secondary);
+  transition: transform 0.2s;
 }
-.avatar-upload:hover { border-color: var(--accent-purple); }
-.avatar-upload .icon { font-size: 28px; color: var(--text-muted); }
-.avatar-upload .label { font-size: 11px; color: var(--text-muted); }
-.avatar-upload.has-avatar {
-  border: 3px solid var(--accent-purple);
-  border-style: solid;
-  font-size: 40px;
-}
+.avatar-edit-badge:active { transform: scale(0.9); }
 .form-group {
   margin-bottom: 20px;
 }
@@ -1146,7 +1151,7 @@ body {
 }
 .network-bar.active { display: flex; }
 
-/* Date Picker */
+/* Age Picker */
 .date-picker-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -1316,7 +1321,7 @@ body {
       <div class="legal-content">
         <h2>Duskia 服务条款</h2>
         <p>更新日期：2026 年 11 月 1 日</p>
-        <p>欢迎使用 Tipsy 服务。请在使用前仔细阅读以下条款。使用本服务即表示您接受本条款。</p>
+        <p>欢迎使用 Duskia 服务。请在使用前仔细阅读以下条款。使用本服务即表示您接受本条款。</p>
         <h2>一、服务说明</h2>
         <p>Duskia 是一款 AI 陪聊产品，通过人工智能技术为用户提供情感陪伴和交流服务。AI 角色的回复由机器学习模型生成，不代表真实人类的观点。</p>
         <h2>二、用户行为规范</h2>
@@ -1339,51 +1344,45 @@ body {
     </div>
   </div>
 
-  <!-- ===== PROFILE SETUP PAGE ===== -->
-  <div class="page" id="page-profile-setup">
-    <div class="page-header">
-      <div style="width:36px"></div>
-      <div class="title"></div>
-      <div class="header-right" style="width:36px"></div>
-    </div>
-    <div class="page-body">
-      <div class="profile-setup">
-        <div class="profile-setup-title">完善个人资料</div>
-        <div class="profile-setup-subtitle">让 AI 更好地了解你</div>
-        
-        <div class="avatar-upload" id="avatar-upload" onclick="showAvatarPicker()">
-          <span class="icon">📷</span>
-          <span class="label">上传头像</span>
-        </div>
-        <input type="file" id="avatar-file-input" accept="image/*" style="display:none" onchange="handleAvatarUpload(event)">
+  <!-- ===== PROFILE SETUP (Bottom Sheet) ===== -->
+  <div class="bottom-sheet-overlay" id="sheet-profile-setup">
+    <div class="bottom-sheet profile-setup-sheet" onclick="event.stopPropagation()">
+      <div class="handle"></div>
+      <div class="profile-setup-title" style="text-align:center">展示你的个性</div>
+      <div class="profile-setup-subtitle" style="text-align:center">让 AI 更好地了解你</div>
 
-        <div class="form-group">
-          <label class="form-label">昵称</label>
-          <input class="form-input" id="input-nickname" type="text" placeholder="给自己起个名字吧" maxlength="20">
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">签名</label>
-          <textarea class="form-input form-textarea" id="input-signature" placeholder="写一句介绍自己的话..." maxlength="100"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">性别</label>
-          <div class="gender-selector" id="gender-selector">
-            <div class="gender-option" data-value="male" onclick="selectGender(this)">♂ 男</div>
-            <div class="gender-option" data-value="female" onclick="selectGender(this)">♀ 女</div>
-            <div class="gender-option" data-value="other" onclick="selectGender(this)">⚧ 其他</div>
-            <div class="gender-option" data-value="secret" onclick="selectGender(this)">🤫 保密</div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">生日</label>
-          <input class="form-input" id="input-birthday" type="text" placeholder="选择你的生日" readonly onclick="showDatePicker()">
-        </div>
-
-        <button class="btn btn-primary" onclick="completeProfileSetup()">完成设置</button>
+      <!-- Avatar with edit button -->
+      <div style="position:relative;width:96px;margin:24px auto 24px">
+        <div class="avatar-setup-display" id="avatar-setup-display">😊</div>
+        <div class="avatar-edit-badge" onclick="showAvatarPicker()">✏️</div>
       </div>
+      <input type="file" id="avatar-file-input" accept="image/*" style="display:none" onchange="handleAvatarUpload(event)">
+
+      <div class="form-group">
+        <label class="form-label">昵称</label>
+        <input class="form-input" id="input-nickname" type="text" placeholder="不填则自动生成" maxlength="20">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">签名</label>
+        <textarea class="form-input form-textarea" id="input-signature" placeholder="写一句介绍自己的话..." maxlength="100"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">性别 <span style="color:var(--accent-pink);font-size:11px">*必选</span></label>
+        <div class="gender-selector" id="gender-selector">
+          <div class="gender-option" data-value="male" onclick="selectGender(this)">♂ 男</div>
+          <div class="gender-option" data-value="female" onclick="selectGender(this)">♀ 女</div>
+          <div class="gender-option" data-value="nonbinary" onclick="selectGender(this)">⚧ 非二元</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">年龄</label>
+        <input class="form-input" id="input-age" type="text" placeholder="选择你的年龄（选填）" readonly onclick="showAgePicker()">
+      </div>
+
+      <button class="btn btn-primary" style="width:100%;margin-top:12px" onclick="completeProfileSetup()">完成设置</button>
     </div>
   </div>
 
@@ -1632,8 +1631,11 @@ body {
     </div>
     <div class="page-body">
       <div class="profile-setup">
-        <div class="avatar-upload has-avatar" id="edit-avatar-upload" onclick="showAvatarPicker()">
-          <span id="edit-avatar-display">😊</span>
+        <div style="position:relative;width:96px;margin:0 auto 24px">
+          <div class="avatar-setup-display" id="edit-avatar-display-wrap">
+            <span id="edit-avatar-display">😊</span>
+          </div>
+          <div class="avatar-edit-badge" onclick="showAvatarPicker()">✏️</div>
         </div>
         <input type="file" id="edit-avatar-file-input" accept="image/*" style="display:none" onchange="handleAvatarUpload(event)">
 
@@ -1652,14 +1654,13 @@ body {
           <div class="gender-selector" id="edit-gender-selector">
             <div class="gender-option" data-value="male" onclick="selectGender(this)">♂ 男</div>
             <div class="gender-option" data-value="female" onclick="selectGender(this)">♀ 女</div>
-            <div class="gender-option" data-value="other" onclick="selectGender(this)">⚧ 其他</div>
-            <div class="gender-option" data-value="secret" onclick="selectGender(this)">🤫 保密</div>
+            <div class="gender-option" data-value="nonbinary" onclick="selectGender(this)">⚧ 非二元</div>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="form-label">生日</label>
-          <input class="form-input" id="edit-birthday" type="text" placeholder="选择你的生日" readonly onclick="showDatePicker()">
+          <label class="form-label">年龄</label>
+          <input class="form-input" id="edit-birthday" type="text" placeholder="选择你的年龄" readonly onclick="showAgePicker()">
         </div>
 
         <button class="btn btn-primary" onclick="saveProfileEdit()">保存</button>
@@ -1779,18 +1780,16 @@ body {
     </div>
   </div>
 
-  <!-- Date Picker -->
-  <div class="date-picker-overlay" id="date-picker">
+  <!-- Age Picker -->
+  <div class="date-picker-overlay" id="age-picker">
     <div class="date-picker-box">
       <div class="date-picker-header">
-        <button class="cancel" onclick="closeDatePicker()">取消</button>
-        <span class="title">选择生日</span>
-        <button class="confirm" onclick="confirmDatePicker()">确认</button>
+        <button class="cancel" onclick="closeAgePicker()">取消</button>
+        <span class="title">选择年龄</span>
+        <button class="confirm" onclick="confirmAgePicker()">确认</button>
       </div>
       <div class="date-picker-wheels">
-        <div class="date-picker-wheel" id="picker-year"></div>
-        <div class="date-picker-wheel" id="picker-month"></div>
-        <div class="date-picker-wheel" id="picker-day"></div>
+        <div class="date-picker-wheel" id="picker-age"></div>
       </div>
     </div>
   </div>
@@ -1870,7 +1869,7 @@ let userProfile = {
   nickname: '',
   signature: '',
   gender: '',
-  birthday: '',
+  age: null,
   avatar: '😊',
   avatarType: 'emoji'
 };
@@ -1953,7 +1952,11 @@ function acceptConsent() {
   navigateTo('page-loading', 'fade');
   
   setTimeout(() => {
-    navigateTo('page-profile-setup', 'fade');
+    navigateTo('page-main', 'fade');
+    loadDiscoverData();
+    setTimeout(() => {
+      document.getElementById('sheet-profile-setup').classList.add('active');
+    }, 300);
   }, 1500);
 }
 
@@ -1998,29 +2001,31 @@ function handleAvatarUpload(event) {
 }
 
 function updateAvatarDisplay() {
-  const uploadEl = document.getElementById('avatar-upload');
-  if (uploadEl) {
-    uploadEl.classList.add('has-avatar');
-    if (userProfile.avatarType === 'image') {
-      uploadEl.innerHTML = `<img src="${userProfile.avatar}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`;
-    } else {
-      uploadEl.innerHTML = `<span>${userProfile.avatar}</span>`;
-    }
+  const imgHtml = `<img src="${userProfile.avatar}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`;
+  const emojiText = userProfile.avatar;
+  const isImage = userProfile.avatarType === 'image';
+  
+  // Setup sheet display
+  const setupEl = document.getElementById('avatar-setup-display');
+  if (setupEl) {
+    setupEl.innerHTML = isImage ? imgHtml : emojiText;
   }
-  const editEl = document.getElementById('edit-avatar-upload');
+  // Edit page display
+  const editEl = document.getElementById('edit-avatar-display');
   if (editEl) {
-    if (userProfile.avatarType === 'image') {
-      document.getElementById('edit-avatar-display').innerHTML = `<img src="${userProfile.avatar}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`;
+    if (isImage) {
+      editEl.innerHTML = imgHtml;
     } else {
-      document.getElementById('edit-avatar-display').textContent = userProfile.avatar;
+      editEl.textContent = emojiText;
     }
   }
+  // Me page avatar
   const meAvatar = document.getElementById('me-avatar');
   if (meAvatar) {
-    if (userProfile.avatarType === 'image') {
-      meAvatar.innerHTML = `<img src="${userProfile.avatar}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`;
+    if (isImage) {
+      meAvatar.innerHTML = imgHtml;
     } else {
-      meAvatar.textContent = userProfile.avatar;
+      meAvatar.textContent = emojiText;
     }
   }
 }
@@ -2035,25 +2040,20 @@ function completeProfileSetup() {
   const nick = document.getElementById('input-nickname').value.trim();
   const sig = document.getElementById('input-signature').value.trim();
   
-  if (!nick) {
-    showToast('请输入昵称', 'error');
-    return;
-  }
-  
   if (!userProfile.gender) {
     showToast('请选择性别', 'error');
     return;
   }
   
-  userProfile.nickname = nick;
+  userProfile.nickname = nick || ('用户' + Math.floor(Math.random() * 9000 + 1000));
   userProfile.signature = sig;
   
-  showToast('资料设置成功！', 'success');
+  closeSheet('sheet-profile-setup');
+  showToast('设置成功！', 'success');
   enterMainApp();
 }
 
 function enterMainApp() {
-  navigateTo('page-main', 'fade');
   loadDiscoverData();
 }
 
@@ -2464,14 +2464,19 @@ function updateMeProfile() {
 function openProfileEdit() {
   document.getElementById('edit-nickname').value = userProfile.nickname;
   document.getElementById('edit-signature').value = userProfile.signature;
-  document.getElementById('edit-avatar-display').textContent = userProfile.avatar;
+  
+  if (userProfile.avatarType === 'image') {
+    document.getElementById('edit-avatar-display').innerHTML = `<img src="${userProfile.avatar}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`;
+  } else {
+    document.getElementById('edit-avatar-display').textContent = userProfile.avatar;
+  }
   
   const genderBtns = document.querySelectorAll('#edit-gender-selector .gender-option');
   genderBtns.forEach(btn => {
     btn.classList.toggle('active', btn.dataset.value === userProfile.gender);
   });
   
-  document.getElementById('edit-birthday').value = userProfile.birthday;
+  document.getElementById('edit-birthday').value = userProfile.age ? (userProfile.age + ' 岁') : '';
   
   navigateTo('page-profile-edit');
 }
@@ -2503,7 +2508,7 @@ function doLogout() {
   closeModal('modal-logout');
   conversations = {};
   favorites.clear();
-  userProfile = { nickname: '', signature: '', gender: '', birthday: '', avatar: '😊', avatarType: 'emoji' };
+  userProfile = { nickname: '', signature: '', gender: '', age: null, avatar: '😊', avatarType: 'emoji' };
   pageHistory = [];
   
   const mainPage = document.getElementById('page-main');
@@ -2526,54 +2531,45 @@ function doDeleteAccount() {
   doLogout();
 }
 
-// ===== DATE PICKER =====
-let pickerYear = 2000, pickerMonth = 1, pickerDay = 1;
+// ===== AGE PICKER =====
+let pickerAge = 20;
 
-function showDatePicker() {
-  const picker = document.getElementById('date-picker');
+function showAgePicker() {
+  const picker = document.getElementById('age-picker');
   picker.classList.add('active');
   
-  const yearWheel = document.getElementById('picker-year');
-  const monthWheel = document.getElementById('picker-month');
-  const dayWheel = document.getElementById('picker-day');
+  const ageWheel = document.getElementById('picker-age');
+  ageWheel.innerHTML = '';
   
-  yearWheel.innerHTML = '';
-  monthWheel.innerHTML = '';
-  dayWheel.innerHTML = '';
+  for (let a = 14; a <= 60; a++) {
+    ageWheel.innerHTML += `<div class="date-picker-item ${a === pickerAge ? 'selected' : ''}" onclick="selectAgeItem(this, ${a})">${a} 岁</div>`;
+  }
   
-  for (let y = 1970; y <= 2015; y++) {
-    yearWheel.innerHTML += `<div class="date-picker-item ${y === pickerYear ? 'selected' : ''}" onclick="selectPickerItem(this, 'year', ${y})">${y}年</div>`;
-  }
-  for (let m = 1; m <= 12; m++) {
-    monthWheel.innerHTML += `<div class="date-picker-item ${m === pickerMonth ? 'selected' : ''}" onclick="selectPickerItem(this, 'month', ${m})">${m}月</div>`;
-  }
-  for (let d = 1; d <= 31; d++) {
-    dayWheel.innerHTML += `<div class="date-picker-item ${d === pickerDay ? 'selected' : ''}" onclick="selectPickerItem(this, 'day', ${d})">${d}日</div>`;
-  }
+  setTimeout(() => {
+    const selected = ageWheel.querySelector('.selected');
+    if (selected) selected.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  }, 100);
 }
 
-function selectPickerItem(el, type, value) {
+function selectAgeItem(el, value) {
   el.parentElement.querySelectorAll('.date-picker-item').forEach(i => i.classList.remove('selected'));
   el.classList.add('selected');
-  if (type === 'year') pickerYear = value;
-  if (type === 'month') pickerMonth = value;
-  if (type === 'day') pickerDay = value;
+  pickerAge = value;
 }
 
-function closeDatePicker() {
-  document.getElementById('date-picker').classList.remove('active');
+function closeAgePicker() {
+  document.getElementById('age-picker').classList.remove('active');
 }
 
-function confirmDatePicker() {
-  const dateStr = `${pickerYear}-${String(pickerMonth).padStart(2,'0')}-${String(pickerDay).padStart(2,'0')}`;
-  userProfile.birthday = dateStr;
+function confirmAgePicker() {
+  userProfile.age = pickerAge;
   
-  const setupInput = document.getElementById('input-birthday');
+  const setupInput = document.getElementById('input-age');
   const editInput = document.getElementById('edit-birthday');
-  if (setupInput) setupInput.value = dateStr;
-  if (editInput) editInput.value = dateStr;
+  if (setupInput) setupInput.value = pickerAge + ' 岁';
+  if (editInput) editInput.value = pickerAge + ' 岁';
   
-  closeDatePicker();
+  closeAgePicker();
 }
 
 // ===== UTILITIES =====
