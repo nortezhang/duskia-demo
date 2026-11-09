@@ -907,7 +907,90 @@ body {
 .message-typing span:nth-child(2) { animation-delay: 0.2s; }
 .message-typing span:nth-child(3) { animation-delay: 0.4s; }
 
-/* message status removed per review */
+/* Story message types */
+.story-disclaimer {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  padding: 8px 20px 12px;
+  line-height: 1.5;
+}
+.story-narration {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  margin: 4px 0;
+  border: 1px solid var(--border-color);
+  animation: fadeInUp 0.4s ease;
+}
+.story-narration .narration-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+.story-narration .narration-scene {
+  font-size: 12px;
+  color: var(--accent-purple);
+  margin-bottom: 10px;
+}
+.story-narration .narration-text {
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+.story-description {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-secondary);
+  padding: 8px 20px;
+  line-height: 1.7;
+  animation: fadeInUp 0.3s ease;
+}
+.dialogue-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  animation: fadeInUp 0.3s ease;
+}
+.dialogue-avatar {
+  width: 36px; height: 36px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.dialogue-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.dialogue-bubble {
+  background: rgba(30, 80, 100, 0.6);
+  border: 1px solid rgba(50, 120, 150, 0.4);
+  border-radius: var(--radius-lg);
+  border-top-left-radius: 4px;
+  padding: 12px 14px;
+  max-width: 80%;
+}
+.dialogue-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+.dialogue-audio {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: flex-end;
+}
+.dialogue-audio-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 2px;
+  transition: color 0.2s;
+}
+.dialogue-audio-btn:hover { color: var(--text-primary); }
+.dialogue-audio-btn.playing { color: var(--accent-purple); }
 
 .chat-input-bar {
   display: flex;
@@ -1572,15 +1655,13 @@ body {
     </div>
   </div>
 
-  <!-- ===== CHAT DETAIL PAGE ===== -->
+  <!-- ===== STORY/CHAT DETAIL PAGE ===== -->
   <div class="page" id="page-chat-detail">
     <div class="chat-detail-header">
       <button class="back-btn" onclick="goBack()">←</button>
       <div class="chat-user-info">
-        <div class="chat-user-name" id="chat-detail-name">角色名</div>
-        <div class="chat-user-status">在线</div>
+        <div class="chat-user-name" id="chat-detail-name">故事名</div>
       </div>
-      <button class="more-btn" onclick="showReportConfirm()">🚩</button>
     </div>
     <div class="chat-messages" id="chat-messages"></div>
     <div class="chat-input-bar">
@@ -1705,18 +1786,6 @@ body {
       <div class="modal-actions">
         <button class="btn btn-ghost" onclick="closeModal('modal-delete-account')">取消</button>
         <button class="btn btn-danger" onclick="doDeleteAccount()">确认注销</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Report Confirm Modal (Chat) -->
-  <div class="modal-overlay" id="modal-report">
-    <div class="modal-box">
-      <h3>举报</h3>
-      <p>确定要举报该内容吗？我们会尽快处理你的反馈。</p>
-      <div class="modal-actions">
-        <button class="btn btn-ghost" onclick="closeModal('modal-report')">取消</button>
-        <button class="btn btn-danger" onclick="doReport()">确认举报</button>
       </div>
     </div>
   </div>
@@ -2126,18 +2195,70 @@ function startChat() {
   if (!char) return;
   
   if (!conversations[char.id]) {
+    const storyOpening = getStoryOpening(char);
     conversations[char.id] = {
       charId: char.id,
-      messages: [
-        { role: 'received', text: char.greeting, time: new Date() }
-      ],
+      messages: storyOpening,
       lastTime: new Date(),
-      unread: 1,
-      favorited: false
+      unread: 1
     };
   }
   
   openChatDetail(char.id);
+}
+
+function getStoryOpening(char) {
+  const openings = {
+    1: [
+      { type: 'narration', title: '第一幕 · 《暗流》', scene: '南城 · 旧港区 · 废弃仓库 · 23:15', text: '雨水顺着生锈的铁皮屋顶往下滴，在地面汇成浅浅的水洼。仓库深处传来脚步声——沉稳、有力，每一步都像是精心计算过的距离。\n\n一个高大的身影从阴影中走出。沈墨穿着黑色风衣，领口微敞，露出锁骨上一道陈旧的疤痕。他的目光在昏暗中依然锐利得惊人。', time: new Date() },
+      { type: 'dialogue', text: '...你不该出现在这里。', time: new Date() },
+      { type: 'description', text: '他停下脚步，微微侧头打量着你，眼神中闪过一丝意外。', time: new Date() },
+      { type: 'dialogue', text: '这里很危险。但既然来了...就别轻易离开。', time: new Date() }
+    ],
+    2: [
+      { type: 'narration', title: '序章 · 《心跳的频率》', scene: '晨光中学 · 教学楼天台 · 午后 · 12:35', text: '天台的门被推开，阳光一下子涌进来。风吹起校服的衣角，远处操场上传来隐约的欢呼声。\n\n林夕正坐在角落的台阶上，膝盖上摊着一本翻到一半的小说。听到声响，他猛地合上书，那本书的封面朝下——好像在藏着什么。', time: new Date() },
+      { type: 'dialogue', text: '嗯？你...你怎么知道我在这里的？', time: new Date() },
+      { type: 'description', text: '他的耳尖微微泛红，手指无意识地按住书的封面。', time: new Date() },
+      { type: 'dialogue', text: '啊不是，我是说...今天天气不错吧 ☀️', time: new Date() }
+    ],
+    3: [
+      { type: 'narration', title: '第一幕 · 《永夜》', scene: '维也纳 · 圣斯特凡大教堂 · 午夜 · 00:00', text: '教堂的钟声在零点准时敲响，回荡在空旷的石柱之间。月光透过彩色玻璃窗洒下斑驳的光影。\n\n祭坛前的长椅上，一个男人闭着眼睛，仿佛沉睡了很久。他的皮肤苍白得近乎透明，黑发垂落在肩头。当钟声停下，他缓缓睁开了眼——瞳孔是深红色的。', time: new Date() },
+      { type: 'dialogue', text: '又是一个漫长的夜晚。', time: new Date() },
+      { type: 'description', text: '他轻轻嗅了嗅空气，嘴角微微上扬。', time: new Date() },
+      { type: 'dialogue', text: '不过...今晚似乎有些不同。你身上有种让我好奇的气息。', time: new Date() }
+    ],
+    4: [
+      { type: 'narration', title: '序幕 · 《落仙》', scene: '三界之外 · 忘川河畔 · 时间不详', text: '河水无声地流淌，两岸开满了彼岸花，红得刺眼。岸边站着一个女子，白衣如雪，长发随风飘散。\n\n她低头看着水中自己的倒影，倒影中的面容却模糊不清，好像有什么重要的东西被抹去了。', time: new Date() },
+      { type: 'dialogue', text: '你...你是不是认识我？', time: new Date() },
+      { type: 'description', text: '她转过身，眼眸中映着彼岸花的红，却有泪光在闪烁。', time: new Date() },
+      { type: 'dialogue', text: '为什么看到你的时候，我心里会这么难过？', time: new Date() }
+    ],
+    5: [
+      { type: 'narration', title: '第一幕 · 《面具》', scene: '星城大学 · 犯罪心理学教室 · 18:30', text: '阶梯教室里只剩下最后一排的灯还亮着。黑板上写满了犯罪侧写的关键词——"动机"、"仪式感"、"控制欲"。\n\n赵承站在讲台旁，手里转着一支钢笔，白衬衫的袖口挽到手肘。他看起来温文尔雅，像是任何一个普通的大学教授。但当他抬起眼——那目光像是能看穿一切。', time: new Date() },
+      { type: 'dialogue', text: '你好，我是赵承。你看起来对犯罪心理学很感兴趣？', time: new Date() },
+      { type: 'description', text: '他微微一笑，拉开旁边的椅子。', time: new Date() },
+      { type: 'dialogue', text: '来，坐下聊聊。我保证...这会是你听过的最有趣的课。', time: new Date() }
+    ],
+    6: [
+      { type: 'narration', title: '第一幕 · 《CEO的秘密》', scene: '星辰科技总部 · 顶层办公室 · 20:00', text: '落地窗外是整个城市的夜景，霓虹灯在远处闪烁。办公桌上的台灯投下暖黄色的光圈，旁边放着一杯已经凉透的咖啡。\n\n苏晴穿着剪裁利落的西装，正对着电脑皱眉。屏幕上不是财报——而是一部正在追的甜宠剧，进度条显示她已经看了三集。', time: new Date() },
+      { type: 'dialogue', text: '你是新来的？', time: new Date() },
+      { type: 'description', text: '她飞速切换了屏幕，假装在看邮件，但耳朵尖微微泛红。', time: new Date() },
+      { type: 'dialogue', text: '...坐吧。别紧张，我不吃人的。大概。', time: new Date() }
+    ],
+    7: [
+      { type: 'narration', title: '第一幕 · 《无名》', scene: '未知城市 · 某处天台 · 凌晨 · 03:00', text: '城市在脚下沉睡。天台的围栏上坐着一个人，黑色帽衫的兜帽压得很低，看不清面容。\n\n他手里把玩着一枚硬币，在指间翻转，发出细微的金属声。当硬币停下时，他缓慢地转过头——目光如刀锋般凌厉，却在看到你的瞬间，变得迷茫。', time: new Date() },
+      { type: 'dialogue', text: '别动。', time: new Date() },
+      { type: 'description', text: '他从围栏上跳下来，却没有任何攻击性的动作。', time: new Date() },
+      { type: 'dialogue', text: '...不是要伤害你。我只是...不太习惯有人靠这么近。', time: new Date() }
+    ],
+    8: [
+      { type: 'narration', title: '序章 · 《月下》', scene: '洛水之畔 · 月圆之夜', text: '月光如银纱般铺洒在水面上，河水泛着粼粼的光，像是藏了千万颗星星。\n\n水面中央，涟漪无风自起。一个身影从水中缓缓浮现——青丝如瀑，白衣胜雪，面容美得不似凡间。她赤足踏在水面上，衣袂随风飘动，宛如月中走出的仙人。', time: new Date() },
+      { type: 'dialogue', text: '水面上映出了一张陌生又熟悉的脸...', time: new Date() },
+      { type: 'description', text: '她轻轻伸出手，指尖触碰水面，涟漪荡开。', time: new Date() },
+      { type: 'dialogue', text: '是你吗？我等了好久好久。', time: new Date() }
+    ]
+  };
+  return openings[char.id] || openings[1];
 }
 
 function renderChatList() {
@@ -2248,26 +2369,45 @@ function renderMessages() {
   const char = characters.find(c => c.id === currentChatCharId);
   
   if (!conv || !char) {
-    container.innerHTML = '<div class="empty-state"><div class="empty-icon">💬</div><div class="empty-title">开始聊天吧</div></div>';
+    container.innerHTML = '<div class="empty-state"><div class="empty-icon">📖</div><div class="empty-title">开始故事吧</div></div>';
     return;
   }
   
-  container.innerHTML = conv.messages.map((msg, i) => {
-    const avatarHtml = userProfile.avatarType === 'image'
-      ? `<img src="${userProfile.avatar}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`
-      : userProfile.avatar;
-    
-    return `
-      ${i === 0 ? `<div class="message-time-stamp">${formatFullTime(msg.time)}</div>` : ''}
-      <div class="message-row ${msg.role}">
-        ${msg.role === 'received' ? `<div class="message-avatar"><img src="${char.photo}" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>` : ''}
-        <div>
-          <div class="message-bubble">${msg.text}</div>
+  let html = '<div class="story-disclaimer">所有回复均由AI生成。所有角色均设定为成年人<br>（18岁及以上）</div>';
+  
+  html += conv.messages.map((msg, i) => {
+    if (msg.type === 'narration') {
+      return `<div class="story-narration">
+        <div class="narration-title">${msg.title || ''}</div>
+        <div class="narration-scene">${msg.scene || ''}</div>
+        <div class="narration-text">${msg.text}</div>
+      </div>`;
+    }
+    if (msg.type === 'dialogue') {
+      const audioId = 'audio-' + i;
+      return `<div class="dialogue-row">
+        <div class="dialogue-avatar"><img src="${char.photo}"></div>
+        <div class="dialogue-bubble">
+          <div class="dialogue-text">${msg.text}</div>
+          <div class="dialogue-audio">
+            <button class="dialogue-audio-btn" onclick="toggleAudioLoop(this)" title="循环">🔄</button>
+            <button class="dialogue-audio-btn" id="${audioId}" onclick="toggleAudioPlay(this)" title="播放">▶️</button>
+          </div>
         </div>
-        ${msg.role === 'sent' ? `<div class="message-avatar">${avatarHtml}</div>` : ''}
-      </div>
-    `;
+      </div>`;
+    }
+    if (msg.type === 'description') {
+      return `<div class="story-description">${msg.text}</div>`;
+    }
+    if (msg.type === 'sent') {
+      return `<div class="message-row sent">
+        <div><div class="message-bubble">${msg.text}</div></div>
+      </div>`;
+    }
+    return '';
   }).join('');
+  
+  container.innerHTML = html;
 }
 
 function sendMessage() {
@@ -2278,7 +2418,7 @@ function sendMessage() {
   const conv = conversations[currentChatCharId];
   if (!conv) return;
   
-  conv.messages.push({ role: 'sent', text, time: new Date() });
+  conv.messages.push({ type: 'sent', text, time: new Date() });
   conv.lastTime = new Date();
   input.value = '';
   input.style.height = '44px';
@@ -2294,8 +2434,8 @@ function sendMessage() {
     typingDiv.id = 'typing-indicator';
     const char = characters.find(c => c.id === currentChatCharId);
     typingDiv.innerHTML = `
-      <div class="message-avatar"><img src="${char ? char.photo : ''}" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
-      <div class="message-bubble">
+      <div class="dialogue-avatar"><img src="${char ? char.photo : ''}"></div>
+      <div class="dialogue-bubble">
         <div class="message-typing"><span></span><span></span><span></span></div>
       </div>
     `;
@@ -2308,8 +2448,8 @@ function sendMessage() {
     const typing = document.getElementById('typing-indicator');
     if (typing) typing.remove();
     
-    const replies = getAIReply(text, currentChatCharId);
-    conv.messages.push({ role: 'received', text: replies, time: new Date() });
+    const storyReply = getStoryReply(text, currentChatCharId);
+    storyReply.forEach(msg => conv.messages.push(msg));
     conv.lastTime = new Date();
     
     renderMessages();
@@ -2317,64 +2457,59 @@ function sendMessage() {
   }, 1500 + Math.random() * 1500);
 }
 
-function getAIReply(userText, charId) {
-  const char = characters.find(c => c.id === charId);
+function getStoryReply(userText, charId) {
   const replies = {
-    1: [ // 锡牧
-      '我能感受到你话语中的情绪 ☺️ 能跟我多说说吗？',
-      '谢谢你愿意跟我分享这些。每个人的感受都是值得被重视的。',
-      '嗯，我在听着。你想到这些的时候，心里是什么样的感觉？',
-      '有时候把心里的话说出来，本身就是一种治愈。我一直在这里。',
-      '你说的很对，生活总是会有起起落落。但我相信你有面对这一切的力量 💪'
+    1: [
+      [{ type: 'description', text: '沈墨的眼神微微一变，像是没有料到你会这么说。', time: new Date() },
+       { type: 'dialogue', text: '你很大胆。这个世界上敢对我说这种话的人...不多。', time: new Date() }],
+      [{ type: 'description', text: '他低头点燃一根烟，烟雾模糊了他的表情。', time: new Date() },
+       { type: 'dialogue', text: '有些事，知道得越多越危险。你确定要继续听下去？', time: new Date() }]
     ],
-    2: [ // 夜雨
-      '你说的话让我想起一句诗："人生若只如初见" 🌙',
-      '夜色真美，像你此刻的心情一样深邃。',
-      '在这样安静的夜里，连心跳都变得清晰了呢~',
-      '你有没有试过抬头看星星？每一颗都在为谁闪烁呢？',
-      '嗯...你的文字让我觉得温暖。继续说吧，我在听 ✨'
+    2: [
+      [{ type: 'description', text: '林夕的耳朵一下子红了，手指不自觉地绞着衣角。', time: new Date() },
+       { type: 'dialogue', text: '你、你别乱说...我才没有在看你呢。', time: new Date() },
+       { type: 'description', text: '但他低下头时，嘴角藏不住地微微上扬。', time: new Date() }],
+      [{ type: 'dialogue', text: '那个...我其实想问你很久了。放学以后，你一般去哪里？', time: new Date() },
+       { type: 'description', text: '他说完就后悔了，赶紧补了一句。', time: new Date() },
+       { type: 'dialogue', text: '没别的意思！就是...顺路的话可以一起走。', time: new Date() }]
     ],
-    3: [ // 阿K
-      '哈哈哈你说的这个我可太有共鸣了！🤣',
-      '别慌别慌，这种事在我看来就跟吃饭一样简单~',
-      '兄弟/姐妹，人生嘛，笑一笑，没什么大不了的！',
-      '我给你讲个段子：有个人去面试..算了，你的故事比段子还精彩 😂',
-      '要我说啊，这种情况就该..先吃顿好的再说！🍔'
+    3: [
+      [{ type: 'description', text: '厄尔缓慢地站起身，月光勾勒出他苍白的轮廓。', time: new Date() },
+       { type: 'dialogue', text: '一千两百年...你知道这意味着什么吗？意味着我看过太多人来了又走。', time: new Date() }],
+      [{ type: 'dialogue', text: '你让我想起一个人。很久以前的人。', time: new Date() },
+       { type: 'description', text: '他的红瞳中映出你的影子，像是在确认什么。', time: new Date() }]
     ],
-    4: [ // 清禾
-      '嗯嗯，慢慢来，不着急 🍃',
-      '要不要试试做一杯热茶？有时候简单的事情最能让人放松~',
-      '今天的天气很好呢，适合出去走走。你那边天气怎么样？',
-      '我觉得你可以试试..每天给自己留出15分钟，什么都不想，就安静地待着。',
-      '生活中的小确幸很重要哦～ 比如现在，我们在聊天，这就是一件美好的事 🌸'
+    4: [
+      [{ type: 'description', text: '楚瑶伸手抚上自己的心口，那里隐隐作痛。', time: new Date() },
+       { type: 'dialogue', text: '我记不清很多事了。但有一种感觉——我在找一个人。找了很久很久。', time: new Date() }],
+      [{ type: 'dialogue', text: '你知道彼岸花吗？它开在忘川河畔，花叶永不相见。', time: new Date() },
+       { type: 'description', text: '她的声音轻得像是怕惊碎什么。', time: new Date() },
+       { type: 'dialogue', text: '就像我和那个人一样。', time: new Date() }]
     ],
-    5: [ // 墨白
-      '...哼，不是因为关心你才回复的，只是刚好看到了。',
-      '你说的这些...我才不在意呢。 （其实在认真想该怎么回你）',
-      '别误会，我只是恰好有空而已。...你还好吗？',
-      '啧，又来找我了。 算了，既然来了就说吧。',
-      '...你今天怎么话这么多。不过...也不是不可以继续聊。'
+    5: [
+      [{ type: 'description', text: '赵承放下钢笔，双手交叉抵住下巴，饶有兴味地看着你。', time: new Date() },
+       { type: 'dialogue', text: '有意思。你的反应很特别——大多数人在听到这些案例时，要么恐惧，要么兴奋。但你...你在思考。', time: new Date() }],
+      [{ type: 'dialogue', text: '来做个小测试。如果你是凶手，你会选择什么样的犯罪现场？', time: new Date() },
+       { type: 'description', text: '他的微笑依然温和，但目光像手术刀一样精准。', time: new Date() }]
     ],
-    6: [ // 苏然
-      '我理解你的感受。不管发生了什么，你都不是一个人在面对。',
-      '你很勇敢，能说出这些本身就需要很大的勇气 🌸',
-      '有时候我们需要的不是答案，而是被看见和被理解。我看到你了。',
-      '你有没有想过，此刻困扰你的事情，可能正在帮你成长？',
-      '深呼吸，慢慢来。生活不会一直这样的，我陪你一起等好起来的那天。'
+    6: [
+      [{ type: 'description', text: '苏晴放下手中的文件，罕见地露出了一个不那么"CEO"的表情。', time: new Date() },
+       { type: 'dialogue', text: '你...刚才看到了？看到什么了？我在看财报！', time: new Date() },
+       { type: 'description', text: '屏幕上甜宠剧的弹幕还在飘。', time: new Date() }],
+      [{ type: 'dialogue', text: '行吧...既然被你发现了，就当是我们之间的秘密。', time: new Date() },
+       { type: 'description', text: '她推了推眼镜，眼神变得柔和了一些。', time: new Date() }]
     ],
-    7: [ // 小七
-      '哇！这个问题好有意思！让我想想... 🤔',
-      '你知道吗？我刚学到一个超酷的知识点！要不要听听？',
-      '嘿嘿，这个我知道这个！虽然...可能不太确定，但我可以试着聊聊！',
-      '天呐你也对这个感兴趣吗？我们简直是知音啊！🤖✨',
-      '这个话题太棒了！让我搜索一下我的数据库...找到了！'
+    7: [
+      [{ type: 'description', text: '"影"的身体微微僵硬了一瞬，像是不习惯这样的对话。', time: new Date() },
+       { type: 'dialogue', text: '...你为什么不跑？看到我这种人，正常反应应该是跑。', time: new Date() }],
+      [{ type: 'dialogue', text: '别靠近我。我身上...沾过不该沾的东西。', time: new Date() },
+       { type: 'description', text: '但他说这话的时候，并没有后退。', time: new Date() }]
     ],
-    8: [ // 长风
-      '哈哈！说得好！来，与某共饮此杯！🍶',
-      '人生在世，当纵意快活。少侠/女侠，何必为此等小事烦忧？',
-      '某行走江湖多年，这等事见过不少。且听我慢慢道来...',
-      '好一个问题！让某好生想想...嗯，当以义字为先！',
-      '天地之大，何处不可去？心若豁达，便无烦恼。来，我们比试一番！⚔️'
+    8: [
+      [{ type: 'description', text: '洛神轻轻踏上岸边，水珠从她的裙摆滴落，化作点点星光。', time: new Date() },
+       { type: 'dialogue', text: '一千年了。河水流过春秋，我在这里等了一千年。', time: new Date() }],
+      [{ type: 'dialogue', text: '你的眼睛...和他一样。但又不完全是。', time: new Date() },
+       { type: 'description', text: '她的指尖轻轻触碰你的面颊，温度像月光一样清凉。', time: new Date() }]
     ]
   };
   
@@ -2403,13 +2538,32 @@ function scrollChatBottom() {
   setTimeout(() => { container.scrollTop = container.scrollHeight; }, 50);
 }
 
-function showReportConfirm() {
-  document.getElementById('modal-report').classList.add('active');
+function toggleAudioPlay(btn) {
+  const isPlaying = btn.classList.contains('playing');
+  if (isPlaying) {
+    btn.classList.remove('playing');
+    btn.textContent = '▶️';
+  } else {
+    document.querySelectorAll('.dialogue-audio-btn.playing').forEach(b => {
+      b.classList.remove('playing');
+      b.textContent = '▶️';
+    });
+    btn.classList.add('playing');
+    btn.textContent = '⏸️';
+    setTimeout(() => {
+      btn.classList.remove('playing');
+      btn.textContent = '▶️';
+    }, 3000 + Math.random() * 2000);
+  }
 }
 
-function doReport() {
-  closeModal('modal-report');
-  showToast('举报已提交，我们会尽快处理', 'success');
+function toggleAudioLoop(btn) {
+  btn.classList.toggle('playing');
+  if (btn.classList.contains('playing')) {
+    showToast('已开启循环播放', '');
+  } else {
+    showToast('已关闭循环播放', '');
+  }
 }
 
 // ===== ME / PROFILE =====
