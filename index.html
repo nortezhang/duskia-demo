@@ -1426,8 +1426,8 @@ body {
         <div class="chat-list-header">
           <h1>聊天</h1>
           <div class="chat-list-segments">
-            <div class="chat-segment active" onclick="switchChatSegment(this,'all')">全部</div>
-            <div class="chat-segment" onclick="switchChatSegment(this,'fav')">收藏</div>
+            <div class="chat-segment active" onclick="switchChatSegment(this,'recent')">最近</div>
+            <div class="chat-segment" onclick="switchChatSegment(this,'viewed')">看过</div>
           </div>
         </div>
         <div class="page-body" id="chat-list-body" style="flex:1">
@@ -1444,11 +1444,11 @@ body {
             <div class="empty-desc">去发现页找一个 AI 角色<br>开始你的第一次对话吧</div>
             <button class="btn btn-primary" onclick="switchTab('discover')">去发现</button>
           </div>
-          <!-- Fav empty state -->
-          <div id="chat-fav-empty" class="empty-state" style="display:none">
-            <div class="empty-icon">⭐</div>
-            <div class="empty-title">暂无收藏</div>
-            <div class="empty-desc">长按聊天即可收藏<br>方便下次快速找到</div>
+          <!-- Viewed empty state -->
+          <div id="chat-viewed-empty" class="empty-state" style="display:none">
+            <div class="empty-icon">👀</div>
+            <div class="empty-title">还没有看过角色</div>
+            <div class="empty-desc">去发现页浏览 AI 角色<br>看过的会出现在这里</div>
           </div>
           <!-- Chat list -->
           <div id="chat-list"></div>
@@ -1489,12 +1489,6 @@ body {
               <div class="me-menu-item" onclick="showToast('通知设置开发中','')">
                 <span class="menu-icon">🔔</span>
                 <span class="menu-label">消息通知</span>
-                <span class="menu-arrow">›</span>
-              </div>
-              <div class="me-menu-item" onclick="showToast('主题设置开发中','')">
-                <span class="menu-icon">🎨</span>
-                <span class="menu-label">主题外观</span>
-                <span class="menu-value">深色</span>
                 <span class="menu-arrow">›</span>
               </div>
               <div class="me-menu-item" onclick="showToast('语言设置开发中','')">
@@ -1540,16 +1534,13 @@ body {
     <div class="tab-bar">
       <div class="tab-item active" data-tab="discover" onclick="switchTab('discover')">
         <span class="tab-icon">🔮</span>
-        <span class="tab-label">发现</span>
       </div>
       <div class="tab-item" data-tab="chats" onclick="switchTab('chats')">
         <span class="tab-icon">💬</span>
-        <span class="tab-label">聊天</span>
         <div class="tab-badge badge" id="chat-tab-badge" style="display:none">0</div>
       </div>
       <div class="tab-item" data-tab="me" onclick="switchTab('me')">
         <span class="tab-icon">👤</span>
-        <span class="tab-label">我的</span>
       </div>
     </div>
   </div>
@@ -1863,7 +1854,8 @@ let pageHistory = [];
 let currentTab = 'discover';
 let currentCharId = null;
 let currentChatCharId = null;
-let chatSegment = 'all';
+let chatSegment = 'recent';
+let viewedChars = [];
 let userProfile = {
   nickname: '',
   signature: '',
@@ -2133,6 +2125,13 @@ function openCharDetail(charId) {
   const char = characters.find(c => c.id === charId);
   if (!char) return;
   
+  if (!viewedChars.includes(charId)) {
+    viewedChars.unshift(charId);
+  } else {
+    viewedChars = viewedChars.filter(id => id !== charId);
+    viewedChars.unshift(charId);
+  }
+  
   document.getElementById('char-banner-emoji').textContent = char.emoji;
   document.getElementById('char-detail-name').textContent = char.name;
   document.getElementById('char-detail-creator').textContent = '👤 ' + char.creator;
@@ -2198,26 +2197,44 @@ function startChat() {
 function renderChatList() {
   const list = document.getElementById('chat-list');
   const empty = document.getElementById('chat-empty');
-  const favEmpty = document.getElementById('chat-fav-empty');
+  const viewedEmpty = document.getElementById('chat-viewed-empty');
   const loading = document.getElementById('chat-loading');
   
   loading.style.display = 'block';
   list.innerHTML = '';
   empty.style.display = 'none';
-  favEmpty.style.display = 'none';
+  viewedEmpty.style.display = 'none';
   
   setTimeout(() => {
     loading.style.display = 'none';
     
-    let convList = Object.values(conversations).sort((a, b) => b.lastTime - a.lastTime);
-    
-    if (chatSegment === 'fav') {
-      convList = convList.filter(c => c.favorited);
-      if (convList.length === 0) {
-        favEmpty.style.display = 'flex';
+    if (chatSegment === 'viewed') {
+      if (viewedChars.length === 0) {
+        viewedEmpty.style.display = 'flex';
         return;
       }
+      list.innerHTML = viewedChars.map(charId => {
+        const char = characters.find(c => c.id === charId);
+        if (!char) return '';
+        const conv = conversations[charId];
+        const hasChat = conv && conv.messages.length > 0;
+        return `
+          <div class="chat-item" onclick="${hasChat ? 'openChatDetail(' + char.id + ')' : 'openCharDetail(' + char.id + ')'}">
+            <div class="chat-avatar">${char.emoji}</div>
+            <div class="chat-content">
+              <div class="chat-name">${char.name}</div>
+              <div class="chat-preview">${char.desc}</div>
+            </div>
+            <div class="chat-meta">
+              <span class="chat-time">${char.tag}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+      return;
     }
+    
+    let convList = Object.values(conversations).sort((a, b) => b.lastTime - a.lastTime);
     
     if (convList.length === 0) {
       empty.style.display = 'flex';
@@ -2235,9 +2252,7 @@ function renderChatList() {
       
       return `
         <div class="chat-item" onclick="openChatDetail(${char.id})">
-          <div class="chat-avatar">
-            ${char.emoji}
-          </div>
+          <div class="chat-avatar">${char.emoji}</div>
           <div class="chat-content">
             <div class="chat-name">${char.name}</div>
             <div class="chat-preview">${lastMsg ? lastMsg.text.substring(0, 30) : ''}</div>
