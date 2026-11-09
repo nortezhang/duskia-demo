@@ -2401,10 +2401,13 @@ function renderMessages() {
   
   let html = '<div class="story-disclaimer">所有回复均由AI生成。所有角色均设定为成年人<br>（18岁及以上）</div>';
   
-  // Find the index of the last dialogue message for showing regenerate button
+  // Only show regenerate on the very last dialogue IF user has sent at least one message
   let lastDialogueIdx = -1;
-  for (let j = conv.messages.length - 1; j >= 0; j--) {
-    if (conv.messages[j].type === 'dialogue') { lastDialogueIdx = j; break; }
+  const hasSentMsg = conv.messages.some(m => m.type === 'sent');
+  if (hasSentMsg) {
+    for (let j = conv.messages.length - 1; j >= 0; j--) {
+      if (conv.messages[j].type === 'dialogue') { lastDialogueIdx = j; break; }
+    }
   }
   
   html += conv.messages.map((msg, i) => {
