@@ -626,26 +626,13 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.character-card .card-tag {
-  position: absolute;
-  top: 8px; left: 8px;
-  padding: 3px 8px;
-  border-radius: var(--radius-full);
-  font-size: 10px;
-  font-weight: 600;
-  background: rgba(168, 85, 247, 0.8);
-  color: white;
-  backdrop-filter: blur(4px);
-}
-.character-card .card-hot {
-  position: absolute;
-  top: 8px; right: 8px;
-  padding: 3px 8px;
-  border-radius: var(--radius-full);
-  font-size: 10px;
-  background: rgba(255, 107, 157, 0.8);
-  color: white;
-  backdrop-filter: blur(4px);
+.character-card .card-chat-count {
+  font-size: 11px;
+  color: rgba(255,255,255,0.6);
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
 }
 
 /* ===== 7. Character Detail ===== */
@@ -1612,49 +1599,45 @@ body {
     </div>
   </div>
 
-  <!-- ===== PROFILE EDIT PAGE ===== -->
-  <div class="page" id="page-profile-edit">
-    <div class="page-header">
-      <button class="back-btn" onclick="goBack()">←</button>
-      <div class="title">编辑资料</div>
-      <div class="header-right"></div>
-    </div>
-    <div class="page-body">
-      <div class="profile-setup">
-        <div style="position:relative;width:96px;margin:0 auto 24px">
-          <div class="avatar-setup-display" id="edit-avatar-display-wrap">
-            <span id="edit-avatar-display">😊</span>
-          </div>
-          <div class="avatar-edit-badge" onclick="showAvatarPicker()">✏️</div>
-        </div>
-        <input type="file" id="edit-avatar-file-input" accept="image/*" style="display:none" onchange="handleAvatarUpload(event)">
+  <!-- ===== PROFILE EDIT (Bottom Sheet) ===== -->
+  <div class="bottom-sheet-overlay" id="sheet-profile-edit" onclick="closeSheet('sheet-profile-edit')">
+    <div class="bottom-sheet profile-setup-sheet" onclick="event.stopPropagation()">
+      <div class="handle"></div>
+      <div class="profile-setup-title" style="text-align:center">编辑资料</div>
 
-        <div class="form-group">
-          <label class="form-label">昵称</label>
-          <input class="form-input" id="edit-nickname" type="text" placeholder="昵称" maxlength="20">
+      <div style="position:relative;width:96px;margin:24px auto 24px">
+        <div class="avatar-setup-display" id="edit-avatar-display-wrap">
+          <span id="edit-avatar-display">😊</span>
         </div>
-
-        <div class="form-group">
-          <label class="form-label">签名</label>
-          <textarea class="form-input form-textarea" id="edit-signature" placeholder="个性签名..." maxlength="100"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">性别</label>
-          <div class="gender-selector" id="edit-gender-selector">
-            <div class="gender-option" data-value="male" onclick="selectGender(this)">♂ 男</div>
-            <div class="gender-option" data-value="female" onclick="selectGender(this)">♀ 女</div>
-            <div class="gender-option" data-value="nonbinary" onclick="selectGender(this)">⚧ 非二元</div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">年龄</label>
-          <input class="form-input" id="edit-birthday" type="text" placeholder="选择你的年龄" readonly onclick="showAgePicker()">
-        </div>
-
-        <button class="btn btn-primary" onclick="saveProfileEdit()">保存</button>
+        <div class="avatar-edit-badge" onclick="showAvatarPicker()">✏️</div>
       </div>
+      <input type="file" id="edit-avatar-file-input" accept="image/*" style="display:none" onchange="handleAvatarUpload(event)">
+
+      <div class="form-group">
+        <label class="form-label">昵称</label>
+        <input class="form-input" id="edit-nickname" type="text" placeholder="昵称" maxlength="20">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">签名</label>
+        <textarea class="form-input form-textarea" id="edit-signature" placeholder="个性签名..." maxlength="100"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">性别</label>
+        <div class="gender-selector" id="edit-gender-selector">
+          <div class="gender-option" data-value="male" onclick="selectGender(this)">♂ 男</div>
+          <div class="gender-option" data-value="female" onclick="selectGender(this)">♀ 女</div>
+          <div class="gender-option" data-value="nonbinary" onclick="selectGender(this)">⚧ 非二元</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">年龄</label>
+        <input class="form-input" id="edit-birthday" type="text" placeholder="选择你的年龄" readonly onclick="showAgePicker()">
+      </div>
+
+      <button class="btn btn-primary" style="width:100%;margin-top:12px" onclick="saveProfileEdit()">保存</button>
     </div>
   </div>
 
@@ -2108,12 +2091,11 @@ function renderCharacterGrid() {
       <div class="card-image">
         ${char.emoji}
         <div class="card-gradient"></div>
-        ${char.tag ? `<div class="card-tag">${char.tag}</div>` : ''}
-        ${char.hot ? `<div class="card-hot">${char.hot}</div>` : ''}
       </div>
       <div class="card-info">
         <div class="card-name">${char.name}</div>
         <div class="card-desc">${char.desc}</div>
+        <div class="card-chat-count">💬 ${char.chats}</div>
       </div>
     </div>
   `).join('');
@@ -2492,7 +2474,7 @@ function openProfileEdit() {
   
   document.getElementById('edit-birthday').value = userProfile.age ? (userProfile.age + ' 岁') : '';
   
-  navigateTo('page-profile-edit');
+  document.getElementById('sheet-profile-edit').classList.add('active');
 }
 
 function saveProfileEdit() {
@@ -2504,8 +2486,8 @@ function saveProfileEdit() {
   userProfile.nickname = nick;
   userProfile.signature = document.getElementById('edit-signature').value.trim();
   
+  closeSheet('sheet-profile-edit');
   showToast('保存成功', 'success');
-  goBack();
   updateMeProfile();
 }
 
