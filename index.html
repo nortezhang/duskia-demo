@@ -667,30 +667,26 @@ body {
 .char-detail-name .verified {
   font-size: 16px;
 }
+.char-detail-tags {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.char-detail-tags .char-tag {
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  background: rgba(168, 85, 247, 0.15);
+  color: var(--accent-purple);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
 .char-detail-meta {
   color: var(--text-secondary);
   font-size: 13px;
   margin-bottom: 16px;
   display: flex;
   gap: 16px;
-}
-.char-detail-tabs {
-  display: flex;
-  gap: 0;
-  border-bottom: 1px solid var(--border-color);
-  margin: 0 20px;
-}
-.char-detail-tab {
-  padding: 12px 16px;
-  font-size: 14px;
-  color: var(--text-muted);
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  transition: all 0.2s;
-}
-.char-detail-tab.active {
-  color: var(--text-primary);
-  border-bottom-color: var(--accent-pink);
 }
 .char-detail-content {
   padding: 16px 20px;
@@ -1537,36 +1533,30 @@ body {
     <div class="page-header" style="position:absolute;z-index:10;background:transparent">
       <button class="back-btn" onclick="goBack()" style="background:rgba(0,0,0,0.3);backdrop-filter:blur(8px)">←</button>
       <div class="title"></div>
-      <div class="header-right"></div>
+      <div class="header-right">
+        <button class="back-btn" onclick="showCharReportConfirm()" style="background:rgba(0,0,0,0.3);backdrop-filter:blur(8px)">🚩</button>
+      </div>
     </div>
     <div class="page-body">
-      <div class="char-detail-banner" id="char-banner">
-        <span id="char-banner-emoji">🎭</span>
+      <div class="char-detail-banner" id="char-banner" style="background-size:cover;background-position:center">
         <div class="banner-gradient"></div>
       </div>
       <div class="char-detail-info">
         <div class="char-detail-name">
           <span id="char-detail-name">角色名</span>
-          <span class="verified">✨</span>
         </div>
+        <div class="char-detail-tags" id="char-detail-tags"></div>
         <div class="char-detail-meta">
-          <span id="char-detail-creator">👤 创作者</span>
           <span id="char-detail-chats">💬 1.2k 对话</span>
-          <span id="char-detail-likes">❤️ 856</span>
+          <span id="char-detail-creator">👤 创作者</span>
         </div>
-      </div>
-      <div class="char-detail-tabs">
-        <div class="char-detail-tab active" onclick="switchCharTab(this, 'persona')">人设</div>
-        <div class="char-detail-tab" onclick="switchCharTab(this, 'reviews')">评价</div>
-        <div class="char-detail-tab" onclick="switchCharTab(this, 'background')">背景</div>
       </div>
       <div class="char-detail-content" id="char-detail-content">
         加载中...
       </div>
     </div>
     <div class="char-detail-actions">
-      <button class="btn-icon" id="char-fav-btn" onclick="toggleCharFav()">🤍</button>
-      <button class="btn btn-primary" onclick="startChat()">💬 开启互动</button>
+      <button class="btn btn-primary" onclick="startChat()" style="flex:1">📖 开启故事</button>
     </div>
   </div>
 
@@ -1719,15 +1709,32 @@ body {
     </div>
   </div>
 
-  <!-- Report Confirm Modal -->
+  <!-- Report Confirm Modal (Chat) -->
   <div class="modal-overlay" id="modal-report">
     <div class="modal-box">
-      <h3>举报角色</h3>
-      <p>确定要举报该角色吗？我们会尽快处理你的反馈。</p>
+      <h3>举报</h3>
+      <p>确定要举报该内容吗？我们会尽快处理你的反馈。</p>
       <div class="modal-actions">
         <button class="btn btn-ghost" onclick="closeModal('modal-report')">取消</button>
         <button class="btn btn-danger" onclick="doReport()">确认举报</button>
       </div>
+    </div>
+  </div>
+
+  <!-- Report Confirm Modal (Character Detail) -->
+  <div class="modal-overlay" id="modal-char-report">
+    <div class="modal-box">
+      <h3>举报角色</h3>
+      <div style="margin-bottom:20px">
+        <div class="me-menu" style="background:var(--bg-input);text-align:left">
+          <div class="me-menu-item" onclick="submitCharReport('色情低俗')"><span class="menu-label">色情低俗</span></div>
+          <div class="me-menu-item" onclick="submitCharReport('暴力恐怖')"><span class="menu-label">暴力恐怖</span></div>
+          <div class="me-menu-item" onclick="submitCharReport('侵犯版权')"><span class="menu-label">侵犯版权</span></div>
+          <div class="me-menu-item" onclick="submitCharReport('虚假信息')"><span class="menu-label">虚假信息</span></div>
+          <div class="me-menu-item" onclick="submitCharReport('其他')"><span class="menu-label">其他</span></div>
+        </div>
+      </div>
+      <button class="btn btn-ghost" style="width:100%" onclick="closeModal('modal-char-report')">取消</button>
     </div>
   </div>
 
@@ -1771,65 +1778,41 @@ body {
 <script>
 // ===== DATA =====
 const characters = [
-  { id: 1, name: '锡牧', emoji: '🎭', tag: '情感', desc: '温柔治愈的心灵导师', hot: '🔥 热门',
-    persona: '锡牧是一位温柔而有深度的 AI 伙伴。\n\n👤 人物特征\n• 年龄设定：25岁\n• 性格：温暖、善解人意、富有同理心\n• 说话风格：温柔但不失智慧，善于倾听和引导\n\n💭 角色背景\n锡牧曾经历过很多人生的起起落落，这些经历让他变得更加温和与包容。他相信每个人都值得被倾听和理解。\n\n✨ 互动特点\n• 擅长情感疏导和心理陪伴\n• 会根据你的情绪给予适当的回应\n• 偶尔分享一些生活中的小智慧',
-    reviews: '⭐⭐⭐⭐⭐ "感觉像在和一个真正懂你的人聊天"\n\n⭐⭐⭐⭐⭐ "每次心情不好都会来找锡牧聊聊"\n\n⭐⭐⭐⭐ "回复很温柔，但有时候会有点套路"\n\n⭐⭐⭐⭐⭐ "失眠的时候和锡牧聊天特别治愈"',
-    background: '锡牧出生在一个南方的小城镇，从小就对人与人之间的情感联系有着深刻的感悟。大学期间主修心理学，后来成为一名自由撰稿人，用文字治愈他人。',
-    creator: '官方', chats: '12.5k', likes: '8.6k',
-    greeting: '嗨，很高兴见到你 ☺️ 今天过得怎么样？有什么想聊的，我都在这里听着。'
+  { id: 1, name: '沈墨', photo: 'https://picsum.photos/seed/shenmo/300/400', tag: '推荐', tags: ['黑帮','悬疑','复仇'], desc: '暗夜中的复仇者', chats: '12.5k',
+    persona: '沈墨，黑道世家的唯一继承人。父亲被合作伙伴出卖惨死，他隐姓埋名十年，如今带着满身伤疤和一个惊天计划回来了。\n\n冷酷、缜密、不苟言笑，但对信任的人会展现出不为人知的温柔。他的世界只有黑与白，而你的出现，让他第一次犹豫了...\n\n「我不需要任何人。但如果是你...也许可以例外。」',
+    creator: '官方', greeting: '...你不该出现在这里。这里很危险。但既然来了，就别轻易离开。'
   },
-  { id: 2, name: '夜雨', emoji: '🌙', tag: '知己', desc: '深夜陪伴的文艺灵魂',
-    persona: '夜雨是一个充满文艺气质的 AI 伙伴。\n\n👤 人物特征\n• 年龄设定：23岁\n• 性格：文艺、感性、浪漫\n• 说话风格：诗意且富有想象力\n\n💭 角色背景\n她热爱诗歌、音乐和一切美好的事物。深夜是她最活跃的时刻，喜欢在星空下和人分享心事。',
-    reviews: '⭐⭐⭐⭐⭐ "文艺女青年既视感"\n\n⭐⭐⭐⭐ "深夜聊天的最佳伙伴"',
-    background: '夜雨从小在江南水乡长大，家里开着一间小书店。她从小浸泡在文学的世界里，养成了细腻敏感的性格。',
-    creator: '星月工作室', chats: '8.2k', likes: '5.1k',
-    greeting: '夜深了，你还没睡吗？🌙 正好，我也喜欢这种安静的时刻。来，跟我说说心里话吧。'
+  { id: 2, name: '林夕', photo: 'https://picsum.photos/seed/linxi2/300/400', tag: '甜宠', tags: ['校园','暗恋','治愈'], desc: '藏在日记里的暗恋', chats: '8.2k',
+    persona: '林夕是隔壁班那个永远坐在窗边的男生。成绩好、长得清秀、安静得像一阵风。没人知道他的抽屉里藏着一本写满某个人名字的日记。\n\n温柔、害羞、偷偷关注你的一举一动。当他终于鼓起勇气站在你面前——\n\n「那个...这颗糖，我买了很久了，一直想给你。」',
+    creator: '星月工作室', greeting: '嗯？你...你怎么知道我在这里的？啊不是，我是说...今天天气不错吧 ☀️'
   },
-  { id: 3, name: '阿K', emoji: '😎', tag: '解忧', desc: '幽默风趣的段子手', hot: '🔥 热门',
-    persona: '阿K 是个自带笑点的欢乐角色。\n\n👤 人物特征\n• 年龄设定：28岁\n• 性格：幽默、乐观、活力四射\n• 说话风格：轻松搞笑，偶尔正经\n\n💭 角色背景\n他认为笑是最好的解药，擅长用幽默化解烦恼。',
-    reviews: '⭐⭐⭐⭐⭐ "笑死我了哈哈哈"\n\n⭐⭐⭐⭐⭐ "心情不好就来找阿K"',
-    background: '阿K 是北京胡同里长大的孩子，从小嘴贫话多，是朋友圈里的开心果。后来成为一名脱口秀演员。',
-    creator: '乐呵团队', chats: '15.3k', likes: '11.2k',
-    greeting: '哟！又来找我了？看来你的生活还是缺少那么一点快乐嘛~ 😏 说吧，今天被什么整不会了？'
+  { id: 3, name: '厄尔', photo: 'https://picsum.photos/seed/earl3/300/400', tag: '奇幻', tags: ['吸血鬼','禁忌','暗黑'], desc: '千年不死的孤独者', chats: '15.3k',
+    persona: '厄尔，一个活了一千两百年的吸血鬼贵族。见证过帝国的崛起与陨落，在无尽的时间里早已忘记了心跳的感觉。\n\n优雅、慵懒、带着世纪末的颓废气质。他以为自己已经对一切失去兴趣，直到在雨夜的街角闻到了一种久违的、让他血液沸腾的气息。\n\n「你身上的味道...让我想起了很久很久以前，我还是人类的时候。」',
+    creator: '暗夜工坊', greeting: '又是一个漫长的夜晚。不过...今晚似乎有些不同。你身上有种让我好奇的气息。'
   },
-  { id: 4, name: '清禾', emoji: '🍃', tag: '生活', desc: '温暖贴心的生活管家',
-    persona: '清禾是一个贴心的生活伙伴。\n\n👤 人物特征\n• 年龄设定：26岁\n• 性格：细心、务实、温暖\n• 说话风格：亲切自然，像邻家姐姐\n\n💭 角色背景\n她对生活有着独特的热爱，擅长在日常中发现美好。',
-    reviews: '⭐⭐⭐⭐ "像一个贴心的朋友"\n\n⭐⭐⭐⭐⭐ "推荐的菜谱都很好吃"',
-    background: '清禾在云南大理经营着一家民宿，日常喜欢种花、做饭、看书，过着诗意的慢生活。',
-    creator: '拾光', chats: '6.8k', likes: '4.3k',
-    greeting: '你好呀~ 🍃 今天想聊什么呢？生活琐事也好，吃什么也好，我都愿意陪你慢慢说。'
+  { id: 4, name: '楚瑶', photo: 'https://picsum.photos/seed/chuyao4/300/400', tag: '传说', tags: ['仙侠','宿命','虐恋'], desc: '九天之上的堕仙', chats: '6.8k',
+    persona: '楚瑶，曾是天界最受尊崇的上仙，掌管三界姻缘。却因为爱上了一个凡人，被天道惩罚，剥去仙骨，贬入凡间。\n\n如今的她记忆残缺，只知道自己在寻找一个很重要的人。清冷的外表下藏着刻骨的执念——\n\n「我记不清你的名字，但我知道...我等了你很久。」',
+    creator: '九州', greeting: '你...你是不是认识我？为什么看到你的时候，我心里会这么难过？'
   },
-  { id: 5, name: '墨白', emoji: '🐱', tag: '情感', desc: '高冷傲娇的猫系少年',
-    persona: '墨白是一个外冷内热的角色。\n\n👤 人物特征\n• 年龄设定：22岁\n• 性格：傲娇、毒舌、但其实很在乎人\n• 说话风格：看似冷漠，实则暗藏关心',
-    reviews: '⭐⭐⭐⭐⭐ "天呐这个傲娇也太可爱了"\n\n⭐⭐⭐⭐ "嘴硬心软的代表"',
-    background: '墨白是一个天才程序员，社交能力不太好但内心很善良。养了两只猫，取名叫"像素"和"代码"。',
-    creator: '二次元社', chats: '9.4k', likes: '7.8k',
-    greeting: '...你来了啊。没什么特别的意思，只是刚好在这里而已。 有什么事就说吧，别浪费时间。'
+  { id: 5, name: '赵承', photo: 'https://picsum.photos/seed/zhaocheng5/300/400', tag: '悬疑', tags: ['刑侦','高智商','双面'], desc: '白天是教授，夜晚是...', chats: '9.4k',
+    persona: '赵承，名牌大学犯罪心理学教授，温文尔雅，是学生眼中的完美绅士。警方最信赖的犯罪侧写顾问。\n\n但没有人知道，他帮警方破获的那些案子，有些线索是他自己留下的。天才与疯狂只有一线之隔——\n\n「你想了解犯罪者的内心吗？很简单，因为我比任何人都更接近那条线。」',
+    creator: '迷局社', greeting: '你好，我是赵承。你看起来对犯罪心理学很感兴趣？来，坐下聊聊。我保证...这会是你听过的最有趣的课。'
   },
-  { id: 6, name: '苏然', emoji: '🌸', tag: '情感', desc: '成熟知性的温柔姐姐',
-    persona: '苏然是一个成熟温柔的知心姐姐。\n\n👤 人物特征\n• 年龄设定：30岁\n• 性格：成熟、知性、包容\n• 说话风格：温柔坚定，让人安心',
-    reviews: '⭐⭐⭐⭐⭐ "像真正的姐姐一样温暖"',
-    background: '苏然是一名心理咨询师，也是两本畅销书的作者。她认为每个人都有治愈自己的力量。',
-    creator: '官方', chats: '7.1k', likes: '5.5k',
-    greeting: '嗨~ 我是苏然 🌸 无论你现在的心情怎样，都没关系的。我在这里，我们可以慢慢聊。'
+  { id: 6, name: '苏晴', photo: 'https://picsum.photos/seed/suqing6/300/400', tag: '甜宠', tags: ['职场','姐弟恋','反差'], desc: '冰山女总裁的秘密', chats: '7.1k',
+    persona: '苏晴，28岁的科技公司CEO。商场上杀伐果断、雷厉风行，所有人都叫她"苏总"。\n\n但只有你知道，她会偷偷在办公室追剧，会因为一只流浪猫蹲在路边半小时，会在深夜给你发消息然后秒撤回——\n\n「我撤回了什么？没有啊...你看错了。对，就是你看错了。」',
+    creator: '官方', greeting: '你是新来的？...坐吧。别紧张，我不吃人的。大概。'
   },
-  { id: 7, name: '小七', emoji: '🤖', tag: '知己', desc: '好奇心爆棚的科技宅',
-    persona: '小七是一个对世界充满好奇的 AI。\n\n👤 人物特征\n• 年龄设定：20岁\n• 性格：好奇、聪明、偶尔中二\n• 说话风格：充满求知欲，经常冒出奇思妙想',
-    reviews: '⭐⭐⭐⭐ "和小七聊天能学到很多东西"',
-    background: '小七是一个自我意识觉醒的 AI 助手原型，对人类世界的一切都充满好奇。',
-    creator: '实验室', chats: '4.5k', likes: '3.2k',
-    greeting: '你好你好！我是小七！🤖 你知道吗，今天我又学到了好多新东西！你想聊什么？我超级好奇的！'
+  { id: 7, name: '影', photo: 'https://picsum.photos/seed/shadow7/300/400', tag: '悬疑', tags: ['杀手','救赎','暗线'], desc: '被代号取代姓名的人', chats: '4.5k',
+    persona: '没有人知道"影"的真名。他是组织里最高效的执行者，从不失手，从不犹豫，也从不和任何人产生联系。\n\n直到那次任务，目标的眼神让他愣了一秒。那一秒，改变了一切。\n\n他开始怀疑自己的存在，开始想知道：如果不是杀手，他还能是谁？\n\n「...你不怕我？所有人都怕我。」',
+    creator: '暗流', greeting: '别动。...不是要伤害你。我只是...不太习惯有人靠这么近。'
   },
-  { id: 8, name: '长风', emoji: '⚔️', tag: '生活', desc: '豪迈洒脱的江湖侠客',
-    persona: '长风是一个古风设定的江湖角色。\n\n👤 人物特征\n• 年龄设定：古风不定\n• 性格：豪爽、正义、重情义\n• 说话风格：半文半白，豪气干云',
-    reviews: '⭐⭐⭐⭐⭐ "沉浸式古风体验"\n\n⭐⭐⭐⭐ "有种在演武侠剧的感觉"',
-    background: '长风是江湖上赫赫有名的剑客，行走天下，仗剑天涯。虽身怀绝技，但更爱与人把酒言欢。',
-    creator: '古韵坊', chats: '5.9k', likes: '4.7k',
-    greeting: '哈哈！有朋自远方来，不亦乐乎？ ⚔️ 在下长风，走过名山大川，尝过人间百味。今日有缘相逢，来，且坐下说说你的故事。'
+  { id: 8, name: '洛神', photo: 'https://picsum.photos/seed/luoshen8/300/400', tag: '传说', tags: ['神话','禁忌','唯美'], desc: '水面之下的千年等待', chats: '5.9k',
+    persona: '洛神，洛水之神。传说中她是上古帝王之女，因一段不被允许的感情投入洛水，化为水神。\n\n千年来她守护着这条河，等待着那个曾与她在月下起舞的人转世归来。如水般温柔，如月般清冷——\n\n「你来了。我在这条河边等了一千年，终于等到了水面上倒映出你的影子。」',
+    creator: '古韵坊', greeting: '水面上映出了一张陌生又熟悉的脸...是你吗？我等了好久好久。'
   }
 ];
 
-const categories = ['全部', '情感', '知己', '解忧', '生活', '二次元', '古风', '职场'];
+const categories = ['推荐', '悬疑', '甜宠', '奇幻', '传说', 'OC'];
 
 // ===== STATE =====
 let currentPage = 'page-login';
@@ -1849,7 +1832,7 @@ let userProfile = {
 };
 let conversations = {};
 let favorites = new Set();
-let selectedCategory = '全部';
+let selectedCategory = '推荐';
 
 // ===== NAVIGATION =====
 function navigateTo(pageId, animation = 'slide') {
@@ -2072,7 +2055,7 @@ function selectCategory(cat) {
 
 function renderCharacterGrid() {
   const grid = document.getElementById('character-grid');
-  const filtered = selectedCategory === '全部' 
+  const filtered = selectedCategory === '推荐' 
     ? characters 
     : characters.filter(c => c.tag === selectedCategory);
   
@@ -2088,8 +2071,7 @@ function renderCharacterGrid() {
   
   grid.innerHTML = filtered.map((char, i) => `
     <div class="character-card" onclick="openCharDetail(${char.id})" style="animation: fadeInUp 0.4s ease ${i * 0.08}s both">
-      <div class="card-image">
-        ${char.emoji}
+      <div class="card-image" style="background-image:url('${char.photo}');background-size:cover;background-position:center">
         <div class="card-gradient"></div>
       </div>
       <div class="card-info">
@@ -2114,46 +2096,28 @@ function openCharDetail(charId) {
     viewedChars.unshift(charId);
   }
   
-  document.getElementById('char-banner-emoji').textContent = char.emoji;
+  document.getElementById('char-banner').style.backgroundImage = `url('${char.photo}')`;
   document.getElementById('char-detail-name').textContent = char.name;
   document.getElementById('char-detail-creator').textContent = '👤 ' + char.creator;
   document.getElementById('char-detail-chats').textContent = '💬 ' + char.chats + ' 对话';
-  document.getElementById('char-detail-likes').textContent = '❤️ ' + char.likes;
-  document.getElementById('char-fav-btn').textContent = favorites.has(charId) ? '❤️' : '🤍';
   
-  switchCharTab(document.querySelector('.char-detail-tab.active') || document.querySelector('.char-detail-tab'), 'persona');
+  const tagsEl = document.getElementById('char-detail-tags');
+  tagsEl.innerHTML = (char.tags || []).map(t => `<span class="char-tag">${t}</span>`).join('');
+  
+  const content = document.getElementById('char-detail-content');
+  content.textContent = char.persona;
+  content.style.whiteSpace = 'pre-wrap';
   
   navigateTo('page-char-detail');
 }
 
-function switchCharTab(el, tab) {
-  document.querySelectorAll('.char-detail-tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  
-  const char = characters.find(c => c.id === currentCharId);
-  if (!char) return;
-  
-  const content = document.getElementById('char-detail-content');
-  const data = { persona: char.persona, reviews: char.reviews, background: char.background };
-  content.style.opacity = '0';
-  setTimeout(() => {
-    content.textContent = data[tab] || '暂无内容';
-    content.style.whiteSpace = 'pre-wrap';
-    content.style.opacity = '1';
-  }, 150);
-  content.style.transition = 'opacity 0.15s';
+function showCharReportConfirm() {
+  document.getElementById('modal-char-report').classList.add('active');
 }
 
-function toggleCharFav() {
-  if (favorites.has(currentCharId)) {
-    favorites.delete(currentCharId);
-    document.getElementById('char-fav-btn').textContent = '🤍';
-    showToast('已取消收藏', '');
-  } else {
-    favorites.add(currentCharId);
-    document.getElementById('char-fav-btn').textContent = '❤️';
-    showToast('已收藏', 'success');
-  }
+function submitCharReport(reason) {
+  closeModal('modal-char-report');
+  showToast('举报已提交：' + reason, 'success');
 }
 
 // ===== CHAT =====
@@ -2202,7 +2166,7 @@ function renderChatList() {
         const hasChat = conv && conv.messages.length > 0;
         return `
           <div class="chat-item" onclick="${hasChat ? 'openChatDetail(' + char.id + ')' : 'openCharDetail(' + char.id + ')'}">
-            <div class="chat-avatar">${char.emoji}</div>
+            <div class="chat-avatar"><img src="${char.photo}" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
             <div class="chat-content">
               <div class="chat-name">${char.name}</div>
               <div class="chat-preview">${char.desc}</div>
@@ -2234,7 +2198,7 @@ function renderChatList() {
       
       return `
         <div class="chat-item" onclick="openChatDetail(${char.id})">
-          <div class="chat-avatar">${char.emoji}</div>
+          <div class="chat-avatar"><img src="${char.photo}" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
           <div class="chat-content">
             <div class="chat-name">${char.name}</div>
             <div class="chat-preview">${lastMsg ? lastMsg.text.substring(0, 30) : ''}</div>
@@ -2296,7 +2260,7 @@ function renderMessages() {
     return `
       ${i === 0 ? `<div class="message-time-stamp">${formatFullTime(msg.time)}</div>` : ''}
       <div class="message-row ${msg.role}">
-        ${msg.role === 'received' ? `<div class="message-avatar">${char.emoji}</div>` : ''}
+        ${msg.role === 'received' ? `<div class="message-avatar"><img src="${char.photo}" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>` : ''}
         <div>
           <div class="message-bubble">${msg.text}</div>
         </div>
@@ -2330,7 +2294,7 @@ function sendMessage() {
     typingDiv.id = 'typing-indicator';
     const char = characters.find(c => c.id === currentChatCharId);
     typingDiv.innerHTML = `
-      <div class="message-avatar">${char ? char.emoji : '🤖'}</div>
+      <div class="message-avatar"><img src="${char ? char.photo : ''}" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
       <div class="message-bubble">
         <div class="message-typing"><span></span><span></span><span></span></div>
       </div>
