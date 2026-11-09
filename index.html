@@ -953,6 +953,12 @@ body {
   margin: 4px 0;
   border: 1px solid rgba(42, 42, 64, 0.6);
   animation: fadeInUp 0.4s ease;
+  position: relative;
+}
+.story-narration .narration-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
 }
 .story-narration .narration-title {
   font-size: 15px;
@@ -965,10 +971,62 @@ body {
   color: var(--accent-purple);
   margin-bottom: 10px;
 }
+.story-narration .narration-body {
+  position: relative;
+}
 .story-narration .narration-text {
   font-size: 13.5px;
   line-height: 1.8;
   color: var(--text-secondary);
+  transition: max-height 0.3s ease;
+}
+.story-narration.collapsed .narration-text {
+  max-height: 100px;
+  overflow: hidden;
+}
+.story-narration.collapsed .narration-body::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 40px;
+  background: linear-gradient(transparent, rgba(26, 26, 46, 0.95));
+  pointer-events: none;
+}
+.story-narration:not(.collapsed) .narration-text {
+  max-height: 300px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.story-narration:not(.collapsed) .narration-text::-webkit-scrollbar { width: 3px; }
+.story-narration:not(.collapsed) .narration-text::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.3);
+  border-radius: 3px;
+}
+.narration-toggle {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 6px;
+}
+.narration-toggle-btn {
+  background: none;
+  border: none;
+  color: var(--accent-purple);
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  transition: background 0.2s;
+}
+.narration-toggle-btn:active { background: rgba(168, 85, 247, 0.1); }
+.narration-toggle-btn .toggle-icon {
+  font-size: 14px;
+  transition: transform 0.3s ease;
+}
+.story-narration:not(.collapsed) .narration-toggle-btn .toggle-icon {
+  transform: rotate(180deg);
 }
 .story-description {
   text-align: center;
@@ -2412,10 +2470,23 @@ function renderMessages() {
   
   html += conv.messages.map((msg, i) => {
     if (msg.type === 'narration') {
-      return `<div class="story-narration">
-        <div class="narration-title">${msg.title || ''}</div>
-        <div class="narration-scene">${msg.scene || ''}</div>
-        <div class="narration-text">${msg.text}</div>
+      const narrationId = 'narration-' + i;
+      return `<div class="story-narration collapsed" id="${narrationId}">
+        <div class="narration-header">
+          <div>
+            <div class="narration-title">${msg.title || ''}</div>
+            <div class="narration-scene">${msg.scene || ''}</div>
+          </div>
+        </div>
+        <div class="narration-body">
+          <div class="narration-text">${msg.text}</div>
+        </div>
+        <div class="narration-toggle">
+          <button class="narration-toggle-btn" onclick="toggleNarration('${narrationId}')">
+            <span>展开</span>
+            <span class="toggle-icon">▼</span>
+          </button>
+        </div>
       </div>`;
     }
     if (msg.type === 'dialogue') {
@@ -2590,6 +2661,21 @@ function toggleAudioPlay(btn) {
       btn.classList.remove('playing');
       btn.textContent = '▶️';
     }, 3000 + Math.random() * 2000);
+  }
+}
+
+function toggleNarration(id) {
+  const card = document.getElementById(id);
+  if (!card) return;
+  const isCollapsed = card.classList.contains('collapsed');
+  const btn = card.querySelector('.narration-toggle-btn span:first-child');
+  
+  if (isCollapsed) {
+    card.classList.remove('collapsed');
+    if (btn) btn.textContent = '收起';
+  } else {
+    card.classList.add('collapsed');
+    if (btn) btn.textContent = '展开';
   }
 }
 
