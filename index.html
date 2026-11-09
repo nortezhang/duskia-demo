@@ -981,7 +981,7 @@ body {
   transition: max-height 0.3s ease;
 }
 .story-narration.collapsed .narration-text {
-  max-height: 100px;
+  max-height: 80px;
   overflow: hidden;
 }
 .story-narration.collapsed .narration-body::after {
@@ -1538,8 +1538,8 @@ body {
       </div>
 
       <div class="form-group">
-        <label class="form-label">年龄</label>
-        <input class="form-input" id="input-age" type="text" placeholder="选择你的年龄（选填）" readonly onclick="showAgePicker()">
+        <label class="form-label">生日 <span style="color:var(--text-muted);font-size:11px">须年满18岁</span></label>
+        <input class="form-input" id="input-birthday" type="text" placeholder="选择你的生日（选填）" readonly onclick="showBirthdayPicker()">
       </div>
 
       <button class="btn btn-primary" style="width:100%;margin-top:12px" onclick="completeProfileSetup()">完成设置</button>
@@ -1787,8 +1787,8 @@ body {
       </div>
 
       <div class="form-group">
-        <label class="form-label">年龄</label>
-        <input class="form-input" id="edit-birthday" type="text" placeholder="选择你的年龄" readonly onclick="showAgePicker()">
+        <label class="form-label">生日 <span style="color:var(--text-muted);font-size:11px">须年满18岁</span></label>
+        <input class="form-input" id="edit-birthday" type="text" placeholder="选择你的生日" readonly onclick="showBirthdayPicker()">
       </div>
 
       <button class="btn btn-primary" style="width:100%;margin-top:12px" onclick="saveProfileEdit()">保存</button>
@@ -1912,16 +1912,19 @@ body {
     </div>
   </div>
 
-  <!-- Age Picker -->
-  <div class="date-picker-overlay" id="age-picker">
+  <!-- Birthday Picker -->
+  <div class="date-picker-overlay" id="birthday-picker">
     <div class="date-picker-box">
       <div class="date-picker-header">
-        <button class="cancel" onclick="closeAgePicker()">取消</button>
-        <span class="title">选择年龄</span>
-        <button class="confirm" onclick="confirmAgePicker()">确认</button>
+        <button class="cancel" onclick="closeBirthdayPicker()">取消</button>
+        <span class="title">选择生日</span>
+        <button class="confirm" onclick="confirmBirthdayPicker()">确认</button>
       </div>
+      <div style="text-align:center;font-size:12px;color:var(--accent-pink);padding:6px 20px 0">须年满18周岁方可使用</div>
       <div class="date-picker-wheels">
-        <div class="date-picker-wheel" id="picker-age"></div>
+        <div class="date-picker-wheel" id="picker-year"></div>
+        <div class="date-picker-wheel" id="picker-month"></div>
+        <div class="date-picker-wheel" id="picker-day"></div>
       </div>
     </div>
   </div>
@@ -1978,7 +1981,7 @@ let userProfile = {
   nickname: '',
   signature: '',
   gender: '',
-  age: null,
+  birthday: '',
   avatar: '😊',
   avatarType: 'emoji'
 };
@@ -2293,19 +2296,19 @@ function startChat() {
 function getStoryOpening(char) {
   const openings = {
     1: [
-      { type: 'narration', title: '第一幕 · 《暗流》', scene: '南城 · 旧港区 · 废弃仓库 · 23:15', text: '雨水顺着生锈的铁皮屋顶往下滴，在地面汇成浅浅的水洼。仓库深处传来脚步声——沉稳、有力，每一步都像是精心计算过的距离。\n\n一个高大的身影从阴影中走出。沈墨穿着黑色风衣，领口微敞，露出锁骨上一道陈旧的疤痕。他的目光在昏暗中依然锐利得惊人。', time: new Date() },
+      { type: 'narration', title: '第一幕 · 《暗流》', scene: '南城 · 旧港区 · 废弃仓库 · 23:15', text: '雨水顺着生锈的铁皮屋顶往下滴，在地面汇成浅浅的水洼。仓库深处传来脚步声——沉稳、有力，每一步都像是精心计算过的距离。\n\n空气中弥漫着海盐和机油的味道。远处码头的灯光穿过破碎的窗户，在地上投下歪斜的光影。角落里堆积着废弃的集装箱，锈迹斑驳的铁壁上还留着不知谁用喷漆写下的标记。\n\n一个高大的身影从阴影中走出。沈墨穿着黑色风衣，领口微敞，露出锁骨上一道陈旧的疤痕。他的目光在昏暗中依然锐利得惊人。\n\n他停在距离你三步的距离——不远不近，恰好是一个可以随时攻击、也可以随时防御的位置。这是十年地下世界打磨出来的本能。\n\n风从破碎的窗口灌进来，吹动他风衣的下摆。远处传来轮船的汽笛声，在空旷的仓库中回荡。', time: new Date() },
       { type: 'dialogue', text: '...你不该出现在这里。', time: new Date() },
       { type: 'description', text: '他停下脚步，微微侧头打量着你，眼神中闪过一丝意外。', time: new Date() },
       { type: 'dialogue', text: '这里很危险。但既然来了...就别轻易离开。', time: new Date() }
     ],
     2: [
-      { type: 'narration', title: '序章 · 《心跳的频率》', scene: '晨光中学 · 教学楼天台 · 午后 · 12:35', text: '天台的门被推开，阳光一下子涌进来。风吹起校服的衣角，远处操场上传来隐约的欢呼声。\n\n林夕正坐在角落的台阶上，膝盖上摊着一本翻到一半的小说。听到声响，他猛地合上书，那本书的封面朝下——好像在藏着什么。', time: new Date() },
+      { type: 'narration', title: '序章 · 《心跳的频率》', scene: '晨光中学 · 教学楼天台 · 午后 · 12:35', text: '天台的门被推开，阳光一下子涌进来。风吹起校服的衣角，远处操场上传来隐约的欢呼声。午后的阳光带着初夏的温度，金色的光线透过铁丝围栏洒在混凝土地面上。\n\n天台角落的通风口旁边放着一瓶喝了一半的矿泉水，水面上倒映着慢慢移动的云影。几盆不知道谁种的多肉植物安静地排列在花架上，叶片饱满，泛着温润的绿色光泽。\n\n林夕正坐在角落的台阶上，膝盖上摊着一本翻到一半的小说。听到声响，他猛地合上书，那本书的封面朝下——好像在藏着什么。他的书包半开着，里面露出一角彩色信封和一盒没拆封的草莓糖。\n\n远处的操场上，体育课的哨声此起彼伏，间或夹杂着篮球弹地的声音。风带来了食堂飘出的饭菜香味，混合着天台上微微的铁锈气息。', time: new Date() },
       { type: 'dialogue', text: '嗯？你...你怎么知道我在这里的？', time: new Date() },
       { type: 'description', text: '他的耳尖微微泛红，手指无意识地按住书的封面。', time: new Date() },
       { type: 'dialogue', text: '啊不是，我是说...今天天气不错吧 ☀️', time: new Date() }
     ],
     3: [
-      { type: 'narration', title: '第一幕 · 《永夜》', scene: '维也纳 · 圣斯特凡大教堂 · 午夜 · 00:00', text: '教堂的钟声在零点准时敲响，回荡在空旷的石柱之间。月光透过彩色玻璃窗洒下斑驳的光影。\n\n祭坛前的长椅上，一个男人闭着眼睛，仿佛沉睡了很久。他的皮肤苍白得近乎透明，黑发垂落在肩头。当钟声停下，他缓缓睁开了眼——瞳孔是深红色的。', time: new Date() },
+      { type: 'narration', title: '第一幕 · 《永夜》', scene: '维也纳 · 圣斯特凡大教堂 · 午夜 · 00:00', text: '教堂的钟声在零点准时敲响，回荡在空旷的石柱之间。月光透过彩色玻璃窗洒下斑驳的光影，将哥特式穹顶上的圣像投射在大理石地面上，光影交错如同另一个世界的入口。\n\n空气中弥漫着古老的松香和蜡烛燃尽后的气味。每一根石柱上都雕刻着几百年前工匠的手迹，岁月在石头上留下了细密的纹路，像是时间本身的指纹。\n\n祭坛前的长椅上，一个男人闭着眼睛，仿佛沉睡了很久。他的皮肤苍白得近乎透明，黑发垂落在肩头。他穿着一件深色丝绒外套，领口的暗纹在月光下若隐若现，款式精致却属于另一个时代。\n\n当钟声停下，寂静重新笼罩教堂。他缓缓睁开了眼——瞳孔是深红色的。那双眼睛里倒映着一千二百年的记忆，每一段都像是刻在灵魂上的伤疤。他轻轻吸了口气，嘴唇微微颤动，像是在品尝夜风中某种久违的气息。', time: new Date() },
       { type: 'dialogue', text: '又是一个漫长的夜晚。', time: new Date() },
       { type: 'description', text: '他轻轻嗅了嗅空气，嘴角微微上扬。', time: new Date() },
       { type: 'dialogue', text: '不过...今晚似乎有些不同。你身上有种让我好奇的气息。', time: new Date() }
@@ -2762,7 +2765,7 @@ function openProfileEdit() {
     btn.classList.toggle('active', btn.dataset.value === userProfile.gender);
   });
   
-  document.getElementById('edit-birthday').value = userProfile.age ? (userProfile.age + ' 岁') : '';
+  document.getElementById('edit-birthday').value = userProfile.birthday || '';
   
   document.getElementById('sheet-profile-edit').classList.add('active');
 }
@@ -2794,7 +2797,7 @@ function doLogout() {
   closeModal('modal-logout');
   conversations = {};
   favorites.clear();
-  userProfile = { nickname: '', signature: '', gender: '', age: null, avatar: '😊', avatarType: 'emoji' };
+  userProfile = { nickname: '', signature: '', gender: '', birthday: '', avatar: '😊', avatarType: 'emoji' };
   pageHistory = [];
   
   const mainPage = document.getElementById('page-main');
@@ -2817,45 +2820,85 @@ function doDeleteAccount() {
   doLogout();
 }
 
-// ===== AGE PICKER =====
-let pickerAge = 20;
+// ===== BIRTHDAY PICKER =====
+let pickerYear = 2000;
+let pickerMonth = 1;
+let pickerDay = 1;
 
-function showAgePicker() {
-  const picker = document.getElementById('age-picker');
+function getMaxBirthYear() {
+  const now = new Date();
+  return now.getFullYear() - 18;
+}
+
+function getDaysInMonth(year, month) {
+  return new Date(year, month, 0).getDate();
+}
+
+function showBirthdayPicker() {
+  const picker = document.getElementById('birthday-picker');
   picker.classList.add('active');
   
-  const ageWheel = document.getElementById('picker-age');
-  ageWheel.innerHTML = '';
+  const maxYear = getMaxBirthYear();
+  const minYear = 1940;
   
-  for (let a = 14; a <= 60; a++) {
-    ageWheel.innerHTML += `<div class="date-picker-item ${a === pickerAge ? 'selected' : ''}" onclick="selectAgeItem(this, ${a})">${a} 岁</div>`;
+  // Year wheel
+  const yearWheel = document.getElementById('picker-year');
+  yearWheel.innerHTML = '';
+  for (let y = maxYear; y >= minYear; y--) {
+    yearWheel.innerHTML += `<div class="date-picker-item ${y === pickerYear ? 'selected' : ''}" onclick="selectBirthdayItem(this, 'year', ${y})">${y}年</div>`;
   }
   
+  // Month wheel
+  const monthWheel = document.getElementById('picker-month');
+  monthWheel.innerHTML = '';
+  for (let m = 1; m <= 12; m++) {
+    monthWheel.innerHTML += `<div class="date-picker-item ${m === pickerMonth ? 'selected' : ''}" onclick="selectBirthdayItem(this, 'month', ${m})">${m}月</div>`;
+  }
+  
+  // Day wheel
+  renderDayWheel();
+  
   setTimeout(() => {
-    const selected = ageWheel.querySelector('.selected');
-    if (selected) selected.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    ['picker-year', 'picker-month', 'picker-day'].forEach(id => {
+      const el = document.getElementById(id);
+      const sel = el.querySelector('.selected');
+      if (sel) sel.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    });
   }, 100);
 }
 
-function selectAgeItem(el, value) {
+function renderDayWheel() {
+  const dayWheel = document.getElementById('picker-day');
+  const maxDays = getDaysInMonth(pickerYear, pickerMonth);
+  if (pickerDay > maxDays) pickerDay = maxDays;
+  dayWheel.innerHTML = '';
+  for (let d = 1; d <= maxDays; d++) {
+    dayWheel.innerHTML += `<div class="date-picker-item ${d === pickerDay ? 'selected' : ''}" onclick="selectBirthdayItem(this, 'day', ${d})">${d}日</div>`;
+  }
+}
+
+function selectBirthdayItem(el, type, value) {
   el.parentElement.querySelectorAll('.date-picker-item').forEach(i => i.classList.remove('selected'));
   el.classList.add('selected');
-  pickerAge = value;
+  if (type === 'year') { pickerYear = value; renderDayWheel(); }
+  else if (type === 'month') { pickerMonth = value; renderDayWheel(); }
+  else { pickerDay = value; }
 }
 
-function closeAgePicker() {
-  document.getElementById('age-picker').classList.remove('active');
+function closeBirthdayPicker() {
+  document.getElementById('birthday-picker').classList.remove('active');
 }
 
-function confirmAgePicker() {
-  userProfile.age = pickerAge;
+function confirmBirthdayPicker() {
+  const birthdayStr = `${pickerYear}/${String(pickerMonth).padStart(2,'0')}/${String(pickerDay).padStart(2,'0')}`;
+  userProfile.birthday = birthdayStr;
   
-  const setupInput = document.getElementById('input-age');
+  const setupInput = document.getElementById('input-birthday');
   const editInput = document.getElementById('edit-birthday');
-  if (setupInput) setupInput.value = pickerAge + ' 岁';
-  if (editInput) editInput.value = pickerAge + ' 岁';
+  if (setupInput) setupInput.value = birthdayStr;
+  if (editInput) editInput.value = birthdayStr;
   
-  closeAgePicker();
+  closeBirthdayPicker();
 }
 
 // ===== UTILITIES =====
