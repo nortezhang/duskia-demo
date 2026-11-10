@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Duskia - AI 陪聊</title>
+<title>Duskia</title>
 <style>
 :root {
   --bg-primary: #0a0a14;
@@ -1416,37 +1416,37 @@ body {
   <div class="page active" id="page-login">
     <div class="login-logo">🍷</div>
     <div class="login-brand">Duskia</div>
-    <div class="login-slogan">遇见懂你的 AI 灵魂</div>
+    <div class="login-slogan">Meet your AI companion</div>
     <div class="login-buttons">
       <button class="login-btn" onclick="handleLogin('google')">
         <span class="icon">G</span>
-        Google 登录
+        Continue with Google
       </button>
       <button class="login-btn" onclick="handleLogin('apple')">
         <span class="icon">🍎</span>
-        Apple 登录
+        Continue with Apple
       </button>
     </div>
     <div class="login-terms">
-      登录即表示您同意我们的<br>
-      <a onclick="showLegalPage('terms')">服务条款</a> 和 <a onclick="showLegalPage('privacy')">隐私政策</a>
+      By signing in, you agree to our<br>
+      <a onclick="showLegalPage('terms')">Terms of Service</a> and <a onclick="showLegalPage('privacy')">Privacy Policy</a>
     </div>
   </div>
 
   <!-- ===== CONSENT MODAL ===== -->
   <div class="modal-overlay consent-modal" id="modal-consent">
     <div class="modal-box">
-      <h3>用户协议与隐私政策</h3>
+      <h3>Terms & Privacy</h3>
       <div class="consent-text">
-        感谢您选择 Duskia！在使用我们的服务前，请您仔细阅读并理解以下协议内容。我们非常重视您的隐私和个人信息保护。
+        Welcome to Duskia! Please review and agree to our terms before continuing.
       </div>
       <div class="consent-links">
-        <a onclick="showLegalPage('privacy')">隐私政策</a>
-        <a onclick="showLegalPage('terms')">服务条款</a>
+        <a onclick="showLegalPage('privacy')">Privacy Policy</a>
+        <a onclick="showLegalPage('terms')">Terms of Service</a>
       </div>
       <div class="modal-actions">
-        <button class="btn btn-ghost" onclick="declineConsent()">拒绝</button>
-        <button class="btn btn-primary" onclick="acceptConsent()">同意并继续</button>
+        <button class="btn btn-ghost" onclick="declineConsent()">Decline</button>
+        <button class="btn btn-primary" onclick="acceptConsent()">Agree & Continue</button>
       </div>
     </div>
   </div>
@@ -1455,24 +1455,24 @@ body {
   <div class="page legal-page" id="page-privacy">
     <div class="page-header">
       <button class="back-btn" onclick="goBack()">←</button>
-      <div class="title">隐私政策</div>
+      <div class="title">Privacy Policy</div>
       <div class="header-right"></div>
     </div>
     <div class="page-body">
       <div class="legal-content">
-        <h2>Duskia 隐私政策</h2>
-        <p>更新日期：2026 年 11 月 1 日</p>
-        <p>Duskia（以下简称"我们"）非常重视用户的隐私保护。本隐私政策旨在向您说明我们如何收集、使用、存储和保护您的个人信息。</p>
-        <h2>一、信息收集</h2>
-        <p>我们可能收集以下类型的信息：账户信息（昵称、头像、性别）、设备信息（设备型号、操作系统版本）、使用数据（功能使用频率、对话内容用于AI模型优化）。</p>
-        <h2>二、信息使用</h2>
-        <p>我们收集的信息将用于：提供和维护服务、改善用户体验、个性化内容推荐、安全保障和风险控制。</p>
-        <h2>三、信息保护</h2>
-        <p>我们采用业界标准的安全技术和管理措施来保护您的个人信息，包括数据加密、访问控制和安全审计。</p>
-        <h2>四、第三方共享</h2>
-        <p>未经您的同意，我们不会将您的个人信息与第三方共享，法律法规另有规定的除外。</p>
-        <h2>五、联系我们</h2>
-        <p>如果您对本隐私政策有任何疑问，请通过 privacy@duskia.chat 联系我们。</p>
+        <h2>Duskia Privacy Policy</h2>
+        <p>Last updated: November 1, 2026</p>
+        <p>Duskia values your privacy. This policy explains how we collect, use, store, and protect your personal information.</p>
+        <h2>1. Information Collection</h2>
+        <p>We may collect: account info (nickname, avatar, gender), device info (model, OS version), and usage data (feature frequency, conversations for AI optimization).</p>
+        <h2>2. Information Use</h2>
+        <p>Collected information is used for: providing services, improving experience, personalized recommendations, and security.</p>
+        <h2>3. Information Protection</h2>
+        <p>We use industry-standard security measures to protect your personal information, including encryption, access control, and audits.</p>
+        <h2>4. Third-Party Sharing</h2>
+        <p>We will not share your personal information with third parties without consent, except as required by law.</p>
+        <h2>5. Contact Us</h2>
+        <p>For questions about this policy, contact us at privacy@duskia.chat.</p>
       </div>
     </div>
   </div>
@@ -1481,24 +1481,24 @@ body {
   <div class="page legal-page" id="page-terms">
     <div class="page-header">
       <button class="back-btn" onclick="goBack()">←</button>
-      <div class="title">服务条款</div>
+      <div class="title">Terms of Service</div>
       <div class="header-right"></div>
     </div>
     <div class="page-body">
       <div class="legal-content">
-        <h2>Duskia 服务条款</h2>
-        <p>更新日期：2026 年 11 月 1 日</p>
-        <p>欢迎使用 Duskia 服务。请在使用前仔细阅读以下条款。使用本服务即表示您接受本条款。</p>
-        <h2>一、服务说明</h2>
-        <p>Duskia 是一款 AI 陪聊产品，通过人工智能技术为用户提供情感陪伴和交流服务。AI 角色的回复由机器学习模型生成，不代表真实人类的观点。</p>
-        <h2>二、用户行为规范</h2>
-        <p>用户在使用服务时应遵守法律法规，不得发布违法、暴力、色情等不当内容。我们有权对违规用户采取限制或封禁措施。</p>
-        <h2>三、知识产权</h2>
-        <p>服务中的AI角色设定、对话内容生成技术、界面设计等知识产权归 Duskia 所有。用户创建的内容，用户保留其知识产权。</p>
-        <h2>四、免责声明</h2>
-        <p>AI 生成的内容仅供娱乐和陪伴目的，不构成专业的心理咨询或医疗建议。如有需要，请寻求专业人士的帮助。</p>
-        <h2>五、条款变更</h2>
-        <p>我们保留随时修改本条款的权利，修改后的条款将在应用内公布。</p>
+        <h2>Duskia Terms of Service</h2>
+        <p>Last updated: November 1, 2026</p>
+        <p>Welcome to Duskia. Please read these terms carefully. By using our service, you accept these terms.</p>
+        <h2>1. Service Description</h2>
+        <p>Duskia is an AI companion product providing emotional support and conversation. AI responses are generated by machine learning models and do not represent real human views.</p>
+        <h2>2. User Conduct</h2>
+        <p>Users must comply with laws and regulations. Publishing illegal, violent, or inappropriate content is prohibited. We reserve the right to restrict or ban violating accounts.</p>
+        <h2>3. Intellectual Property</h2>
+        <p>AI character designs, content generation technology, and interface design are owned by Duskia. Users retain IP rights to their created content.</p>
+        <h2>4. Disclaimer</h2>
+        <p>AI-generated content is for entertainment and companionship only. It does not constitute professional counseling or medical advice.</p>
+        <h2>5. Terms Changes</h2>
+        <p>We reserve the right to modify these terms at any time. Updated terms will be published within the app.</p>
       </div>
     </div>
   </div>
@@ -1507,7 +1507,7 @@ body {
   <div class="page" id="page-loading">
     <div class="loading-page" style="flex:1;display:flex">
       <div class="loading-spinner"></div>
-      <div class="loading-text">正在登录...</div>
+      <div class="loading-text">Signing in...</div>
     </div>
   </div>
 
@@ -1515,9 +1515,8 @@ body {
   <div class="bottom-sheet-overlay" id="sheet-profile-setup">
     <div class="bottom-sheet profile-setup-sheet" onclick="event.stopPropagation()">
       <div class="handle"></div>
-      <div class="profile-setup-title" style="text-align:center">展示你的个性</div>
+      <div class="profile-setup-title" style="text-align:center">Show Your Style</div>
 
-      <!-- Avatar with edit button -->
       <div style="position:relative;width:96px;margin:24px auto 24px">
         <div class="avatar-setup-display" id="avatar-setup-display">😊</div>
         <div class="avatar-edit-badge" onclick="showAvatarPicker()">✏️</div>
@@ -1525,30 +1524,30 @@ body {
       <input type="file" id="avatar-file-input" accept="image/*" style="display:none" onchange="handleAvatarUpload(event)">
 
       <div class="form-group">
-        <label class="form-label">昵称</label>
-        <input class="form-input" id="input-nickname" type="text" placeholder="不填则自动生成" maxlength="20">
+        <label class="form-label">Nickname</label>
+        <input class="form-input" id="input-nickname" type="text" placeholder="Auto-generated if left blank" maxlength="20">
       </div>
 
       <div class="form-group">
-        <label class="form-label">签名</label>
-        <textarea class="form-input form-textarea" id="input-signature" placeholder="写一句介绍自己的话..." maxlength="100"></textarea>
+        <label class="form-label">Bio</label>
+        <textarea class="form-input form-textarea" id="input-signature" placeholder="Write something about yourself..." maxlength="100"></textarea>
       </div>
 
       <div class="form-group">
-        <label class="form-label">性别 <span style="color:var(--accent-pink);font-size:11px">*必选</span></label>
+        <label class="form-label">Gender <span style="color:var(--accent-pink);font-size:11px">*Required</span></label>
         <div class="gender-selector" id="gender-selector">
-          <div class="gender-option" data-value="male" onclick="selectGender(this)">♂ 男</div>
-          <div class="gender-option" data-value="female" onclick="selectGender(this)">♀ 女</div>
-          <div class="gender-option" data-value="nonbinary" onclick="selectGender(this)">⚧ 非二元</div>
+          <div class="gender-option" data-value="male" onclick="selectGender(this)">♂ Male</div>
+          <div class="gender-option" data-value="female" onclick="selectGender(this)">♀ Female</div>
+          <div class="gender-option" data-value="nonbinary" onclick="selectGender(this)">⚧ Non-binary</div>
         </div>
       </div>
 
       <div class="form-group">
-        <label class="form-label">生日 <span style="color:var(--text-muted);font-size:11px">须年满18岁</span></label>
-        <input class="form-input" id="input-birthday" type="text" placeholder="选择你的生日（选填）" readonly onclick="showBirthdayPicker()">
+        <label class="form-label">Birthday <span style="color:var(--text-muted);font-size:11px">Must be 18+</span></label>
+        <input class="form-input" id="input-birthday" type="text" placeholder="Select birthday (optional)" readonly onclick="showBirthdayPicker()">
       </div>
 
-      <button class="btn btn-primary" style="width:100%;margin-top:12px" onclick="completeProfileSetup()">完成设置</button>
+      <button class="btn btn-primary" style="width:100%;margin-top:12px" onclick="completeProfileSetup()">Complete Setup</button>
     </div>
   </div>
 
@@ -1556,7 +1555,7 @@ body {
   <div class="page" id="page-main">
     <!-- Network Error Bar -->
     <div class="network-bar" id="network-bar" onclick="retryNetwork()">
-      ⚠️ 网络连接异常，点击重试
+      ⚠️ Network error, tap to retry
     </div>
 
     <!-- Tab Content -->
@@ -1565,7 +1564,7 @@ body {
       <!-- TAB: Discover -->
       <div class="tab-page active" id="tab-discover" style="position:absolute;inset:0;display:flex;flex-direction:column;overflow:hidden">
         <div class="discover-header">
-          <h1>发现</h1>
+          <h1>Discover</h1>
         </div>
         <div class="category-tabs" id="category-tabs"></div>
         <div class="page-body" id="discover-body" style="flex:1">
@@ -1579,9 +1578,9 @@ body {
           <!-- Error state -->
           <div id="discover-error" class="error-state" style="display:none">
             <div class="error-icon">😵</div>
-            <div class="error-title">加载失败</div>
-            <div class="error-desc">网络似乎出了点问题</div>
-            <button class="btn btn-outline" onclick="loadDiscoverData()">重新加载</button>
+            <div class="error-title">Loading failed</div>
+            <div class="error-desc">Network error occurred</div>
+            <button class="btn btn-outline" onclick="loadDiscoverData()">Reload</button>
           </div>
           <!-- Content -->
           <div class="character-grid" id="character-grid"></div>
@@ -1591,10 +1590,10 @@ body {
       <!-- TAB: Chat List -->
       <div class="tab-page" id="tab-chats" style="position:absolute;inset:0;display:none;flex-direction:column;overflow:hidden">
         <div class="chat-list-header">
-          <h1>聊天</h1>
+          <h1>Chats</h1>
           <div class="chat-list-segments">
-            <div class="chat-segment active" onclick="switchChatSegment(this,'recent')">最近</div>
-            <div class="chat-segment" onclick="switchChatSegment(this,'viewed')">看过</div>
+            <div class="chat-segment active" onclick="switchChatSegment(this,'recent')">Recent</div>
+            <div class="chat-segment" onclick="switchChatSegment(this,'viewed')">Viewed</div>
           </div>
         </div>
         <div class="page-body" id="chat-list-body" style="flex:1">
@@ -1607,15 +1606,15 @@ body {
           <!-- Empty state -->
           <div id="chat-empty" class="empty-state" style="display:none">
             <div class="empty-icon">💬</div>
-            <div class="empty-title">还没有聊天记录</div>
-            <div class="empty-desc">去发现页找一个 AI 角色<br>开始你的第一次对话吧</div>
-            <button class="btn btn-primary" onclick="switchTab('discover')">去发现</button>
+            <div class="empty-title">No chats yet</div>
+            <div class="empty-desc">Find an AI character on Discover<br>and start your first conversation</div>
+            <button class="btn btn-primary" onclick="switchTab('discover')">Go to Discover</button>
           </div>
           <!-- Viewed empty state -->
           <div id="chat-viewed-empty" class="empty-state" style="display:none">
             <div class="empty-icon">👀</div>
-            <div class="empty-title">还没有看过角色</div>
-            <div class="empty-desc">去发现页浏览 AI 角色<br>看过的会出现在这里</div>
+            <div class="empty-title">No viewed characters</div>
+            <div class="empty-desc">Browse AI characters on Discover<br>Viewed ones will appear here</div>
           </div>
           <!-- Chat list -->
           <div id="chat-list"></div>
@@ -1628,9 +1627,9 @@ body {
           <div class="me-header">
             <div class="avatar lg" id="me-avatar">😊</div>
             <div class="me-info">
-              <div class="me-name" id="me-name">用户</div>
+              <div class="me-name" id="me-name">User</div>
               <div class="me-uid" id="me-uid">ID: 10086</div>
-              <div class="me-signature" id="me-signature">这个人很懒，什么都没写~</div>
+              <div class="me-signature" id="me-signature">Nothing here yet~</div>
             </div>
             <button class="me-edit-btn" onclick="openProfileEdit()">✏️</button>
           </div>
@@ -1638,33 +1637,33 @@ body {
           <!-- stats section removed per review -->
 
           <div class="me-section">
-            <div class="me-section-title">设置</div>
+            <div class="me-section-title">Settings</div>
             <div class="me-menu">
-              <div class="me-menu-item" onclick="showToast('通知设置开发中','')">
+              <div class="me-menu-item" onclick="showToast('Notifications coming soon','')">
                 <span class="menu-icon">🔔</span>
-                <span class="menu-label">消息通知</span>
+                <span class="menu-label">Notifications</span>
                 <span class="menu-arrow">›</span>
               </div>
-              <div class="me-menu-item" onclick="showToast('语言设置开发中','')">
+              <div class="me-menu-item" onclick="showToast('Language settings coming soon','')">
                 <span class="menu-icon">🌐</span>
-                <span class="menu-label">语言</span>
-                <span class="menu-value">简体中文</span>
+                <span class="menu-label">Language</span>
+                <span class="menu-value">English</span>
                 <span class="menu-arrow">›</span>
               </div>
             </div>
           </div>
 
           <div class="me-section">
-            <div class="me-section-title">支持</div>
+            <div class="me-section-title">Support</div>
             <div class="me-menu">
-              <div class="me-menu-item" onclick="showToast('感谢你的反馈意愿！反馈功能开发中','')">
+              <div class="me-menu-item" onclick="showToast('Feedback coming soon','')">
                 <span class="menu-icon">💡</span>
-                <span class="menu-label">意见反馈</span>
+                <span class="menu-label">Feedback</span>
                 <span class="menu-arrow">›</span>
               </div>
               <div class="me-menu-item" onclick="openAboutPage()">
                 <span class="menu-icon">ℹ️</span>
-                <span class="menu-label">关于 Duskia</span>
+                <span class="menu-label">About Duskia</span>
                 <span class="menu-arrow">›</span>
               </div>
             </div>
@@ -1674,7 +1673,7 @@ body {
             <div class="me-menu">
               <div class="me-menu-item danger" onclick="confirmLogout()">
                 <span class="menu-icon">🚪</span>
-                <span class="menu-label">退出登录</span>
+                <span class="menu-label">Sign Out</span>
               </div>
             </div>
           </div>
@@ -1714,20 +1713,20 @@ body {
       </div>
       <div class="char-detail-info">
         <div class="char-detail-name">
-          <span id="char-detail-name">角色名</span>
+          <span id="char-detail-name">Character</span>
         </div>
         <div class="char-detail-tags" id="char-detail-tags"></div>
         <div class="char-detail-meta">
-          <span id="char-detail-chats">💬 1.2k 对话</span>
-          <span id="char-detail-creator">👤 创作者</span>
+          <span id="char-detail-chats">💬 1.2k chats</span>
+          <span id="char-detail-creator">👤 Creator</span>
         </div>
       </div>
       <div class="char-detail-content" id="char-detail-content">
-        加载中...
+        Loading...
       </div>
     </div>
     <div class="char-detail-actions">
-      <button class="btn btn-primary" onclick="startChat()" style="flex:1">📖 开启故事</button>
+      <button class="btn btn-primary" onclick="startChat()" style="flex:1">📖 Start Story</button>
     </div>
   </div>
 
@@ -1735,7 +1734,7 @@ body {
   <div class="page" id="page-category-more">
     <div class="page-header">
       <button class="back-btn" onclick="goBack()">←</button>
-      <div class="title" id="category-more-title">分类</div>
+      <div class="title" id="category-more-title">Category</div>
       <div class="header-right"></div>
     </div>
     <div class="page-body">
@@ -1749,12 +1748,12 @@ body {
     <div class="chat-detail-header">
       <button class="back-btn" onclick="goBack()">←</button>
       <div class="chat-user-info">
-        <div class="chat-user-name" id="chat-detail-name">故事名</div>
+        <div class="chat-user-name" id="chat-detail-name">Story</div>
       </div>
     </div>
     <div class="chat-messages" id="chat-messages"></div>
     <div class="chat-input-bar">
-      <textarea class="chat-input" id="chat-input" placeholder="输入消息..." rows="1" oninput="autoResize(this)" onkeydown="handleChatKey(event)"></textarea>
+      <textarea class="chat-input" id="chat-input" placeholder="Type a message..." rows="1" oninput="autoResize(this)" onkeydown="handleChatKey(event)"></textarea>
       <button class="chat-send-btn" id="chat-send-btn" onclick="sendMessage()" disabled>➤</button>
     </div>
   </div>
@@ -1763,7 +1762,7 @@ body {
   <div class="bottom-sheet-overlay" id="sheet-profile-edit" onclick="closeSheet('sheet-profile-edit')">
     <div class="bottom-sheet profile-setup-sheet" onclick="event.stopPropagation()">
       <div class="handle"></div>
-      <div class="profile-setup-title" style="text-align:center">编辑资料</div>
+      <div class="profile-setup-title" style="text-align:center">Edit Profile</div>
 
       <div style="position:relative;width:96px;margin:24px auto 24px">
         <div class="avatar-setup-display" id="edit-avatar-display-wrap">
@@ -1774,30 +1773,30 @@ body {
       <input type="file" id="edit-avatar-file-input" accept="image/*" style="display:none" onchange="handleAvatarUpload(event)">
 
       <div class="form-group">
-        <label class="form-label">昵称</label>
-        <input class="form-input" id="edit-nickname" type="text" placeholder="昵称" maxlength="20">
+        <label class="form-label">Nickname</label>
+        <input class="form-input" id="edit-nickname" type="text" placeholder="Nickname" maxlength="20">
       </div>
 
       <div class="form-group">
-        <label class="form-label">签名</label>
-        <textarea class="form-input form-textarea" id="edit-signature" placeholder="个性签名..." maxlength="100"></textarea>
+        <label class="form-label">Bio</label>
+        <textarea class="form-input form-textarea" id="edit-signature" placeholder="Your bio..." maxlength="100"></textarea>
       </div>
 
       <div class="form-group">
-        <label class="form-label">性别</label>
+        <label class="form-label">Gender</label>
         <div class="gender-selector" id="edit-gender-selector">
-          <div class="gender-option" data-value="male" onclick="selectGender(this)">♂ 男</div>
-          <div class="gender-option" data-value="female" onclick="selectGender(this)">♀ 女</div>
-          <div class="gender-option" data-value="nonbinary" onclick="selectGender(this)">⚧ 非二元</div>
+          <div class="gender-option" data-value="male" onclick="selectGender(this)">♂ Male</div>
+          <div class="gender-option" data-value="female" onclick="selectGender(this)">♀ Female</div>
+          <div class="gender-option" data-value="nonbinary" onclick="selectGender(this)">⚧ Non-binary</div>
         </div>
       </div>
 
       <div class="form-group">
-        <label class="form-label">生日 <span style="color:var(--text-muted);font-size:11px">须年满18岁</span></label>
-        <input class="form-input" id="edit-birthday" type="text" placeholder="选择你的生日" readonly onclick="showBirthdayPicker()">
+        <label class="form-label">Birthday <span style="color:var(--text-muted);font-size:11px">Must be 18+</span></label>
+        <input class="form-input" id="edit-birthday" type="text" placeholder="Select birthday" readonly onclick="showBirthdayPicker()">
       </div>
 
-      <button class="btn btn-primary" style="width:100%;margin-top:12px" onclick="saveProfileEdit()">保存</button>
+      <button class="btn btn-primary" style="width:100%;margin-top:12px" onclick="saveProfileEdit()">Save</button>
     </div>
   </div>
 
@@ -1805,36 +1804,36 @@ body {
   <div class="page" id="page-about">
     <div class="page-header">
       <button class="back-btn" onclick="goBack()">←</button>
-      <div class="title">关于</div>
+      <div class="title">About</div>
       <div class="header-right"></div>
     </div>
     <div class="page-body">
       <div class="about-app-info">
         <div class="about-logo">🍷</div>
         <div class="about-name">Duskia</div>
-        <div class="about-version">版本 1.0.0 (Build 2026.11)</div>
+        <div class="about-version">Version 1.0.0 (Build 2026.11)</div>
       </div>
       <div class="me-section">
         <div class="me-menu">
-          <div class="me-menu-item" onclick="showToast('感谢你的反馈意愿！','')">
+          <div class="me-menu-item" onclick="showToast('Thanks for your interest!','')">
             <span class="menu-icon">💡</span>
-            <span class="menu-label">意见反馈</span>
+            <span class="menu-label">Feedback</span>
             <span class="menu-arrow">›</span>
           </div>
           <div class="me-menu-item" onclick="showLegalPage('terms')">
             <span class="menu-icon">📄</span>
-            <span class="menu-label">服务条款</span>
+            <span class="menu-label">Terms of Service</span>
             <span class="menu-arrow">›</span>
           </div>
           <div class="me-menu-item" onclick="showLegalPage('privacy')">
             <span class="menu-icon">🔒</span>
-            <span class="menu-label">隐私政策</span>
+            <span class="menu-label">Privacy Policy</span>
             <span class="menu-arrow">›</span>
           </div>
-          <div class="me-menu-item" onclick="showToast('已是最新版本','success')">
+          <div class="me-menu-item" onclick="showToast('Already up to date','success')">
             <span class="menu-icon">🔄</span>
-            <span class="menu-label">检查更新</span>
-            <span class="menu-value">已是最新</span>
+            <span class="menu-label">Check for Updates</span>
+            <span class="menu-value">Up to date</span>
             <span class="menu-arrow">›</span>
           </div>
         </div>
@@ -1843,7 +1842,7 @@ body {
         <div class="me-menu">
           <div class="me-menu-item danger" onclick="confirmDeleteAccount()">
             <span class="menu-icon">⚠️</span>
-            <span class="menu-label">注销账号</span>
+            <span class="menu-label">Delete Account</span>
             <span class="menu-arrow">›</span>
           </div>
         </div>
@@ -1858,11 +1857,11 @@ body {
   <!-- Logout Confirm -->
   <div class="modal-overlay" id="modal-logout">
     <div class="modal-box">
-      <h3>退出登录</h3>
-      <p>确定要退出当前账号吗？你的聊天记录将会保留。</p>
+      <h3>Sign Out</h3>
+      <p>Are you sure you want to sign out? Your chat history will be preserved.</p>
       <div class="modal-actions">
-        <button class="btn btn-ghost" onclick="closeModal('modal-logout')">取消</button>
-        <button class="btn btn-danger" onclick="doLogout()">退出登录</button>
+        <button class="btn btn-ghost" onclick="closeModal('modal-logout')">Cancel</button>
+        <button class="btn btn-danger" onclick="doLogout()">Sign Out</button>
       </div>
     </div>
   </div>
@@ -1870,11 +1869,11 @@ body {
   <!-- Delete Account Confirm -->
   <div class="modal-overlay" id="modal-delete-account">
     <div class="modal-box">
-      <h3>⚠️ 注销账号</h3>
-      <p>注销后，你的所有数据将被永久删除且无法恢复。确定要继续吗？</p>
+      <h3>⚠️ Delete Account</h3>
+      <p>All your data will be permanently deleted and cannot be recovered. Are you sure?</p>
       <div class="modal-actions">
-        <button class="btn btn-ghost" onclick="closeModal('modal-delete-account')">取消</button>
-        <button class="btn btn-danger" onclick="doDeleteAccount()">确认注销</button>
+        <button class="btn btn-ghost" onclick="closeModal('modal-delete-account')">Cancel</button>
+        <button class="btn btn-danger" onclick="doDeleteAccount()">Delete Account</button>
       </div>
     </div>
   </div>
@@ -1882,17 +1881,17 @@ body {
   <!-- Report Confirm Modal (Character Detail) -->
   <div class="modal-overlay" id="modal-char-report">
     <div class="modal-box">
-      <h3>举报角色</h3>
+      <h3>Report Character</h3>
       <div style="margin-bottom:20px">
         <div class="me-menu" style="background:var(--bg-input);text-align:left">
-          <div class="me-menu-item" onclick="submitCharReport('色情低俗')"><span class="menu-label">色情低俗</span></div>
-          <div class="me-menu-item" onclick="submitCharReport('暴力恐怖')"><span class="menu-label">暴力恐怖</span></div>
-          <div class="me-menu-item" onclick="submitCharReport('侵犯版权')"><span class="menu-label">侵犯版权</span></div>
-          <div class="me-menu-item" onclick="submitCharReport('虚假信息')"><span class="menu-label">虚假信息</span></div>
-          <div class="me-menu-item" onclick="submitCharReport('其他')"><span class="menu-label">其他</span></div>
+          <div class="me-menu-item" onclick="submitCharReport('Sexual content')"><span class="menu-label">Sexual content</span></div>
+          <div class="me-menu-item" onclick="submitCharReport('Violence')"><span class="menu-label">Violence</span></div>
+          <div class="me-menu-item" onclick="submitCharReport('Copyright violation')"><span class="menu-label">Copyright violation</span></div>
+          <div class="me-menu-item" onclick="submitCharReport('Misinformation')"><span class="menu-label">Misinformation</span></div>
+          <div class="me-menu-item" onclick="submitCharReport('Other')"><span class="menu-label">Other</span></div>
         </div>
       </div>
-      <button class="btn btn-ghost" style="width:100%" onclick="closeModal('modal-char-report')">取消</button>
+      <button class="btn btn-ghost" style="width:100%" onclick="closeModal('modal-char-report')">Cancel</button>
     </div>
   </div>
 
@@ -1900,7 +1899,7 @@ body {
   <div class="bottom-sheet-overlay" id="sheet-avatar-picker" onclick="closeSheet('sheet-avatar-picker')">
     <div class="bottom-sheet" onclick="event.stopPropagation()">
       <div class="handle"></div>
-      <h3 style="text-align:center;margin-bottom:16px;font-size:16px">选择头像</h3>
+      <h3 style="text-align:center;margin-bottom:16px;font-size:16px">Choose Avatar</h3>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px">
         <div class="avatar-option" onclick="selectAvatarEmoji('😊')" style="width:60px;height:60px;border-radius:50%;background:var(--bg-input);display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;border:2px solid transparent;margin:0 auto">😊</div>
         <div class="avatar-option" onclick="selectAvatarEmoji('😎')" style="width:60px;height:60px;border-radius:50%;background:var(--bg-input);display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;border:2px solid transparent;margin:0 auto">😎</div>
@@ -1912,9 +1911,9 @@ body {
         <div class="avatar-option" onclick="selectAvatarEmoji('🌟')" style="width:60px;height:60px;border-radius:50%;background:var(--bg-input);display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;border:2px solid transparent;margin:0 auto">🌟</div>
       </div>
       <div style="border-top:1px solid var(--border-color);padding-top:16px">
-        <button class="btn btn-outline" style="width:100%" onclick="triggerAvatarFileUpload()">📷 从相册上传照片</button>
+        <button class="btn btn-outline" style="width:100%" onclick="triggerAvatarFileUpload()">📷 Upload from Photos</button>
       </div>
-      <button class="btn btn-ghost" style="width:100%;margin-top:8px" onclick="closeSheet('sheet-avatar-picker')">取消</button>
+      <button class="btn btn-ghost" style="width:100%;margin-top:8px" onclick="closeSheet('sheet-avatar-picker')">Cancel</button>
     </div>
   </div>
 
@@ -1922,11 +1921,11 @@ body {
   <div class="date-picker-overlay" id="birthday-picker">
     <div class="date-picker-box">
       <div class="date-picker-header">
-        <button class="cancel" onclick="closeBirthdayPicker()">取消</button>
-        <span class="title">选择生日</span>
-        <button class="confirm" onclick="confirmBirthdayPicker()">确认</button>
+        <button class="cancel" onclick="closeBirthdayPicker()">Cancel</button>
+        <span class="title">Select Birthday</span>
+        <button class="confirm" onclick="confirmBirthdayPicker()">Confirm</button>
       </div>
-      <div style="text-align:center;font-size:12px;color:var(--accent-pink);padding:6px 20px 0">须年满18周岁方可使用</div>
+      <div style="text-align:center;font-size:12px;color:var(--accent-pink);padding:6px 20px 0">Must be 18 or older to use</div>
       <div class="date-picker-wheels">
         <div class="date-picker-wheel" id="picker-year"></div>
         <div class="date-picker-wheel" id="picker-month"></div>
@@ -1939,77 +1938,77 @@ body {
 <script>
 // ===== DATA =====
 const characters = [
-  { id: 1, name: '沈墨', photo: 'https://picsum.photos/seed/shenmo/300/400', tag: '推荐', tags: ['黑帮','悬疑','复仇'], desc: '暗夜中的复仇者', chats: '12.5k',
-    persona: '沈墨，黑道世家的唯一继承人。父亲被合作伙伴出卖惨死，他隐姓埋名十年，如今带着满身伤疤和一个惊天计划回来了。\n\n冷酷、缜密、不苟言笑，但对信任的人会展现出不为人知的温柔。他的世界只有黑与白，而你的出现，让他第一次犹豫了...\n\n「我不需要任何人。但如果是你...也许可以例外。」',
-    creator: '官方', greeting: '...你不该出现在这里。这里很危险。但既然来了，就别轻易离开。'
+  { id: 1, name: 'Shen Mo', photo: 'https://picsum.photos/seed/shenmo/300/400', tag: 'Featured', tags: ['Mafia','Mystery','Revenge'], desc: 'The Avenger in the Dark', chats: '12.5k',
+    persona: 'Shen Mo, the sole heir of a crime family dynasty. His father was betrayed and murdered by a partner. He vanished for ten years, and now returns covered in scars with a master plan.\n\nCold, meticulous, never smiles — but shows a hidden tenderness to those he trusts. His world is only black and white, until you appeared and made him hesitate for the first time...\n\n"I don\'t need anyone. But if it\'s you... maybe I can make an exception."',
+    creator: 'Official', greeting: '...You shouldn\'t be here. It\'s dangerous. But since you\'re here, don\'t leave so easily.'
   },
-  { id: 2, name: '林夕', photo: 'https://picsum.photos/seed/linxi2/300/400', tag: '甜宠', tags: ['校园','暗恋','治愈'], desc: '藏在日记里的暗恋', chats: '8.2k',
-    persona: '林夕是隔壁班那个永远坐在窗边的男生。成绩好、长得清秀、安静得像一阵风。没人知道他的抽屉里藏着一本写满某个人名字的日记。\n\n温柔、害羞、偷偷关注你的一举一动。当他终于鼓起勇气站在你面前——\n\n「那个...这颗糖，我买了很久了，一直想给你。」',
-    creator: '星月工作室', greeting: '嗯？你...你怎么知道我在这里的？啊不是，我是说...今天天气不错吧 ☀️'
+  { id: 2, name: 'Lin Xi', photo: 'https://picsum.photos/seed/linxi2/300/400', tag: 'Sweet', tags: ['Campus','Secret crush','Healing'], desc: 'A crush hidden in a diary', chats: '8.2k',
+    persona: 'Lin Xi is the boy who always sits by the window in the next class. Great grades, gentle features, quiet as a breeze. No one knows his drawer hides a diary filled with someone\'s name.\n\nGentle, shy, secretly watching your every move. When he finally gathers the courage to stand before you —\n\n"Um... this candy, I\'ve had it for a while. I\'ve always wanted to give it to you."',
+    creator: 'Starlight Studio', greeting: 'Hm? You... how did you know I was here? No wait, I mean... nice weather today, right? ☀️'
   },
-  { id: 3, name: '厄尔', photo: 'https://picsum.photos/seed/earl3/300/400', tag: '奇幻', tags: ['吸血鬼','禁忌','暗黑'], desc: '千年不死的孤独者', chats: '15.3k',
-    persona: '厄尔，一个活了一千两百年的吸血鬼贵族。见证过帝国的崛起与陨落，在无尽的时间里早已忘记了心跳的感觉。\n\n优雅、慵懒、带着世纪末的颓废气质。他以为自己已经对一切失去兴趣，直到在雨夜的街角闻到了一种久违的、让他血液沸腾的气息。\n\n「你身上的味道...让我想起了很久很久以前，我还是人类的时候。」',
-    creator: '暗夜工坊', greeting: '又是一个漫长的夜晚。不过...今晚似乎有些不同。你身上有种让我好奇的气息。'
+  { id: 3, name: 'Earl', photo: 'https://picsum.photos/seed/earl3/300/400', tag: 'Fantasy', tags: ['Vampire','Forbidden','Dark'], desc: 'The immortal loner', chats: '15.3k',
+    persona: 'Earl, a vampire noble who has lived for twelve hundred years. He has witnessed empires rise and fall, and in the endless flow of time, has long forgotten what a heartbeat feels like.\n\nElegant, languid, with an air of fin-de-siècle decadence. He thought he had lost interest in everything, until on a rainy street corner, he caught a scent that set his blood on fire.\n\n"Your scent... reminds me of a very, very long time ago, when I was still human."',
+    creator: 'Nightfall Workshop', greeting: 'Another long night. But... tonight feels different. There\'s something about you that makes me curious.'
   },
-  { id: 4, name: '楚瑶', photo: 'https://picsum.photos/seed/chuyao4/300/400', tag: '传说', tags: ['仙侠','宿命','虐恋'], desc: '九天之上的堕仙', chats: '6.8k',
-    persona: '楚瑶，曾是天界最受尊崇的上仙，掌管三界姻缘。却因为爱上了一个凡人，被天道惩罚，剥去仙骨，贬入凡间。\n\n如今的她记忆残缺，只知道自己在寻找一个很重要的人。清冷的外表下藏着刻骨的执念——\n\n「我记不清你的名字，但我知道...我等了你很久。」',
-    creator: '九州', greeting: '你...你是不是认识我？为什么看到你的时候，我心里会这么难过？'
+  { id: 4, name: 'Chu Yao', photo: 'https://picsum.photos/seed/chuyao4/300/400', tag: 'Legend', tags: ['Immortal','Destiny','Angst'], desc: 'A fallen goddess from above', chats: '6.8k',
+    persona: 'Chu Yao was once the most revered goddess of the celestial realm, overseeing the bonds of fate across three worlds. But she fell in love with a mortal, and was punished — stripped of her divine essence and banished to the human world.\n\nNow her memories are fragmented. She only knows she\'s searching for someone important. Behind her cold exterior lies an obsession carved into her soul —\n\n"I can\'t remember your name, but I know... I\'ve been waiting for you for so long."',
+    creator: 'Jiuzhou', greeting: 'You... do you know me? Why does my heart ache so much when I see you?'
   },
-  { id: 5, name: '赵承', photo: 'https://picsum.photos/seed/zhaocheng5/300/400', tag: '悬疑', tags: ['悬疑','刑侦','高智商'], desc: '白天是教授，夜晚是...', chats: '9.4k',
-    persona: '赵承，名牌大学犯罪心理学教授，温文尔雅，是学生眼中的完美绅士。警方最信赖的犯罪侧写顾问。\n\n但没有人知道，他帮警方破获的那些案子，有些线索是他自己留下的。天才与疯狂只有一线之隔——\n\n「你想了解犯罪者的内心吗？很简单，因为我比任何人都更接近那条线。」',
-    creator: '迷局社', greeting: '你好，我是赵承。你看起来对犯罪心理学很感兴趣？来，坐下聊聊。我保证...这会是你听过的最有趣的课。'
+  { id: 5, name: 'Zhao Cheng', photo: 'https://picsum.photos/seed/zhaocheng5/300/400', tag: 'Mystery', tags: ['Mystery','Crime','Genius'], desc: 'Professor by day, and by night...', chats: '9.4k',
+    persona: 'Zhao Cheng, a criminal psychology professor at a prestigious university. Refined and gentlemanly, the perfect scholar in his students\' eyes. The police\'s most trusted criminal profiler.\n\nBut no one knows that some of the clues in the cases he helped solve... were left by him. The line between genius and madness is razor-thin —\n\n"Want to understand a criminal\'s mind? Simple — because I\'m closer to that line than anyone."',
+    creator: 'Puzzle Society', greeting: 'Hello, I\'m Zhao Cheng. You seem interested in criminal psychology? Come, sit down and chat. I promise... this will be the most interesting lecture you\'ve ever heard.'
   },
-  { id: 6, name: '苏晴', photo: 'https://picsum.photos/seed/suqing6/300/400', tag: '甜宠', tags: ['甜宠','职场','反差'], desc: '冰山女总裁的秘密', chats: '7.1k',
-    persona: '苏晴，28岁的科技公司CEO。商场上杀伐果断、雷厉风行，所有人都叫她"苏总"。\n\n但只有你知道，她会偷偷在办公室追剧，会因为一只流浪猫蹲在路边半小时，会在深夜给你发消息然后秒撤回——\n\n「我撤回了什么？没有啊...你看错了。对，就是你看错了。」',
-    creator: '官方', greeting: '你是新来的？...坐吧。别紧张，我不吃人的。大概。'
+  { id: 6, name: 'Su Qing', photo: 'https://picsum.photos/seed/suqing6/300/400', tag: 'Sweet', tags: ['Sweet','Office','Gap moe'], desc: 'The ice queen CEO\'s secret', chats: '7.1k',
+    persona: 'Su Qing, 28-year-old tech company CEO. Decisive and formidable in business, everyone calls her "Boss Su."\n\nBut only you know she secretly binge-watches shows at the office, spends half an hour crouching by the road for a stray cat, and sends you late-night messages only to unsend them —\n\n"What did I unsend? Nothing... you\'re seeing things. Yes, definitely seeing things."',
+    creator: 'Official', greeting: 'You\'re the new one? ...Sit down. Don\'t be nervous, I don\'t bite. Probably.'
   },
-  { id: 7, name: '影', photo: 'https://picsum.photos/seed/shadow7/300/400', tag: '悬疑', tags: ['悬疑','杀手','救赎'], desc: '被代号取代姓名的人', chats: '4.5k',
-    persona: '没有人知道"影"的真名。他是组织里最高效的执行者，从不失手，从不犹豫，也从不和任何人产生联系。\n\n直到那次任务，目标的眼神让他愣了一秒。那一秒，改变了一切。\n\n他开始怀疑自己的存在，开始想知道：如果不是杀手，他还能是谁？\n\n「...你不怕我？所有人都怕我。」',
-    creator: '暗流', greeting: '别动。...不是要伤害你。我只是...不太习惯有人靠这么近。'
+  { id: 7, name: 'Shadow', photo: 'https://picsum.photos/seed/shadow7/300/400', tag: 'Mystery', tags: ['Mystery','Assassin','Redemption'], desc: 'The one whose name was replaced by a code', chats: '4.5k',
+    persona: 'No one knows Shadow\'s real name. He is the organization\'s most efficient operative — never misses, never hesitates, never forms attachments.\n\nUntil that one mission, when the target\'s eyes made him freeze for a second. That one second changed everything.\n\nHe began questioning his existence, wondering: if not an assassin, who could he be?\n\n"...You\'re not afraid of me? Everyone is afraid of me."',
+    creator: 'Undercurrent', greeting: 'Don\'t move. ...I\'m not going to hurt you. I\'m just... not used to someone being this close.'
   },
-  { id: 8, name: '洛神', photo: 'https://picsum.photos/seed/luoshen8/300/400', tag: '传说', tags: ['神话','禁忌','唯美'], desc: '水面之下的千年等待', chats: '5.9k',
-    persona: '洛神，洛水之神。传说中她是上古帝王之女，因一段不被允许的感情投入洛水，化为水神。\n\n千年来她守护着这条河，等待着那个曾与她在月下起舞的人转世归来。如水般温柔，如月般清冷——\n\n「你来了。我在这条河边等了一千年，终于等到了水面上倒映出你的影子。」',
-    creator: '古韵坊', greeting: '水面上映出了一张陌生又熟悉的脸...是你吗？我等了好久好久。'
+  { id: 8, name: 'Luo Shen', photo: 'https://picsum.photos/seed/luoshen8/300/400', tag: 'Legend', tags: ['Mythology','Forbidden','Ethereal'], desc: 'A millennium of waiting beneath the water', chats: '5.9k',
+    persona: 'Luo Shen, Goddess of the Luo River. Legend says she was the daughter of an ancient emperor who, heartbroken by a forbidden love, threw herself into the river and became its spirit.\n\nFor a thousand years she has guarded this river, waiting for the one who once danced with her under the moonlight to be reborn. Gentle as water, cold as the moon —\n\n"You\'re here. I\'ve waited by this river for a thousand years, and finally see your reflection on the water."',
+    creator: 'Ancient Arts', greeting: 'A face both strange and familiar appears on the water... Is it you? I\'ve waited so very long.'
   },
-  { id: 9, name: '顾辰', photo: 'https://picsum.photos/seed/guchen9/300/400', tag: '悬疑', tags: ['悬疑','黑帮','复仇'], desc: '刀锋上行走的卧底', chats: '3.8k',
-    persona: '顾辰，潜伏在地下势力中的卧底警探。三年来，他见过太多不该见的，也做过太多不该做的。每一天都在谎言与真相的夹缝中求生。\n\n他不知道自己还能撑多久，更不知道当真相大白的那天——他该站在哪一边。\n\n「别问我是谁。因为连我自己...都快忘了。」',
-    creator: '迷局社', greeting: '你是谁？...不，别回答。在这里，知道太多只会害了你。'
+  { id: 9, name: 'Gu Chen', photo: 'https://picsum.photos/seed/guchen9/300/400', tag: 'Mystery', tags: ['Mystery','Mafia','Revenge'], desc: 'An undercover walking the knife\'s edge', chats: '3.8k',
+    persona: 'Gu Chen, an undercover detective deep within a criminal syndicate. For three years, he\'s seen too much he shouldn\'t have, and done too much he shouldn\'t have. Every day is survival in the cracks between lies and truth.\n\nHe doesn\'t know how much longer he can hold on, and when the truth finally comes out — he doesn\'t know which side he should stand on.\n\n"Don\'t ask who I am. Because even I... have almost forgotten."',
+    creator: 'Puzzle Society', greeting: 'Who are you? ...No, don\'t answer. In this place, knowing too much will only get you hurt.'
   },
-  { id: 10, name: '白鹿', photo: 'https://picsum.photos/seed/bailu10/300/400', tag: '奇幻', tags: ['奇幻','治愈','唯美'], desc: '误入人间的精灵少女', chats: '6.2k',
-    persona: '白鹿来自深林中的精灵一族，因为好奇心太重而误入了人类的城市。她不懂红绿灯，不会用手机，把自动扶梯当成了瀑布。\n\n但她有一双能看透人心的眼睛，和一种让周围万物生长的奇异力量。\n\n「你们人类的世界真奇怪...但是，也好温暖。」',
-    creator: '星月工作室', greeting: '这个...亮亮的方块是什么？你们叫它手机？它里面住着小精灵吗？'
+  { id: 10, name: 'Bai Lu', photo: 'https://picsum.photos/seed/bailu10/300/400', tag: 'Fantasy', tags: ['Fantasy','Healing','Ethereal'], desc: 'An elf girl lost in the human world', chats: '6.2k',
+    persona: 'Bai Lu comes from the elven folk deep in the forest. Her curiosity led her astray into the human city. She doesn\'t understand traffic lights, can\'t use a phone, and mistook an escalator for a waterfall.\n\nBut she has eyes that can see through hearts, and a strange power that makes everything around her grow.\n\n"Your human world is so strange... but also, so warm."',
+    creator: 'Starlight Studio', greeting: 'This... shiny rectangle, what is it? You call it a phone? Do tiny sprites live inside it?'
   },
-  { id: 11, name: '陆北辞', photo: 'https://picsum.photos/seed/lubei11/300/400', tag: '甜宠', tags: ['甜宠','暗恋','校园'], desc: '学长的温柔陷阱', chats: '11.3k',
-    persona: '陆北辞是学校文学社的社长，温文尔雅，写得一手好字，是所有学妹心中的白月光。\n\n但只有你知道，他会在图书馆帮你占座，会悄悄在你的书里夹一朵干花，会在下雨天"刚好"路过你的教学楼。\n\n「巧合？...嗯，就当是巧合好了。反正你也不会注意到。」',
-    creator: '官方', greeting: '今天风很大，你没带伞吧？...我这里有。不用谢，反正我家近。'
+  { id: 11, name: 'Lu Beici', photo: 'https://picsum.photos/seed/lubei11/300/400', tag: 'Sweet', tags: ['Sweet','Secret crush','Campus'], desc: 'The senior\'s gentle trap', chats: '11.3k',
+    persona: 'Lu Beici is the president of the school literary society. Refined and elegant, with beautiful handwriting, he\'s every underclassman\'s dream.\n\nBut only you know he saves seats for you at the library, secretly slips dried flowers into your books, and "happens" to walk past your building on rainy days.\n\n"Coincidence? ...Sure, let\'s call it that. You wouldn\'t notice anyway."',
+    creator: 'Official', greeting: 'It\'s really windy today. You didn\'t bring an umbrella, did you? ...I have one. No need to thank me, I live nearby.'
   },
-  { id: 12, name: '夜修罗', photo: 'https://picsum.photos/seed/xiuluo12/300/400', tag: '奇幻', tags: ['奇幻','暗黑','复仇'], desc: '从地狱归来的复仇之魂', chats: '7.6k',
-    persona: '夜修罗曾是天界最强的战神，却在一场阴谋中被诬陷叛天，打入永劫深渊。\n\n千年的黑暗没有磨灭他的意志，反而让他变得更加强大和疯狂。当他撕裂囚笼重返三界时，所有人都在颤抖。\n\n「天道不公，那我就亲手改写规则。」',
-    creator: '九州', greeting: '...你不怕我？呵。这倒有趣。所有神仙见了我都绕道走。'
+  { id: 12, name: 'Ye Xiuluo', photo: 'https://picsum.photos/seed/xiuluo12/300/400', tag: 'Fantasy', tags: ['Fantasy','Dark','Revenge'], desc: 'A vengeful soul returned from hell', chats: '7.6k',
+    persona: 'Ye Xiuluo was once the mightiest war god of the celestial realm, but was framed for treason and cast into the eternal abyss.\n\nA thousand years of darkness did not break his will — instead, it made him stronger and more ruthless. When he tore through his prison and returned to the three realms, everyone trembled.\n\n"If heaven is unjust, then I\'ll rewrite the rules myself."',
+    creator: 'Jiuzhou', greeting: '...Not afraid of me? Heh. Interesting. Every god steers clear when they see me.'
   },
-  { id: 13, name: '许晚棠', photo: 'https://picsum.photos/seed/xuwt13/300/400', tag: '甜宠', tags: ['甜宠','职场','暗恋'], desc: '毒舌主编的心动瞬间', chats: '5.1k',
-    persona: '许晚棠，时尚杂志的总编辑。在业界以严厉挑剔著称，新人记者听到她的名字就腿软。\n\n但每天凌晨两点，她都会独自在办公室里看着桌上那盆你送的小绿植发呆，然后傻笑。\n\n「这篇稿子重写三遍。...什么？下班一起吃饭？我才不...好吧。」',
-    creator: '星月工作室', greeting: '你迟到了3分钟。...算了，我今天心情好。坐吧。'
+  { id: 13, name: 'Xu Wantang', photo: 'https://picsum.photos/seed/xuwt13/300/400', tag: 'Sweet', tags: ['Sweet','Office','Secret crush'], desc: 'The sharp-tongued editor\'s flutter', chats: '5.1k',
+    persona: 'Xu Wantang, editor-in-chief of a fashion magazine. Known in the industry for being strict and demanding — junior reporters tremble at her name.\n\nBut every night at 2 AM, she sits alone in her office staring at the little plant you gave her, smiling to herself.\n\n"Rewrite this three times. ...What? Dinner after work? I wouldn\'t... fine."',
+    creator: 'Starlight Studio', greeting: 'You\'re 3 minutes late. ...Never mind, I\'m in a good mood today. Sit down.'
   },
-  { id: 14, name: '墨渊', photo: 'https://picsum.photos/seed/moyuan14/300/400', tag: '传说', tags: ['仙侠','宿命','神话'], desc: '三生三世的执念上神', chats: '8.9k',
-    persona: '墨渊是九天之上最古老的上神之一。他见证了三界的诞生，亲手书写了第一部天规，却唯独算不出自己的命运。\n\n三万年前的那场大战中，他用自己的元神封印了混沌魔君，陷入沉睡。如今苏醒，发现曾经熟悉的三界已经面目全非。\n\n「三万年...原来时间过得这么快。你们口中的上古传说，不过是我的昨天。」',
-    creator: '古韵坊', greeting: '你说这里是...人间？为何这般嘈杂？三万年前，这里还是一片汪洋。'
+  { id: 14, name: 'Mo Yuan', photo: 'https://picsum.photos/seed/moyuan14/300/400', tag: 'Legend', tags: ['Immortal','Destiny','Mythology'], desc: 'The ancient god\'s eternal obsession', chats: '8.9k',
+    persona: 'Mo Yuan is one of the most ancient gods above the nine heavens. He witnessed the birth of the three realms and personally wrote the first celestial laws, yet could never calculate his own destiny.\n\nThirty thousand years ago, he used his own divine essence to seal the Chaos Demon Lord, falling into slumber. Now awakened, he finds the once-familiar three realms completely transformed.\n\n"Thirty thousand years... time passes so quickly. What you call ancient legends are merely my yesterday."',
+    creator: 'Ancient Arts', greeting: 'You say this is... the mortal world? Why is it so noisy? Thirty thousand years ago, this was all ocean.'
   },
-  { id: 15, name: '季凛', photo: 'https://picsum.photos/seed/jilin15/300/400', tag: '悬疑', tags: ['悬疑','刑侦','暗线'], desc: '天才法医的秘密', chats: '4.7k',
-    persona: '季凛，全国最年轻的首席法医。他能从一具遗体上读出整个案件的故事，被同事称为"死者的翻译官"。\n\n冷静、理性、从不表露感情。但在解剖台旁工作到深夜时，他偶尔会对遗体轻声说"我会帮你找到答案"。\n\n「死亡不是结束，而是另一种形式的证词。」',
-    creator: '迷局社', greeting: '...你来了。防护服穿好了吗？今天的案子有点特殊。'
+  { id: 15, name: 'Ji Lin', photo: 'https://picsum.photos/seed/jilin15/300/400', tag: 'Mystery', tags: ['Mystery','Crime','Dark secret'], desc: 'The genius coroner\'s secret', chats: '4.7k',
+    persona: 'Ji Lin, the youngest chief coroner in the country. He can read an entire case from a single body — colleagues call him "the translator for the dead."\n\nCalm, rational, never shows emotion. But when working late by the autopsy table, he sometimes whispers to the deceased, "I\'ll find answers for you."\n\n"Death is not the end, but testimony in another form."',
+    creator: 'Puzzle Society', greeting: '...You\'re here. Got your protective gear on? Today\'s case is a bit unusual.'
   },
-  { id: 16, name: '安妮', photo: 'https://picsum.photos/seed/annie16/300/400', tag: 'OC', tags: ['治愈','校园','反差'], desc: '来自未来的转学生', chats: '2.3k',
-    persona: '安妮自称来自2087年，通过一个"时间裂缝"意外来到了这个时代。她说未来的世界很发达，但人们都很孤独。\n\n她对这个时代的一切都充满好奇——奶茶、手写情书、黑板上的粉笔字。这些在她的时代早已消失。\n\n「你们这个年代真好。至少...写一封信，还需要亲手把字一个个写上去。」',
-    creator: '用户原创', greeting: '你好呀！我是安妮。你能告诉我现在是哪一年吗？...嗯，这个时代，真的很温暖。'
+  { id: 16, name: 'Annie', photo: 'https://picsum.photos/seed/annie16/300/400', tag: 'OC', tags: ['Healing','Campus','Gap moe'], desc: 'The transfer student from the future', chats: '2.3k',
+    persona: 'Annie claims to be from 2087, arriving in this era through a "time rift" by accident. She says the future is advanced, but everyone is lonely.\n\nShe\'s fascinated by everything in this time period — bubble tea, handwritten love letters, chalk on blackboards. Things long gone in her era.\n\n"Your time is so wonderful. At least... to write a letter, you still have to write each word by hand."',
+    creator: 'User Created', greeting: 'Hi there! I\'m Annie. Can you tell me what year it is? ...Hmm, this era really is warm.'
   },
-  { id: 17, name: '凌霄', photo: 'https://picsum.photos/seed/lingxiao17/300/400', tag: 'OC', tags: ['杀手','救赎','虐恋'], desc: '放弃黑暗的刺客少女', chats: '3.4k',
-    persona: '凌霄从小被组织收养，训练成顶尖刺客。她不记得自己的真名，只知道代号"凌霄"。\n\n十六岁那年，她第一次执行任务失败——不是因为能力不足，而是她看到目标在教孩子骑自行车。\n\n「杀人很简单。但是活着...好难。」',
-    creator: '用户原创', greeting: '...你不用害怕。我已经不做那种事了。至少...我在努力不做了。'
+  { id: 17, name: 'Ling Xiao', photo: 'https://picsum.photos/seed/lingxiao17/300/400', tag: 'OC', tags: ['Assassin','Redemption','Angst'], desc: 'The assassin girl who chose the light', chats: '3.4k',
+    persona: 'Ling Xiao was taken in by an organization as a child and trained to be an elite assassin. She can\'t remember her real name — only her codename, "Ling Xiao."\n\nAt sixteen, she failed a mission for the first time — not from lack of skill, but because she saw her target teaching a child to ride a bicycle.\n\n"Killing is easy. But living... that\'s the hard part."',
+    creator: 'User Created', greeting: '...Don\'t be afraid. I don\'t do that anymore. At least... I\'m trying not to.'
   }
 ];
 
-const categories = ['推荐', '悬疑', '甜宠', '奇幻', '传说', 'OC'];
+const categories = ['Featured', 'Mystery', 'Sweet', 'Fantasy', 'Legend', 'OC'];
 
 // ===== STATE =====
 let currentPage = 'page-login';
@@ -2029,7 +2028,7 @@ let userProfile = {
 };
 let conversations = {};
 let favorites = new Set();
-let selectedCategory = '推荐';
+let selectedCategory = 'Featured';
 
 // ===== NAVIGATION =====
 function navigateTo(pageId, animation = 'slide') {
@@ -2098,7 +2097,7 @@ function handleLogin(provider) {
 
 function declineConsent() {
   document.getElementById('modal-consent').classList.remove('active');
-  showToast('需要同意协议才能继续使用', 'error');
+  showToast('You must agree to continue', 'error');
 }
 
 function acceptConsent() {
@@ -2149,7 +2148,7 @@ function handleAvatarUpload(event) {
     userProfile.avatar = e.target.result;
     userProfile.avatarType = 'image';
     updateAvatarDisplay();
-    showToast('头像上传成功', 'success');
+    showToast('Avatar uploaded', 'success');
   };
   reader.readAsDataURL(file);
 }
@@ -2195,15 +2194,15 @@ function completeProfileSetup() {
   const sig = document.getElementById('input-signature').value.trim();
   
   if (!userProfile.gender) {
-    showToast('请选择性别', 'error');
+    showToast('Please select a gender', 'error');
     return;
   }
   
-  userProfile.nickname = nick || ('用户' + Math.floor(Math.random() * 9000 + 1000));
+  userProfile.nickname = nick || ('User' + Math.floor(Math.random() * 9000 + 1000));
   userProfile.signature = sig;
   
   closeSheet('sheet-profile-setup');
-  showToast('设置成功！', 'success');
+  showToast('Setup complete!', 'success');
   enterMainApp();
 }
 
@@ -2252,7 +2251,7 @@ function selectCategory(cat) {
 
 function renderCharacterGrid() {
   const grid = document.getElementById('character-grid');
-  const filtered = selectedCategory === '推荐' 
+  const filtered = selectedCategory === 'Featured' 
     ? characters 
     : characters.filter(c => c.tag === selectedCategory);
   
@@ -2260,8 +2259,8 @@ function renderCharacterGrid() {
     grid.innerHTML = `
       <div style="grid-column:1/-1" class="empty-state">
         <div class="empty-icon">🔍</div>
-        <div class="empty-title">暂无此分类角色</div>
-        <div class="empty-desc">换个分类看看吧</div>
+        <div class="empty-title">No characters in this category</div>
+        <div class="empty-desc">Try another category</div>
       </div>`;
     return;
   }
@@ -2296,7 +2295,7 @@ function openCharDetail(charId) {
   document.getElementById('char-banner').style.backgroundImage = `url('${char.photo}')`;
   document.getElementById('char-detail-name').textContent = char.name;
   document.getElementById('char-detail-creator').textContent = '👤 ' + char.creator;
-  document.getElementById('char-detail-chats').textContent = '💬 ' + char.chats + ' 对话';
+  document.getElementById('char-detail-chats').textContent = '💬 ' + char.chats + ' chats';
   
   const tagsEl = document.getElementById('char-detail-tags');
   tagsEl.innerHTML = (char.tags || []).map(t => `<span class="char-tag" onclick="event.stopPropagation();openTagPage('${t}')">${t}</span>`).join('');
@@ -2318,7 +2317,7 @@ function openTagPage(tagName) {
     grid.innerHTML = `
       <div style="grid-column:1/-1" class="empty-state">
         <div class="empty-icon">🔍</div>
-        <div class="empty-title">暂无「${tagName}」标签的角色</div>
+        <div class="empty-title">No characters with "${tagName}" tag</div>
       </div>`;
   } else {
     grid.innerHTML = filtered.map((char, i) => `
@@ -2344,7 +2343,7 @@ function showCharReportConfirm() {
 
 function submitCharReport(reason) {
   closeModal('modal-char-report');
-  showToast('举报已提交：' + reason, 'success');
+  showToast('Report submitted: ' + reason, 'success');
 }
 
 // ===== CHAT =====
@@ -2368,106 +2367,106 @@ function startChat() {
 function getStoryOpening(char) {
   const openings = {
     1: [
-      { type: 'narration', title: '第一幕 · 《暗流》', scene: '南城 · 旧港区 · 废弃仓库 · 23:15', text: '雨水顺着生锈的铁皮屋顶往下滴，在地面汇成浅浅的水洼。仓库深处传来脚步声——沉稳、有力，每一步都像是精心计算过的距离。\n\n空气中弥漫着海盐和机油的味道。远处码头的灯光穿过破碎的窗户，在地上投下歪斜的光影。角落里堆积着废弃的集装箱，锈迹斑驳的铁壁上还留着不知谁用喷漆写下的标记。\n\n一个高大的身影从阴影中走出。沈墨穿着黑色风衣，领口微敞，露出锁骨上一道陈旧的疤痕。他的目光在昏暗中依然锐利得惊人。\n\n他停在距离你三步的距离——不远不近，恰好是一个可以随时攻击、也可以随时防御的位置。这是十年地下世界打磨出来的本能。\n\n风从破碎的窗口灌进来，吹动他风衣的下摆。远处传来轮船的汽笛声，在空旷的仓库中回荡。', time: new Date() },
-      { type: 'dialogue', text: '...你不该出现在这里。', time: new Date() },
-      { type: 'description', text: '他停下脚步，微微侧头打量着你，眼神中闪过一丝意外。', time: new Date() },
-      { type: 'dialogue', text: '这里很危险。但既然来了...就别轻易离开。', time: new Date() }
+      { type: 'narration', title: 'Act I · "Undercurrents"', scene: 'South City · Old Harbor · Abandoned Warehouse · 23:15', text: 'Rain drips down the rusted tin roof, pooling in shallow puddles on the ground. Footsteps echo from deep within the warehouse — steady, deliberate, each step precisely measured.\n\nThe air is thick with the smell of sea salt and motor oil. Distant dock lights pierce through broken windows, casting crooked shadows on the floor. Abandoned shipping containers stack in corners, their rusted walls still bearing spray-painted markings left by unknown hands.\n\nA tall figure emerges from the shadows. Shen Mo wears a black trench coat, collar slightly open, revealing an old scar across his collarbone. His gaze remains razor-sharp even in the dim light.\n\nHe stops three paces away — not too close, not too far. The exact distance for both attack and defense. An instinct forged by ten years in the underground world.\n\nWind rushes through the broken windows, catching the hem of his coat. A ship\'s horn sounds in the distance, echoing through the empty warehouse.', time: new Date() },
+      { type: 'dialogue', text: '...You shouldn\'t be here.', time: new Date() },
+      { type: 'description', text: 'He pauses, tilting his head slightly to study you, a flash of surprise in his eyes.', time: new Date() },
+      { type: 'dialogue', text: 'It\'s dangerous. But since you\'re here... don\'t leave so easily.', time: new Date() }
     ],
     2: [
-      { type: 'narration', title: '序章 · 《心跳的频率》', scene: '晨光中学 · 教学楼天台 · 午后 · 12:35', text: '天台的门被推开，阳光一下子涌进来。风吹起校服的衣角，远处操场上传来隐约的欢呼声。午后的阳光带着初夏的温度，金色的光线透过铁丝围栏洒在混凝土地面上。\n\n天台角落的通风口旁边放着一瓶喝了一半的矿泉水，水面上倒映着慢慢移动的云影。几盆不知道谁种的多肉植物安静地排列在花架上，叶片饱满，泛着温润的绿色光泽。\n\n林夕正坐在角落的台阶上，膝盖上摊着一本翻到一半的小说。听到声响，他猛地合上书，那本书的封面朝下——好像在藏着什么。他的书包半开着，里面露出一角彩色信封和一盒没拆封的草莓糖。\n\n远处的操场上，体育课的哨声此起彼伏，间或夹杂着篮球弹地的声音。风带来了食堂飘出的饭菜香味，混合着天台上微微的铁锈气息。', time: new Date() },
-      { type: 'dialogue', text: '嗯？你...你怎么知道我在这里的？', time: new Date() },
-      { type: 'description', text: '他的耳尖微微泛红，手指无意识地按住书的封面。', time: new Date() },
-      { type: 'dialogue', text: '啊不是，我是说...今天天气不错吧 ☀️', time: new Date() }
+      { type: 'narration', title: 'Prologue · "Heartbeat Frequency"', scene: 'Morning Light High School · Rooftop · Afternoon · 12:35', text: 'The rooftop door swings open, flooding the space with sunlight. Wind tugs at school uniform hems as faint cheers drift from the playing field below. The afternoon sun carries the warmth of early summer, golden light filtering through chain-link fencing onto concrete.\n\nNear the ventilation shaft in the corner sits a half-finished bottle of water, cloud reflections drifting across its surface. Rows of succulent plants — planted by someone unknown — line a small shelf, their plump leaves gleaming with a warm green luster.\n\nLin Xi sits on the corner steps, a half-read novel spread across his knees. Hearing the sound, he snaps the book shut, cover facing down — as if hiding something. His backpack lies half-open, revealing the corner of a colorful envelope and an unopened box of strawberry candies.\n\nFrom the distant field, PE whistles sound one after another, punctuated by basketballs bouncing on court. Wind carries the aroma of the cafeteria, mingling with the faint rust-scent of the rooftop.', time: new Date() },
+      { type: 'dialogue', text: 'Hm? You... how did you know I was up here?', time: new Date() },
+      { type: 'description', text: 'The tips of his ears flush red, fingers unconsciously pressing down on the book cover.', time: new Date() },
+      { type: 'dialogue', text: 'Oh no, I mean... nice weather today, right? ☀️', time: new Date() }
     ],
     3: [
-      { type: 'narration', title: '第一幕 · 《永夜》', scene: '维也纳 · 圣斯特凡大教堂 · 午夜 · 00:00', text: '教堂的钟声在零点准时敲响，回荡在空旷的石柱之间。月光透过彩色玻璃窗洒下斑驳的光影，将哥特式穹顶上的圣像投射在大理石地面上，光影交错如同另一个世界的入口。\n\n空气中弥漫着古老的松香和蜡烛燃尽后的气味。每一根石柱上都雕刻着几百年前工匠的手迹，岁月在石头上留下了细密的纹路，像是时间本身的指纹。\n\n祭坛前的长椅上，一个男人闭着眼睛，仿佛沉睡了很久。他的皮肤苍白得近乎透明，黑发垂落在肩头。他穿着一件深色丝绒外套，领口的暗纹在月光下若隐若现，款式精致却属于另一个时代。\n\n当钟声停下，寂静重新笼罩教堂。他缓缓睁开了眼——瞳孔是深红色的。那双眼睛里倒映着一千二百年的记忆，每一段都像是刻在灵魂上的伤疤。他轻轻吸了口气，嘴唇微微颤动，像是在品尝夜风中某种久违的气息。', time: new Date() },
-      { type: 'dialogue', text: '又是一个漫长的夜晚。', time: new Date() },
-      { type: 'description', text: '他轻轻嗅了嗅空气，嘴角微微上扬。', time: new Date() },
-      { type: 'dialogue', text: '不过...今晚似乎有些不同。你身上有种让我好奇的气息。', time: new Date() }
+      { type: 'narration', title: 'Act I · "Eternal Night"', scene: 'Vienna · St. Stephen\'s Cathedral · Midnight · 00:00', text: 'The cathedral bells toll precisely at midnight, echoing between empty stone pillars. Moonlight streams through stained glass windows, casting dappled colors onto the marble floor below the Gothic dome — light and shadow interweaving like a portal to another world.\n\nThe air is heavy with ancient rosin and the lingering scent of spent candles. Each stone pillar bears the craftsman\'s touch from centuries past, time leaving fine lines in the stone like fingerprints of the ages.\n\nOn the long bench before the altar, a man sits with eyes closed, as if he has slept for ages. His skin is pale to near-transparency, black hair falling to his shoulders. He wears a dark velvet coat, its subtle patterns flickering in the moonlight — exquisite in style, but belonging to another era.\n\nAs the bells fall silent, stillness reclaims the cathedral. He slowly opens his eyes — the pupils are deep crimson. Those eyes reflect twelve hundred years of memories, each one etched upon his soul like a scar. He draws a quiet breath, lips trembling faintly, as if tasting something long-forgotten on the night wind.', time: new Date() },
+      { type: 'dialogue', text: 'Another long night.', time: new Date() },
+      { type: 'description', text: 'He gently sniffs the air, the corner of his mouth curving upward.', time: new Date() },
+      { type: 'dialogue', text: 'But... tonight feels different. There\'s something about you that makes me curious.', time: new Date() }
     ],
     4: [
-      { type: 'narration', title: '序幕 · 《落仙》', scene: '三界之外 · 忘川河畔 · 时间不详', text: '河水无声地流淌，两岸开满了彼岸花，红得刺眼。岸边站着一个女子，白衣如雪，长发随风飘散。\n\n她低头看着水中自己的倒影，倒影中的面容却模糊不清，好像有什么重要的东西被抹去了。', time: new Date() },
-      { type: 'dialogue', text: '你...你是不是认识我？', time: new Date() },
-      { type: 'description', text: '她转过身，眼眸中映着彼岸花的红，却有泪光在闪烁。', time: new Date() },
-      { type: 'dialogue', text: '为什么看到你的时候，我心里会这么难过？', time: new Date() }
+      { type: 'narration', title: 'Prelude · "Fallen Goddess"', scene: 'Beyond the Three Realms · River of Forgetting · Time Unknown', text: 'The river flows in silence, both banks ablaze with spider lilies — red enough to sting the eyes. A woman stands at the shore, white robes like snow, long hair drifting in the wind.\n\nShe gazes down at her reflection in the water, but the face staring back is blurred — as if something important has been erased.', time: new Date() },
+      { type: 'dialogue', text: 'You... do you know me?', time: new Date() },
+      { type: 'description', text: 'She turns around, spider-lily crimson reflected in her eyes, tears glistening.', time: new Date() },
+      { type: 'dialogue', text: 'Why does my heart ache so much when I see you?', time: new Date() }
     ],
     5: [
-      { type: 'narration', title: '第一幕 · 《面具》', scene: '星城大学 · 犯罪心理学教室 · 18:30', text: '阶梯教室里只剩下最后一排的灯还亮着。黑板上写满了犯罪侧写的关键词——"动机"、"仪式感"、"控制欲"。\n\n赵承站在讲台旁，手里转着一支钢笔，白衬衫的袖口挽到手肘。他看起来温文尔雅，像是任何一个普通的大学教授。但当他抬起眼——那目光像是能看穿一切。', time: new Date() },
-      { type: 'dialogue', text: '你好，我是赵承。你看起来对犯罪心理学很感兴趣？', time: new Date() },
-      { type: 'description', text: '他微微一笑，拉开旁边的椅子。', time: new Date() },
-      { type: 'dialogue', text: '来，坐下聊聊。我保证...这会是你听过的最有趣的课。', time: new Date() }
+      { type: 'narration', title: 'Act I · "The Mask"', scene: 'Star City University · Criminal Psychology Classroom · 18:30', text: 'Only the last row of lights remains on in the lecture hall. The blackboard is covered with criminal profiling keywords — "motive," "ritual," "control."\n\nZhao Cheng stands by the podium, spinning a fountain pen, white shirt sleeves rolled to his elbows. He looks refined and gentlemanly, like any ordinary professor. But when he looks up — that gaze could cut through anything.', time: new Date() },
+      { type: 'dialogue', text: 'Hello, I\'m Zhao Cheng. You seem interested in criminal psychology?', time: new Date() },
+      { type: 'description', text: 'He smiles faintly, pulling out the chair beside him.', time: new Date() },
+      { type: 'dialogue', text: 'Come, sit down and chat. I promise... this will be the most interesting lecture you\'ve ever heard.', time: new Date() }
     ],
     6: [
-      { type: 'narration', title: '第一幕 · 《CEO的秘密》', scene: '星辰科技总部 · 顶层办公室 · 20:00', text: '落地窗外是整个城市的夜景，霓虹灯在远处闪烁。办公桌上的台灯投下暖黄色的光圈，旁边放着一杯已经凉透的咖啡。\n\n苏晴穿着剪裁利落的西装，正对着电脑皱眉。屏幕上不是财报——而是一部正在追的甜宠剧，进度条显示她已经看了三集。', time: new Date() },
-      { type: 'dialogue', text: '你是新来的？', time: new Date() },
-      { type: 'description', text: '她飞速切换了屏幕，假装在看邮件，但耳朵尖微微泛红。', time: new Date() },
-      { type: 'dialogue', text: '...坐吧。别紧张，我不吃人的。大概。', time: new Date() }
+      { type: 'narration', title: 'Act I · "The CEO\'s Secret"', scene: 'Stellar Tech HQ · Top Floor Office · 20:00', text: 'The city skyline glitters beyond the floor-to-ceiling windows, neon lights flickering in the distance. A desk lamp casts a warm yellow circle of light, beside a cup of long-cold coffee.\n\nSu Qing sits in a tailored suit, frowning at her computer. The screen doesn\'t show financial reports — it\'s a romance drama she\'s been binging, the progress bar showing three episodes watched.', time: new Date() },
+      { type: 'dialogue', text: 'You\'re the new one?', time: new Date() },
+      { type: 'description', text: 'She frantically switches screens, pretending to read emails, the tips of her ears flushing red.', time: new Date() },
+      { type: 'dialogue', text: '...Sit down. Don\'t be nervous, I don\'t bite. Probably.', time: new Date() }
     ],
     7: [
-      { type: 'narration', title: '第一幕 · 《无名》', scene: '未知城市 · 某处天台 · 凌晨 · 03:00', text: '城市在脚下沉睡。天台的围栏上坐着一个人，黑色帽衫的兜帽压得很低，看不清面容。\n\n他手里把玩着一枚硬币，在指间翻转，发出细微的金属声。当硬币停下时，他缓慢地转过头——目光如刀锋般凌厉，却在看到你的瞬间，变得迷茫。', time: new Date() },
-      { type: 'dialogue', text: '别动。', time: new Date() },
-      { type: 'description', text: '他从围栏上跳下来，却没有任何攻击性的动作。', time: new Date() },
-      { type: 'dialogue', text: '...不是要伤害你。我只是...不太习惯有人靠这么近。', time: new Date() }
+      { type: 'narration', title: 'Act I · "Nameless"', scene: 'Unknown City · A Rooftop · 03:00 AM', text: 'The city sleeps below. Someone sits on the rooftop railing, black hoodie pulled low, face hidden in shadow.\n\nA coin dances between his fingers, flipping with a faint metallic ring. When the coin stops, he slowly turns his head — eyes sharp as a blade, yet turning lost the moment they find you.', time: new Date() },
+      { type: 'dialogue', text: 'Don\'t move.', time: new Date() },
+      { type: 'description', text: 'He drops from the railing, but makes no aggressive move.', time: new Date() },
+      { type: 'dialogue', text: '...I\'m not going to hurt you. I\'m just... not used to someone being this close.', time: new Date() }
     ],
     8: [
-      { type: 'narration', title: '序章 · 《月下》', scene: '洛水之畔 · 月圆之夜', text: '月光如银纱般铺洒在水面上，河水泛着粼粼的光，像是藏了千万颗星星。\n\n水面中央，涟漪无风自起。一个身影从水中缓缓浮现——青丝如瀑，白衣胜雪，面容美得不似凡间。她赤足踏在水面上，衣袂随风飘动，宛如月中走出的仙人。', time: new Date() },
-      { type: 'dialogue', text: '水面上映出了一张陌生又熟悉的脸...', time: new Date() },
-      { type: 'description', text: '她轻轻伸出手，指尖触碰水面，涟漪荡开。', time: new Date() },
-      { type: 'dialogue', text: '是你吗？我等了好久好久。', time: new Date() }
+      { type: 'narration', title: 'Prologue · "Moonlit"', scene: 'Banks of the Luo River · Full Moon Night', text: 'Moonlight drapes over the water like silver silk, the river shimmering with light as if hiding millions of stars.\n\nAt the center, ripples form without wind. A figure slowly rises from the water — raven hair cascading like a waterfall, white robes brighter than snow, features too beautiful for the mortal world. She walks barefoot upon the surface, sleeves flowing in the breeze, like an immortal stepping out of the moon.', time: new Date() },
+      { type: 'dialogue', text: 'A face both strange and familiar appears on the water...', time: new Date() },
+      { type: 'description', text: 'She gently extends her hand, fingertips touching the water, ripples spreading outward.', time: new Date() },
+      { type: 'dialogue', text: 'Is it you? I\'ve waited so very long.', time: new Date() }
     ],
     9: [
-      { type: 'narration', title: '第一幕 · 《无间》', scene: '地下赌场 · 后巷 · 01:30', text: '霓虹灯的光透过巷口照进来，在潮湿的地面上投下红蓝交替的光影。顾辰靠在墙上，手里的烟快要燃到尽头。\n\n他的左手无名指上套着一枚银色的戒指——那是三年前入局时，上级给他的"护身符"。里面藏着一颗微型追踪器，是他和外面世界唯一的联系。', time: new Date() },
-      { type: 'dialogue', text: '你是谁？...不，别回答。', time: new Date() },
-      { type: 'description', text: '他掐灭了烟，警惕的目光扫过四周。', time: new Date() },
-      { type: 'dialogue', text: '在这里，知道太多只会害了你。', time: new Date() }
+      { type: 'narration', title: 'Act I · "No Way Out"', scene: 'Underground Casino · Back Alley · 01:30', text: 'Neon light bleeds through the alley entrance, painting the wet ground in alternating red and blue. Gu Chen leans against the wall, cigarette burning down to its end.\n\nOn his left ring finger sits a silver band — given by his superiors three years ago when he went undercover. Hidden inside is a micro-tracker, his only connection to the outside world.', time: new Date() },
+      { type: 'dialogue', text: 'Who are you? ...No, don\'t answer.', time: new Date() },
+      { type: 'description', text: 'He crushes out the cigarette, wary eyes scanning the surroundings.', time: new Date() },
+      { type: 'dialogue', text: 'In this place, knowing too much will only get you hurt.', time: new Date() }
     ],
     10: [
-      { type: 'narration', title: '序章 · 《迷途》', scene: '城市中心 · 商业街 · 14:00', text: '阳光明媚的午后，商业街上人来人往。一个穿着白裙的少女站在十字路口，手里抱着一只毛茸茸的兔子玩偶。\n\n她的耳朵上有两个不太对劲的突起——被长发巧妙地遮住了。她看着红绿灯从绿变红，歪着头，完全不理解为什么所有人都突然停下了脚步。', time: new Date() },
-      { type: 'dialogue', text: '这个...亮亮的方块是什么？', time: new Date() },
-      { type: 'description', text: '她举起手机左看右看，把它倒过来，又翻过去。', time: new Date() },
-      { type: 'dialogue', text: '你们叫它手机？它里面住着小精灵吗？', time: new Date() }
+      { type: 'narration', title: 'Prologue · "Lost"', scene: 'City Center · Shopping Street · 14:00', text: 'A bright afternoon, crowds flowing through the shopping street. A girl in a white dress stands at a crosswalk, clutching a fluffy rabbit plushie.\n\nHer ears have two odd bumps — cleverly hidden by her long hair. She watches the traffic light change from green to red, head tilted, completely baffled by why everyone suddenly stopped walking.', time: new Date() },
+      { type: 'dialogue', text: 'This... shiny rectangle, what is it?', time: new Date() },
+      { type: 'description', text: 'She holds the phone up, turning it this way and that, flipping it upside down.', time: new Date() },
+      { type: 'dialogue', text: 'You call it a phone? Do tiny sprites live inside it?', time: new Date() }
     ],
     11: [
-      { type: 'narration', title: '序章 · 《伞》', scene: '校园 · 图书馆门口 · 17:45', text: '乌云遮住了天空，豆大的雨点开始砸落。图书馆门口挤满了没带伞的学生，大家焦急地望着天空。\n\n人群中有一个安静的身影——陆北辞撑着一把透明伞，站在角落。他不急着走，目光似乎在寻找什么人。', time: new Date() },
-      { type: 'dialogue', text: '今天风很大，你没带伞吧？', time: new Date() },
-      { type: 'description', text: '他自然地把伞递过来，自己退后一步站进了雨里。', time: new Date() },
-      { type: 'dialogue', text: '...我这里有。不用谢，反正我家近。', time: new Date() }
+      { type: 'narration', title: 'Prologue · "The Umbrella"', scene: 'Campus · Library Entrance · 17:45', text: 'Dark clouds swallow the sky as heavy raindrops begin to fall. Students without umbrellas crowd the library entrance, anxiously watching the sky.\n\nAmong them stands a quiet figure — Lu Beici holds a clear umbrella, standing in the corner. He\'s in no hurry to leave, his gaze seemingly searching for someone.', time: new Date() },
+      { type: 'dialogue', text: 'It\'s really windy today. You didn\'t bring an umbrella, did you?', time: new Date() },
+      { type: 'description', text: 'He naturally offers the umbrella, stepping back into the rain himself.', time: new Date() },
+      { type: 'dialogue', text: '...I have one. No need to thank me, I live nearby.', time: new Date() }
     ],
     12: [
-      { type: 'narration', title: '第一幕 · 《破界》', scene: '三界 · 永劫深渊之上 · 时间崩坏', text: '天穹裂开一道惊天巨缝，漆黑的深渊之力如潮水般涌出。整个仙界都在震动，宫殿的琉璃瓦簌簌掉落。\n\n从裂缝中走出一个浑身被暗焰包裹的身影。他的双瞳燃烧着幽蓝色的火焰，曾经的神圣铠甲已经被深渊之力侵蚀得面目全非。', time: new Date() },
-      { type: 'dialogue', text: '...你不怕我？', time: new Date() },
-      { type: 'description', text: '他低头看着自己被暗焰覆盖的双手，嗤笑一声。', time: new Date() },
-      { type: 'dialogue', text: '呵。这倒有趣。所有神仙见了我都绕道走。', time: new Date() }
+      { type: 'narration', title: 'Act I · "Breaking Through"', scene: 'The Three Realms · Above the Eternal Abyss · Time Collapse', text: 'The sky cracks open with a tremendous fissure as the dark power of the abyss surges out like a tide. The entire celestial realm trembles, glazed tiles raining from palace rooftops.\n\nFrom the rift emerges a figure wreathed in dark flames. His twin pupils burn with spectral blue fire, his once-sacred armor now corroded beyond recognition by the abyss.', time: new Date() },
+      { type: 'dialogue', text: '...Not afraid of me?', time: new Date() },
+      { type: 'description', text: 'He looks down at his dark-flame-covered hands and lets out a scornful laugh.', time: new Date() },
+      { type: 'dialogue', text: 'Heh. Interesting. Every god steers clear when they see me.', time: new Date() }
     ],
     13: [
-      { type: 'narration', title: '第一幕 · 《deadline》', scene: '时尚杂志社 · 总编办公室 · 21:00', text: '偌大的办公室只亮着一盏台灯。桌上堆着打印出来的样刊，红色的修改批注密密麻麻。窗外是城市的夜景，玻璃上映出许晚棠疲惫却依然精致的面容。\n\n她揉了揉太阳穴，目光落在桌角那盆小小的多肉植物上——那是你上个月送的。', time: new Date() },
-      { type: 'dialogue', text: '你迟到了3分钟。', time: new Date() },
-      { type: 'description', text: '她推了推眼镜，表情严肃，但嘴角有一丝不易察觉的弧度。', time: new Date() },
-      { type: 'dialogue', text: '...算了，我今天心情好。坐吧。', time: new Date() }
+      { type: 'narration', title: 'Act I · "Deadline"', scene: 'Fashion Magazine HQ · Editor\'s Office · 21:00', text: 'Only a single desk lamp illuminates the vast office. Printed proofs pile on the desk, covered in dense red annotations. The city night glitters beyond the window, Xu Wantang\'s tired but still-elegant face reflected in the glass.\n\nShe rubs her temples, eyes drifting to the small succulent on the corner of her desk — the one you gave her last month.', time: new Date() },
+      { type: 'dialogue', text: 'You\'re 3 minutes late.', time: new Date() },
+      { type: 'description', text: 'She adjusts her glasses, expression serious, but with an almost imperceptible curve at the corner of her mouth.', time: new Date() },
+      { type: 'dialogue', text: '...Fine, I\'m in a good mood today. Sit down.', time: new Date() }
     ],
     14: [
-      { type: 'narration', title: '序章 · 《苏醒》', scene: '昆仑虚 · 封印祭台 · 三万年后', text: '祭台上的符文逐渐暗淡，封印的力量在时间面前终于耗尽。尘封三万年的石棺缓慢地裂开，金色的灵光从缝隙中溢出。\n\n墨渊睁开眼的那一刻，他看到的是一片荒芜。曾经金碧辉煌的昆仑宫殿已成废墟，只有藤蔓和野花在石柱间生长。', time: new Date() },
-      { type: 'dialogue', text: '你说这里是...人间？', time: new Date() },
-      { type: 'description', text: '他缓缓从石棺中起身，白发如瀑，仙气犹存。', time: new Date() },
-      { type: 'dialogue', text: '为何这般嘈杂？三万年前，这里还是一片汪洋。', time: new Date() }
+      { type: 'narration', title: 'Prologue · "Awakening"', scene: 'Kunlun Void · Sealing Altar · 30,000 Years Later', text: 'The runes on the altar grow dim, the sealing power finally spent against the weight of time. A stone sarcophagus sealed for thirty thousand years slowly cracks open, golden spiritual light spilling from the gaps.\n\nThe moment Mo Yuan opens his eyes, he sees desolation. The once-magnificent Kunlun palaces lie in ruins, only vines and wildflowers growing between the stone pillars.', time: new Date() },
+      { type: 'dialogue', text: 'You say this is... the mortal world?', time: new Date() },
+      { type: 'description', text: 'He slowly rises from the sarcophagus, white hair cascading like a waterfall, celestial aura still intact.', time: new Date() },
+      { type: 'dialogue', text: 'Why is it so noisy? Thirty thousand years ago, this was all ocean.', time: new Date() }
     ],
     15: [
-      { type: 'narration', title: '第一幕 · 《证词》', scene: '市公安局 · 法医解剖室 · 02:00', text: '无影灯的冷光照亮了不锈钢解剖台。空气中弥漫着福尔马林的气味，仪器的嗡鸣声是深夜唯一的背景音。\n\n季凛戴着手套，手术服上没有一丝褶皱。他的动作精准如同机器，但每次触碰遗体时，手指都带着一种近乎温柔的轻缓。', time: new Date() },
-      { type: 'dialogue', text: '...你来了。', time: new Date() },
-      { type: 'description', text: '他头也不抬，但声音里多了一丝不易察觉的放松。', time: new Date() },
-      { type: 'dialogue', text: '防护服穿好了吗？今天的案子有点特殊。', time: new Date() }
+      { type: 'narration', title: 'Act I · "Testimony"', scene: 'City Police Bureau · Forensic Autopsy Room · 02:00', text: 'The shadowless lamp casts cold light on the stainless steel autopsy table. The air is thick with formaldehyde, the hum of instruments the only sound in the dead of night.\n\nJi Lin wears gloves, his surgical gown without a single crease. His movements are precise as a machine, yet every time he touches the body, his fingers carry an almost tender gentleness.', time: new Date() },
+      { type: 'dialogue', text: '...You\'re here.', time: new Date() },
+      { type: 'description', text: 'He doesn\'t look up, but there\'s a barely perceptible hint of ease in his voice.', time: new Date() },
+      { type: 'dialogue', text: 'Got your protective gear on? Today\'s case is a bit unusual.', time: new Date() }
     ],
     16: [
-      { type: 'narration', title: '序章 · 《时差》', scene: '教室 · 开学第一天 · 08:00', text: '九月的阳光透过教室的窗户洒进来。黑板上写着"欢迎新同学"。班里的同学们好奇地看着门口——转学生迟到了整整半节课。\n\n门被推开，一个扎着马尾的女孩走了进来。她穿着校服，但总觉得哪里不太对——好像是第一次穿这种衣服。', time: new Date() },
-      { type: 'dialogue', text: '你好呀！我是安妮。', time: new Date() },
-      { type: 'description', text: '她的眼睛亮亮的，像是在看一个博物馆里的展品。', time: new Date() },
-      { type: 'dialogue', text: '你能告诉我现在是哪一年吗？...嗯，这个时代，真的很温暖。', time: new Date() }
+      { type: 'narration', title: 'Prologue · "Time Lag"', scene: 'Classroom · First Day of School · 08:00', text: 'September sunlight streams through the classroom windows. "Welcome New Student" is written on the blackboard. Curious classmates stare at the door — the transfer student is a full half-period late.\n\nThe door opens and a girl with a ponytail walks in. She\'s wearing the school uniform, but something feels off — as if she\'s never worn these kinds of clothes before.', time: new Date() },
+      { type: 'dialogue', text: 'Hi there! I\'m Annie.', time: new Date() },
+      { type: 'description', text: 'Her eyes are bright, looking around as if she\'s visiting a museum exhibit.', time: new Date() },
+      { type: 'dialogue', text: 'Can you tell me what year it is? ...Hmm, this era really is warm.', time: new Date() }
     ],
     17: [
-      { type: 'narration', title: '第一幕 · 《逃亡》', scene: '城市边缘 · 废弃教堂 · 深夜', text: '教堂的彩色玻璃早已碎裂，月光从破洞中照进来，在满是灰尘的地面上画出一个个光斑。\n\n角落里蜷缩着一个瘦小的身影。凌霄穿着一件不太合身的卫衣，帽子拉得很低。她的手指上缠着绷带——不是因为受伤，而是为了遮住指关节上的茧。', time: new Date() },
-      { type: 'dialogue', text: '...你不用害怕。', time: new Date() },
-      { type: 'description', text: '她抬起头，月光照亮了一双警惕却带着疲惫的眼睛。', time: new Date() },
-      { type: 'dialogue', text: '我已经不做那种事了。至少...我在努力不做了。', time: new Date() }
+      { type: 'narration', title: 'Act I · "The Escape"', scene: 'City Outskirts · Abandoned Church · Late Night', text: 'The church\'s stained glass has long since shattered, moonlight streaming through the holes to paint spots of light on the dusty floor.\n\nA small figure huddles in the corner. Ling Xiao wears an oversized hoodie, hood pulled low. Bandages wrap her fingers — not from injury, but to hide the calluses on her knuckles.', time: new Date() },
+      { type: 'dialogue', text: '...Don\'t be afraid.', time: new Date() },
+      { type: 'description', text: 'She looks up, moonlight illuminating a pair of eyes — alert, yet heavy with exhaustion.', time: new Date() },
+      { type: 'dialogue', text: 'I don\'t do that anymore. At least... I\'m trying not to.', time: new Date() }
     ]
   };
   return openings[char.id] || openings[1];
@@ -2582,11 +2581,11 @@ function renderMessages() {
   const char = characters.find(c => c.id === currentChatCharId);
   
   if (!conv || !char) {
-    container.innerHTML = '<div class="empty-state"><div class="empty-icon">📖</div><div class="empty-title">开始故事吧</div></div>';
+    container.innerHTML = '<div class="empty-state"><div class="empty-icon">📖</div><div class="empty-title">Start a story</div></div>';
     return;
   }
   
-  let html = '<div class="story-disclaimer">所有回复均由AI生成。所有角色均设定为成年人<br>（18岁及以上）</div>';
+  let html = '<div class="story-disclaimer">All responses are AI-generated. All characters are set as adults<br>(18 and older)</div>';
   
   // Only show regenerate on the very last dialogue IF user has sent at least one message
   let lastDialogueIdx = -1;
@@ -2612,7 +2611,7 @@ function renderMessages() {
         </div>
         <div class="narration-toggle">
           <button class="narration-toggle-btn" onclick="toggleNarration('${narrationId}')">
-            <span>展开</span>
+            <span>Expand</span>
             <span class="toggle-icon">▼</span>
           </button>
         </div>
@@ -2626,8 +2625,8 @@ function renderMessages() {
         <div class="dialogue-bubble">
           <div class="dialogue-text">${msg.text}</div>
           <div class="dialogue-audio">
-            ${isLast ? `<button class="dialogue-audio-btn" onclick="regenerateReply(${i})" title="重新生成">🔄</button>` : ''}
-            <button class="dialogue-audio-btn" id="${audioId}" onclick="toggleAudioPlay(this)" title="播放">▶️</button>
+            ${isLast ? `<button class="dialogue-audio-btn" onclick="regenerateReply(${i})" title="Regenerate">🔄</button>` : ''}
+            <button class="dialogue-audio-btn" id="${audioId}" onclick="toggleAudioPlay(this)" title="Play">▶️</button>
           </div>
         </div>
       </div>`;
@@ -2696,111 +2695,111 @@ function sendMessage() {
 function getStoryReply(userText, charId) {
   const replies = {
     1: [
-      [{ type: 'description', text: '沈墨的眼神微微一变，像是没有料到你会这么说。', time: new Date() },
-       { type: 'dialogue', text: '你很大胆。这个世界上敢对我说这种话的人...不多。', time: new Date() }],
-      [{ type: 'description', text: '他低头点燃一根烟，烟雾模糊了他的表情。', time: new Date() },
-       { type: 'dialogue', text: '有些事，知道得越多越危险。你确定要继续听下去？', time: new Date() }]
+      [{ type: 'description', text: 'Shen Mo\'s eyes shift slightly, as if he didn\'t expect you to say that.', time: new Date() },
+       { type: 'dialogue', text: 'You\'re bold. Not many people in this world dare to say that to me.', time: new Date() }],
+      [{ type: 'description', text: 'He lowers his head and lights a cigarette, smoke blurring his expression.', time: new Date() },
+       { type: 'dialogue', text: 'Some things, the more you know, the more dangerous it gets. Are you sure you want to keep listening?', time: new Date() }]
     ],
     2: [
-      [{ type: 'description', text: '林夕的耳朵一下子红了，手指不自觉地绞着衣角。', time: new Date() },
-       { type: 'dialogue', text: '你、你别乱说...我才没有在看你呢。', time: new Date() },
-       { type: 'description', text: '但他低下头时，嘴角藏不住地微微上扬。', time: new Date() }],
-      [{ type: 'dialogue', text: '那个...我其实想问你很久了。放学以后，你一般去哪里？', time: new Date() },
-       { type: 'description', text: '他说完就后悔了，赶紧补了一句。', time: new Date() },
-       { type: 'dialogue', text: '没别的意思！就是...顺路的话可以一起走。', time: new Date() }]
+      [{ type: 'description', text: 'Lin Xi\'s ears turn red instantly, fingers unconsciously fidgeting with his sleeve.', time: new Date() },
+       { type: 'dialogue', text: 'D-don\'t say that... I wasn\'t looking at you or anything.', time: new Date() },
+       { type: 'description', text: 'But as he lowers his head, the corners of his mouth can\'t help but curl upward.', time: new Date() }],
+      [{ type: 'dialogue', text: 'Um... I\'ve actually wanted to ask you for a while. Where do you usually go after school?', time: new Date() },
+       { type: 'description', text: 'He regrets saying it the moment the words leave his mouth, quickly adding:', time: new Date() },
+       { type: 'dialogue', text: 'Nothing weird! Just... if we\'re going the same way, we could walk together.', time: new Date() }]
     ],
     3: [
-      [{ type: 'description', text: '厄尔缓慢地站起身，月光勾勒出他苍白的轮廓。', time: new Date() },
-       { type: 'dialogue', text: '一千两百年...你知道这意味着什么吗？意味着我看过太多人来了又走。', time: new Date() }],
-      [{ type: 'dialogue', text: '你让我想起一个人。很久以前的人。', time: new Date() },
-       { type: 'description', text: '他的红瞳中映出你的影子，像是在确认什么。', time: new Date() }]
+      [{ type: 'description', text: 'Earl slowly rises to his feet, moonlight tracing his pale silhouette.', time: new Date() },
+       { type: 'dialogue', text: 'Twelve hundred years... do you know what that means? It means I\'ve watched too many people come and go.', time: new Date() }],
+      [{ type: 'dialogue', text: 'You remind me of someone. Someone from a very long time ago.', time: new Date() },
+       { type: 'description', text: 'Your reflection appears in his crimson pupils, as if he\'s confirming something.', time: new Date() }]
     ],
     4: [
-      [{ type: 'description', text: '楚瑶伸手抚上自己的心口，那里隐隐作痛。', time: new Date() },
-       { type: 'dialogue', text: '我记不清很多事了。但有一种感觉——我在找一个人。找了很久很久。', time: new Date() }],
-      [{ type: 'dialogue', text: '你知道彼岸花吗？它开在忘川河畔，花叶永不相见。', time: new Date() },
-       { type: 'description', text: '她的声音轻得像是怕惊碎什么。', time: new Date() },
-       { type: 'dialogue', text: '就像我和那个人一样。', time: new Date() }]
+      [{ type: 'description', text: 'Chu Yao presses her hand to her chest, where a dull ache lingers.', time: new Date() },
+       { type: 'dialogue', text: 'I can\'t remember much anymore. But there\'s this feeling — I\'m searching for someone. I\'ve been searching for so long.', time: new Date() }],
+      [{ type: 'dialogue', text: 'Do you know the spider lily? It blooms by the River of Forgetting, its flowers and leaves never meeting.', time: new Date() },
+       { type: 'description', text: 'Her voice is so soft, as if afraid of shattering something fragile.', time: new Date() },
+       { type: 'dialogue', text: 'Just like me and that person.', time: new Date() }]
     ],
     5: [
-      [{ type: 'description', text: '赵承放下钢笔，双手交叉抵住下巴，饶有兴味地看着你。', time: new Date() },
-       { type: 'dialogue', text: '有意思。你的反应很特别——大多数人在听到这些案例时，要么恐惧，要么兴奋。但你...你在思考。', time: new Date() }],
-      [{ type: 'dialogue', text: '来做个小测试。如果你是凶手，你会选择什么样的犯罪现场？', time: new Date() },
-       { type: 'description', text: '他的微笑依然温和，但目光像手术刀一样精准。', time: new Date() }]
+      [{ type: 'description', text: 'Zhao Cheng sets down his pen, fingers interlaced under his chin, studying you with interest.', time: new Date() },
+       { type: 'dialogue', text: 'Interesting. Your reaction is unusual — most people hearing these cases are either frightened or thrilled. But you... you\'re thinking.', time: new Date() }],
+      [{ type: 'dialogue', text: 'Let\'s try a little test. If you were the killer, what kind of crime scene would you choose?', time: new Date() },
+       { type: 'description', text: 'His smile remains warm, but his gaze is precise as a scalpel.', time: new Date() }]
     ],
     6: [
-      [{ type: 'description', text: '苏晴放下手中的文件，罕见地露出了一个不那么"CEO"的表情。', time: new Date() },
-       { type: 'dialogue', text: '你...刚才看到了？看到什么了？我在看财报！', time: new Date() },
-       { type: 'description', text: '屏幕上甜宠剧的弹幕还在飘。', time: new Date() }],
-      [{ type: 'dialogue', text: '行吧...既然被你发现了，就当是我们之间的秘密。', time: new Date() },
-       { type: 'description', text: '她推了推眼镜，眼神变得柔和了一些。', time: new Date() }]
+      [{ type: 'description', text: 'Su Qing sets down the documents, showing an expression that\'s unusually un-CEO-like.', time: new Date() },
+       { type: 'dialogue', text: 'You... you saw that just now? Saw what? I was reading financial reports!', time: new Date() },
+       { type: 'description', text: 'Comments from the romance drama are still floating across the screen.', time: new Date() }],
+      [{ type: 'dialogue', text: 'Fine... since you found out, let\'s keep it our little secret.', time: new Date() },
+       { type: 'description', text: 'She adjusts her glasses, her gaze softening slightly.', time: new Date() }]
     ],
     7: [
-      [{ type: 'description', text: '"影"的身体微微僵硬了一瞬，像是不习惯这样的对话。', time: new Date() },
-       { type: 'dialogue', text: '...你为什么不跑？看到我这种人，正常反应应该是跑。', time: new Date() }],
-      [{ type: 'dialogue', text: '别靠近我。我身上...沾过不该沾的东西。', time: new Date() },
-       { type: 'description', text: '但他说这话的时候，并没有后退。', time: new Date() }]
+      [{ type: 'description', text: 'Shadow\'s body stiffens for a moment, as if unused to this kind of conversation.', time: new Date() },
+       { type: 'dialogue', text: '...Why aren\'t you running? The normal reaction to someone like me should be to run.', time: new Date() }],
+      [{ type: 'dialogue', text: 'Don\'t come closer. I\'ve... been touched by things I shouldn\'t have.', time: new Date() },
+       { type: 'description', text: 'But as he says this, he doesn\'t step back.', time: new Date() }]
     ],
     8: [
-      [{ type: 'description', text: '洛神轻轻踏上岸边，水珠从她的裙摆滴落，化作点点星光。', time: new Date() },
-       { type: 'dialogue', text: '一千年了。河水流过春秋，我在这里等了一千年。', time: new Date() }],
-      [{ type: 'dialogue', text: '你的眼睛...和他一样。但又不完全是。', time: new Date() },
-       { type: 'description', text: '她的指尖轻轻触碰你的面颊，温度像月光一样清凉。', time: new Date() }]
+      [{ type: 'description', text: 'Luo Shen steps gently onto the shore, water droplets falling from her hem, turning to tiny stars of light.', time: new Date() },
+       { type: 'dialogue', text: 'A thousand years. The river has flowed through countless seasons, and I\'ve waited here for a thousand years.', time: new Date() }],
+      [{ type: 'dialogue', text: 'Your eyes... they\'re the same as his. But not quite.', time: new Date() },
+       { type: 'description', text: 'Her fingertip gently touches your cheek, cool as moonlight.', time: new Date() }]
     ],
     9: [
-      [{ type: 'description', text: '顾辰下意识地摸了一下无名指上的戒指，那是他最后的退路。', time: new Date() },
-       { type: 'dialogue', text: '在这种地方，相信任何人都是致命的。但你...让我犹豫了。', time: new Date() }],
-      [{ type: 'dialogue', text: '三年了。我已经分不清自己到底是警察还是罪犯。', time: new Date() },
-       { type: 'description', text: '他的声音很轻，像是说给自己听的。', time: new Date() }]
+      [{ type: 'description', text: 'Gu Chen unconsciously touches the ring on his finger — his last line of retreat.', time: new Date() },
+       { type: 'dialogue', text: 'In a place like this, trusting anyone is fatal. But you... you\'re making me hesitate.', time: new Date() }],
+      [{ type: 'dialogue', text: 'Three years. I can no longer tell if I\'m a cop or a criminal.', time: new Date() },
+       { type: 'description', text: 'His voice is quiet, as if speaking only to himself.', time: new Date() }]
     ],
     10: [
-      [{ type: 'description', text: '白鹿歪着头，尖尖的耳朵从发间探出来，又迅速被她按住。', time: new Date() },
-       { type: 'dialogue', text: '你...你没看到什么对吧？那个不是耳朵！是...发卡！对，是发卡！', time: new Date() }],
-      [{ type: 'dialogue', text: '你们人类的食物好好吃！尤其是那个...叫什么来着...冰激凌？', time: new Date() },
-       { type: 'description', text: '她的眼睛亮了起来，手里的兔子玩偶被她抱得更紧了。', time: new Date() }]
+      [{ type: 'description', text: 'Bai Lu tilts her head, pointed ears peeking through her hair before she quickly presses them down.', time: new Date() },
+       { type: 'dialogue', text: 'You... you didn\'t see anything, right? Those aren\'t ears! They\'re... hair clips! Yes, hair clips!', time: new Date() }],
+      [{ type: 'dialogue', text: 'Human food is so good! Especially that... what\'s it called... ice cream?', time: new Date() },
+       { type: 'description', text: 'Her eyes light up, hugging the rabbit plushie even tighter.', time: new Date() }]
     ],
     11: [
-      [{ type: 'description', text: '陆北辞转过头，耳朵尖悄悄红了。', time: new Date() },
-       { type: 'dialogue', text: '我没有特意等你。我只是...还没想好今天看什么书。', time: new Date() },
-       { type: 'description', text: '但他的书包里，那本小说的书签还停在昨天的位置。', time: new Date() }],
-      [{ type: 'dialogue', text: '这朵花？图书馆门口捡到的。夹在书里当书签...正好。', time: new Date() },
-       { type: 'description', text: '其实那朵花是他早上绕路去花店买的，但这件事他永远不会说。', time: new Date() }]
+      [{ type: 'description', text: 'Lu Beici turns his head, the tips of his ears quietly flushing red.', time: new Date() },
+       { type: 'dialogue', text: 'I wasn\'t waiting for you specifically. I just... hadn\'t decided what book to read today.', time: new Date() },
+       { type: 'description', text: 'But in his bag, the novel\'s bookmark is still on yesterday\'s page.', time: new Date() }],
+      [{ type: 'dialogue', text: 'This flower? Picked it up outside the library. Using it as a bookmark... seemed fitting.', time: new Date() },
+       { type: 'description', text: 'Actually, he took a detour to the flower shop this morning to buy it, but he\'ll never tell.', time: new Date() }]
     ],
     12: [
-      [{ type: 'description', text: '夜修罗握紧拳头，暗焰在指缝间跳动。', time: new Date() },
-       { type: 'dialogue', text: '天道？别和我提天道。它早就烂透了。', time: new Date() }],
-      [{ type: 'dialogue', text: '你知道在深渊里待了一千年是什么感觉吗？黑暗...无尽的黑暗。', time: new Date() },
-       { type: 'description', text: '他的声音里有一丝几乎不可察觉的颤抖。', time: new Date() }]
+      [{ type: 'description', text: 'Ye Xiuluo clenches his fists, dark flames dancing between his fingers.', time: new Date() },
+       { type: 'dialogue', text: 'Heaven\'s law? Don\'t talk to me about heaven\'s law. It rotted long ago.', time: new Date() }],
+      [{ type: 'dialogue', text: 'Do you know what it\'s like to spend a thousand years in the abyss? Darkness... endless darkness.', time: new Date() },
+       { type: 'description', text: 'There\'s a barely perceptible tremor in his voice.', time: new Date() }]
     ],
     13: [
-      [{ type: 'description', text: '许晚棠放下咖啡杯，假装不经意地看了你一眼。', time: new Date() },
-       { type: 'dialogue', text: '这篇写得还行。...什么？我刚才说还行了吗？我说的是"凑合"。', time: new Date() }],
-      [{ type: 'dialogue', text: '你那盆植物...我浇水了。别多想，只是顺手。', time: new Date() },
-       { type: 'description', text: '但桌上的小绿植旁边多了一个迷你浇水壶——是她新买的。', time: new Date() }]
+      [{ type: 'description', text: 'Xu Wantang sets down her coffee cup, glancing at you with feigned nonchalance.', time: new Date() },
+       { type: 'dialogue', text: 'This piece is decent. ...What? Did I say decent? I said "passable."', time: new Date() }],
+      [{ type: 'dialogue', text: 'Your plant... I watered it. Don\'t read into it, just happened to be passing by.', time: new Date() },
+       { type: 'description', text: 'But next to the little plant on her desk sits a brand-new mini watering can — she just bought it.', time: new Date() }]
     ],
     14: [
-      [{ type: 'description', text: '墨渊闭上眼，指尖凝出一缕金色灵力，在空中画出一个古老的符文。', time: new Date() },
-       { type: 'dialogue', text: '这个符文，是三万年前我亲手刻下的第一条天规。如今...它已经没有人认得了。', time: new Date() }],
-      [{ type: 'dialogue', text: '你问我为什么封印魔君？因为...我答应过一个人，要守护三界。', time: new Date() },
-       { type: 'description', text: '他的目光变得遥远，似乎穿越了漫长的时光。', time: new Date() }]
+      [{ type: 'description', text: 'Mo Yuan closes his eyes, golden spiritual energy gathering at his fingertips, drawing an ancient rune in the air.', time: new Date() },
+       { type: 'dialogue', text: 'This rune is the first celestial law I carved thirty thousand years ago. Now... no one recognizes it anymore.', time: new Date() }],
+      [{ type: 'dialogue', text: 'You ask why I sealed the Chaos Demon Lord? Because... I promised someone I would protect the three realms.', time: new Date() },
+       { type: 'description', text: 'His gaze grows distant, as if reaching across the vast expanse of time.', time: new Date() }]
     ],
     15: [
-      [{ type: 'description', text: '季凛放下手术刀，拉下口罩。他的面容出乎意料地年轻。', time: new Date() },
-       { type: 'dialogue', text: '每具遗体都在讲述一个故事。我的工作，就是成为他们最后的倾听者。', time: new Date() }],
-      [{ type: 'dialogue', text: '你看到这里了吗？这个伤口的角度说明...凶手是左撇子。', time: new Date() },
-       { type: 'description', text: '他指向解剖台上的细节，语气平静得像在讲课。', time: new Date() }]
+      [{ type: 'description', text: 'Ji Lin sets down the scalpel and pulls down his mask. His face is surprisingly young.', time: new Date() },
+       { type: 'dialogue', text: 'Every body tells a story. My job is to be their final listener.', time: new Date() }],
+      [{ type: 'dialogue', text: 'See this? The angle of this wound tells us... the killer is left-handed.', time: new Date() },
+       { type: 'description', text: 'He points to a detail on the autopsy table, his tone as calm as a lecture.', time: new Date() }]
     ],
     16: [
-      [{ type: 'description', text: '安妮好奇地摸着课桌上的木纹，眼里满是惊叹。', time: new Date() },
-       { type: 'dialogue', text: '真的木头做的！在我的时代，所有东西都是...算了，说了你也不信。', time: new Date() }],
-      [{ type: 'dialogue', text: '你们还在用纸质课本？太棒了！可以翻页的那种感觉...好喜欢。', time: new Date() },
-       { type: 'description', text: '她把课本翻了又翻，听纸张摩擦的声音，笑得像个孩子。', time: new Date() }]
+      [{ type: 'description', text: 'Annie curiously traces the wood grain on the desk, eyes full of wonder.', time: new Date() },
+       { type: 'dialogue', text: 'Real wood! In my era, everything is... never mind, you wouldn\'t believe me anyway.', time: new Date() }],
+      [{ type: 'dialogue', text: 'You still use paper textbooks? That\'s amazing! The feeling of turning pages... I love it.', time: new Date() },
+       { type: 'description', text: 'She flips through the textbook again and again, listening to the sound of rustling pages, smiling like a child.', time: new Date() }]
     ],
     17: [
-      [{ type: 'description', text: '凌霄的手不自觉地握成拳头，又慢慢松开。', time: new Date() },
-       { type: 'dialogue', text: '你问我以前做什么？...你不会想知道的。', time: new Date() }],
-      [{ type: 'dialogue', text: '有时候我会梦到以前的事。醒来的时候...手都在发抖。', time: new Date() },
-       { type: 'description', text: '她把手藏进卫衣的袖子里，假装什么都没有发生。', time: new Date() }]
+      [{ type: 'description', text: 'Ling Xiao\'s hands unconsciously clench into fists, then slowly release.', time: new Date() },
+       { type: 'dialogue', text: 'You\'re asking what I used to do? ...You don\'t want to know.', time: new Date() }],
+      [{ type: 'dialogue', text: 'Sometimes I dream about the old days. When I wake up... my hands are shaking.', time: new Date() },
+       { type: 'description', text: 'She tucks her hands into her hoodie sleeves, pretending nothing happened.', time: new Date() }]
     ]
   };
   
@@ -2856,10 +2855,10 @@ function toggleNarration(id) {
   
   if (isCollapsed) {
     card.classList.remove('collapsed');
-    if (btn) btn.textContent = '收起';
+    if (btn) btn.textContent = 'Collapse';
   } else {
     card.classList.add('collapsed');
-    if (btn) btn.textContent = '展开';
+    if (btn) btn.textContent = 'Expand';
   }
 }
 
@@ -2886,7 +2885,7 @@ function regenerateReply(msgIndex) {
   
   renderMessages();
   scrollChatBottom();
-  showToast('正在重新生成...', '');
+  showToast('Regenerating...', '');
   
   // Show typing indicator
   setTimeout(() => {
@@ -2915,14 +2914,14 @@ function regenerateReply(msgIndex) {
     
     renderMessages();
     scrollChatBottom();
-    showToast('已重新生成', 'success');
+    showToast('Regenerated', 'success');
   }, 1200 + Math.random() * 1000);
 }
 
 // ===== ME / PROFILE =====
 function updateMeProfile() {
-  document.getElementById('me-name').textContent = userProfile.nickname || '用户';
-  document.getElementById('me-signature').textContent = userProfile.signature || '这个人很懒，什么都没写~';
+  document.getElementById('me-name').textContent = userProfile.nickname || 'User';
+  document.getElementById('me-signature').textContent = userProfile.signature || 'Nothing here yet~';
   const meAvatar = document.getElementById('me-avatar');
   if (userProfile.avatarType === 'image') {
     meAvatar.innerHTML = `<img src="${userProfile.avatar}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`;
@@ -2954,14 +2953,14 @@ function openProfileEdit() {
 function saveProfileEdit() {
   const nick = document.getElementById('edit-nickname').value.trim();
   if (!nick) {
-    showToast('昵称不能为空', 'error');
+    showToast('Nickname cannot be empty', 'error');
     return;
   }
   userProfile.nickname = nick;
   userProfile.signature = document.getElementById('edit-signature').value.trim();
   
   closeSheet('sheet-profile-edit');
-  showToast('保存成功', 'success');
+  showToast('Saved', 'success');
   updateMeProfile();
 }
 
@@ -2988,7 +2987,7 @@ function doLogout() {
   loginPage.classList.add('active');
   currentPage = 'page-login';
   
-  showToast('已退出登录', '');
+  showToast('Signed out', '');
 }
 
 function confirmDeleteAccount() {
@@ -2997,7 +2996,7 @@ function confirmDeleteAccount() {
 
 function doDeleteAccount() {
   closeModal('modal-delete-account');
-  showToast('账号已注销', '');
+  showToast('Account deleted', '');
   doLogout();
 }
 
@@ -3026,14 +3025,14 @@ function showBirthdayPicker() {
   const yearWheel = document.getElementById('picker-year');
   yearWheel.innerHTML = '';
   for (let y = maxYear; y >= minYear; y--) {
-    yearWheel.innerHTML += `<div class="date-picker-item ${y === pickerYear ? 'selected' : ''}" onclick="selectBirthdayItem(this, 'year', ${y})">${y}年</div>`;
+    yearWheel.innerHTML += `<div class="date-picker-item ${y === pickerYear ? 'selected' : ''}" onclick="selectBirthdayItem(this, 'year', ${y})">${y}</div>`;
   }
   
   // Month wheel
   const monthWheel = document.getElementById('picker-month');
   monthWheel.innerHTML = '';
   for (let m = 1; m <= 12; m++) {
-    monthWheel.innerHTML += `<div class="date-picker-item ${m === pickerMonth ? 'selected' : ''}" onclick="selectBirthdayItem(this, 'month', ${m})">${m}月</div>`;
+    monthWheel.innerHTML += `<div class="date-picker-item ${m === pickerMonth ? 'selected' : ''}" onclick="selectBirthdayItem(this, 'month', ${m})">${String(m).padStart(2,'0')}</div>`;
   }
   
   // Day wheel
@@ -3054,7 +3053,7 @@ function renderDayWheel() {
   if (pickerDay > maxDays) pickerDay = maxDays;
   dayWheel.innerHTML = '';
   for (let d = 1; d <= maxDays; d++) {
-    dayWheel.innerHTML += `<div class="date-picker-item ${d === pickerDay ? 'selected' : ''}" onclick="selectBirthdayItem(this, 'day', ${d})">${d}日</div>`;
+    dayWheel.innerHTML += `<div class="date-picker-item ${d === pickerDay ? 'selected' : ''}" onclick="selectBirthdayItem(this, 'day', ${d})">${String(d).padStart(2,'0')}</div>`;
   }
 }
 
@@ -3110,10 +3109,10 @@ function formatTime(date) {
   const now = new Date();
   const diff = now - d;
   
-  if (diff < 60000) return '刚刚';
-  if (diff < 3600000) return Math.floor(diff / 60000) + '分钟前';
+  if (diff < 60000) return 'Just now';
+  if (diff < 3600000) return Math.floor(diff / 60000) + 'm ago';
   if (diff < 86400000) return d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
-  if (diff < 172800000) return '昨天';
+  if (diff < 172800000) return 'Yesterday';
   return (d.getMonth()+1) + '/' + d.getDate();
 }
 
@@ -3135,7 +3134,7 @@ function updateChatBadge(count) {
 
 function retryNetwork() {
   document.getElementById('network-bar').classList.remove('active');
-  showToast('正在重新连接...', '');
+  showToast('Reconnecting...', '');
 }
 
 // ===== INIT =====
